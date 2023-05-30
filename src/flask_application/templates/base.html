@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="UTF-8"/>
+        <meta name="application-name" content="Valorant agent instalocker"/> <!-- TODO: Find some good name suffix -->
+        <meta name="author" content="Davi Sampaio">
+        <meta name="description" content="A tool to instalock your preferred agent">
+        <meta name="keywords" content=""> <!-- TODO: Generate keywords -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="{{url_for('static', filename='main.css')}}" rel="stylesheet" type="text/css">
+        <script defer src="{{url_for('static', filename='main.js')}}" rel="text/javascript"></script>
+
+        <title>{% block title %}{% endblock %} - VI</title> <!-- TODO: Add name suffix here too -->
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <!-- TODO: Make header-->
+    </header>
+    <main>
+        {% block main %}
+        {% endblock %}
+    </main>
+    <footer>
+        <!-- TODO: Make footer -->
+    </footer>
+</body>
+</html>

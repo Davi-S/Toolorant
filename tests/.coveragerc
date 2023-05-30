@@ -1,0 +1,10 @@
+[run]
+data_file = tests/.coverage
+branch = True
+
+[report]
+skip_empty = True
+skip_covered = True
+
+[html]
+directory = tests/html_coverage_report
