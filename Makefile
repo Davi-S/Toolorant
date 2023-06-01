@@ -17,6 +17,11 @@ requirements: .venv\Lib\site-packages
 	$(ACTIVATE_VENV) pip install -r requirements.txt
 
 
+.PHONY: clean
+clean:
+	$(ACTIVATE_VENV) pyclean .
+
+
 # Run the flask server and application
 FLASK_ENVIRONMENT = development
 # Check if the environment is valid

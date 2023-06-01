@@ -164,5 +164,3 @@ cython_debug/
 
 # Dynaconf secret files
 .secrets.*
-
-workspace_todo.txt

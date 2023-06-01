@@ -2,7 +2,7 @@
 # SECRET_KEY defined in the .secrets.toml file
 ENVIRONMENT_NAME = 'default'  # Will be overide by the other environments
 EXTENSIONS = [
-    # TODO: add extensions
+    'src.flask_application.index.index:init_app'
 ]
 
 [production]
