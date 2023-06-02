@@ -1,4 +1,3 @@
-# TODO: Rename this blueprint folder to "general" if all the routes are placed here
 import flask
 
 index_bp = flask.Blueprint('index_bp', __name__,
@@ -12,3 +11,13 @@ def init_app(app: flask.Flask):
 @index_bp.route('/')
 def index():
     return flask.render_template('index/index.html')
+
+
+@index_bp.route('/start', methods=['POST'])
+def start_instalocker():
+    pass
+
+
+@index_bp.route('/stop', methods=['POST'])
+def stop_instalocker():
+    pass
