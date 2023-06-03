@@ -2,7 +2,8 @@
 # SECRET_KEY defined in the .secrets.toml file
 ENVIRONMENT_NAME = 'default'  # Will be overide by the other environments
 EXTENSIONS = [
-    'src.flask_application.index.index:init_app'
+    'src.flask_application.index.index:init_app',
+    'src.flask_application.instalocker.instalocker:init_app'
 ]
 
 [production]

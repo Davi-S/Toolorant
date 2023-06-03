@@ -15,7 +15,7 @@
         $(document).ready(function() {
             $('#start_instalocker').click(function() {
                 $.ajax({
-                    url: "{{ url_for('index_bp.start_instalocker')}}",
+                    url: "{{ url_for('instalocker_bp.start')}}",
                     type: 'POST',
                     success: function(response) {
                         console.log(response);
@@ -28,7 +28,7 @@
 
             $('#stop_instalocker').click(function() {
                 $.ajax({
-                    url: "{{ url_for('index_bp.stop_instalocker')}}",
+                    url: "{{ url_for('instalocker_bp.stop')}}",
                     type: 'POST',
                     success: function(response) {
                         console.log(response);
