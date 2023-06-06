@@ -1,1 +1,4 @@
-☐ The program must be accessible through a desktop app or web interface if the user has the desktop app on the computer. 
+☐ Add support for the testing environments in the websocket extension (and other extensions too)
+    ☐ Create a websocket for testing and other to real use
+
+☐ add support for working if valorant is not running and start the websocket when it is running. https://chat.openai.com/share/d2cd5728-93a9-475f-b7f6-80759e23b286
