@@ -13,10 +13,10 @@ class Publisher(abc.ABC):
 
     def notify_listeners(self, event):
         for listener in self._listeners:
-            listener.update(event)
+            listener.on_event(event)
 
 
 class Listener(abc.ABC):
     @abc.abstractmethod
-    def update(self, event):
+    def on_event(self, event):
         raise NotImplementedError

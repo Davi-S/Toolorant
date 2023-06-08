@@ -1,7 +1,7 @@
 import dataclasses
 import json
 import os
-from . import game_resources as ge
+from .. import game_resources as ge
 
 BASE_PROFILES_PATH = 'src/profiles/'  # os.path.join(os.getcwd(), 'profiles/')
 

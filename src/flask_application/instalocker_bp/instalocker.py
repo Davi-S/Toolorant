@@ -1,10 +1,10 @@
 import flask
-from ...observer_pattern_abstract import Listener
+from ..abstracts import Listener
 import valclient
 import valclient.resources
-from ..websocket.websocket import Event
 from .. import game_resources as ge
-from ..profile import Profile
+from .profile import Profile
+
 
 instalocker_bp = flask.Blueprint('instalocker_bp', __name__,
                                  template_folder='templates')
@@ -14,38 +14,15 @@ def init_app(app: flask.Flask):
     app.register_blueprint(instalocker_bp)
 
 
-class CustomClient(valclient.Client):
-    """Is a valclient that don't need a region and don't need to be initialized."""
-
-    def __init__(self):
-        super().__init__()  # passing 'na' region by default (it will be override)
-        super().activate()
-
-        region = self.fetch_region()['region'].lower()
-
-        # The same code form the valclient.Client
-        self.region = region
-        self.shard = region
-
-        if self.region in valclient.resources.region_shard_override.keys():
-            self.shard = valclient.resources.region_shard_override[self.region]
-        if self.shard in valclient.resources.shard_region_override.keys():
-            self.region = valclient.resources.shard_region_override[self.shard]
-
-    def fetch_region(self) -> dict:
-        """Gets info about the region and from the Riot client"""
-        return self.fetch(endpoint="/riotclient/region-locale", endpoint_type="local")
-
-
 class Instalocker(Listener):
     def __init__(self) -> None:
         super().__init__()
         # self._client = CustomClient()
         self.profile = None
 
-    def update(self, event):
+    def on_event(self, event):
         print('update called')
-        if event != Event.PREGAME_STARTED:
+        if event != 'pregame_started':
             return
 
         if not self.profile:
@@ -91,13 +68,13 @@ instalocker = Instalocker()
 @instalocker_bp.route('/start', methods=['POST'])
 def start():
     instalocker.profile = 'some_profile'
-    flask.current_app.config.websocket.add_listener(instalocker)
+    flask.current_app.websocket.add_listener(instalocker)
     print('instalocker subscribed')
     return ''
 
 
 @instalocker_bp.route('/stop', methods=['POST'])
 def stop():
-    flask.current_app.config.websocket.remove_listener(instalocker)
+    flask.current_app.websocket.remove_listener(instalocker)
     print('instalocker unsubscribed')
     return ''
