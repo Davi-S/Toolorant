@@ -6,11 +6,13 @@
         <meta name="application-name" content="Toolorant"/>
         <meta name="author" content="Davi Sampaio">
         <meta name="description" content="A collection of valorant related tool">
-        <meta name="keywords" content=""> <!-- TODO: Generate keywords -->
+        <!-- TODO: Generate keywords -->
+        <meta name="keywords" content=""> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <link href="{{url_for('static', filename='main.css')}}" rel="stylesheet" type="text/css">
+        
+        <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
         <script defer src="{{url_for('static', filename='main.js')}}" rel="text/javascript"></script>
+        <link href="{{url_for('static', filename='main.css')}}" rel="stylesheet" type="text/css">
 
         <title>{% block title %}{% endblock %} - TL</title>
     {% endblock %}
@@ -28,5 +30,7 @@
         <!-- TODO: Make footer -->
         FOOTER
     </footer>
+    {% block script %}
+    {% endblock %}
 </body>
 </html>
