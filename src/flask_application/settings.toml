@@ -2,6 +2,7 @@
 # SECRET_KEY defined in the .secrets.toml file
 ENVIRONMENT_NAME = 'default'  # Will be overide by the other environments
 EXTENSIONS = [
+    'src.flask_application.user_settings.with_dynaconf:init_app',
     'src.flask_application.client:init_app',
     'src.flask_application.websocket:init_app',
     'src.flask_application.index_bp.index:init_app',
