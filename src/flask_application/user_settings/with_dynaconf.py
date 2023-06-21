@@ -3,6 +3,7 @@ from dynaconf import Dynaconf, loaders
 
 class CustomDynaconf(Dynaconf):
     def persist(self):
+        # https://www.dynaconf.com/advanced/#exporting
         loaders.write(self['SETTINGS_FILE_FOR_DYNACONF'][0], self.to_dict())
 
 
