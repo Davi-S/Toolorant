@@ -1,0 +1,14 @@
+{
+    "game_mode": "Competitive",
+    "map_agent": {
+        "Ascent": null,
+        "Bind": null,
+        "Breeze": null,
+        "Fracture": null,
+        "Haven": null,
+        "Icebox": null,
+        "Pearl": null,
+        "Split": null,
+        "Lotus": null
+    }
+}

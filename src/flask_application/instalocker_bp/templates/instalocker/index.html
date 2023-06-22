@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Profiles{% endblock %}
+{% block main %}
+  <!-- Select profile -->
+  <form id="select_profile_form" action="#" method="post">
+    {{ select_profile_form.hidden_tag() }}
+    {% for radio in select_profile_form.profile_name %}
+      {{ radio() }} {{ radio.label() }}
+      <br>
+    {% endfor %}
+    {% for error in select_profile_form.profile_name.errors %}
+      {{ error }}
+      <br>
+    {% endfor %}
+    {{ select_profile_form.set }}
+    {{ select_profile_form.delete }}
+  </form>
+  <br>
+  <br>
+  <!-- Create new profile -->
+  <form id="create_profile_form" action="#" method="post" autocomplete="off">
+    {{ new_profile_form.hidden_tag() }}
+    <!-- Do not render hidden because of the labels -->
+    {% for field in new_profile_form if field.widget.input_type != 'hidden' %}
+      {{ field.label() }} {{ field() }}
+      {% for error in field.errors %}{{ error }}{% endfor %}
+      <br>
+    {% endfor %}
+    <button type="submit">Create profile</button>
+  </form>
+  <br>
+  <br>
+  <!-- Switch the instalocker on and off -->
+  <input id="start/stop_instalocker" type="checkbox">
+  <label for="start/stop_instalocker">Instalocker</label>
+{% endblock %}

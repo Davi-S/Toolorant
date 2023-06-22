@@ -1,33 +1,37 @@
 import dataclasses
 import json
 import os
-from .. import game_resources as ge
+from .. import game_resources as gr
 
-BASE_PROFILES_PATH = 'src/profiles/'  # os.path.join(os.getcwd(), 'profiles/')
-
-# TODO: use toml instead of json
+BASE_PROFILES_PATH = 'src\\flask_application\\instalocker_bp\\profiles\\'
 
 
 @dataclasses.dataclass
 class Profile:
     name: str
-    game_mode: ge.GameMode
-    map_agent: dict[ge.Map, ge.Agent | None]
+    game_mode: gr.GameMode
+    map_agent: dict[gr.Map, gr.Agent | None]
 
     @classmethod
-    def load_profile(cls, profile_name: str):
+    def load(cls, profile_name: str):
         # Load JSON data from file
         with open(BASE_PROFILES_PATH + profile_name + '.json', 'r') as f:
             json_data = json.load(f)
 
         # Create instances of dataclasses using JSON data
         # Use Enum to get enum member
-        game_mode = ge.GameMode[json_data['game_mode'].upper()]
-        map_agent = {ge.Map[k.upper()]: (ge.Agent[v.upper()] if v is not None else None)
+        game_mode = gr.GameMode[json_data['game_mode'].upper()]
+        map_agent = {gr.Map[k.upper()]: (gr.Agent[v.upper()] if v is not None else None)
                      for k, v in json_data['map_agent'].items()}
         return cls(profile_name, game_mode, map_agent)
 
-    def dump_profile(self) -> None:
+    @classmethod
+    def delete(cls, profile_name: str) -> None:
+        os.remove(f'{BASE_PROFILES_PATH}\\{profile_name}.json')
+
+    # TODO: Create classmethod to create profile by form or some other data structure
+
+    def dump(self) -> None:
         # Dump dataclass instances to JSON
         game_data_dict = {
             'game_mode': self.game_mode.name.title(),
@@ -37,5 +41,7 @@ class Profile:
         with open(BASE_PROFILES_PATH + self.name + '.json', 'w') as f:
             json.dump(game_data_dict, f, indent=4)
 
-    def delete_profile(self) -> None:
-        os.remove(f'{BASE_PROFILES_PATH}\\{self.name}.json')
+
+def get_all_profiles():
+    profiles_name = [file.rstrip('.json')for file in os.listdir(f'{os.getcwd()}\\{BASE_PROFILES_PATH}')]
+    return [Profile.load(profile_name) for profile_name in profiles_name]
