@@ -1,0 +1,36 @@
+:root {
+    /* Color palette */
+    --white_shade: rgb(230, 230, 230);
+    --black_shade: rgb(25, 25, 25);
+    --primary_color: rgb(28, 37, 51);
+    --accent_color: rgb(250, 68, 84);
+    --neutral_color: rgb(11, 129, 110); /* rgb(61, 165, 255); */
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    color: var(--white_shade);
+    background-color: var(--primary_color);
+}
+
+main {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    /* TODO: Remove this later. Just to enable scrolling */
+    height: 1500px; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+a {
+    color: var(--accent_color);
+    text-decoration: None;
+}

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     {% block head %}
+        <!-- Metas -->
         <meta charset="UTF-8"/>
         <meta name="application-name" content="Toolorant"/>
         <meta name="author" content="Davi Sampaio">
@@ -10,35 +11,49 @@
         <meta name="keywords" content=""> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <!-- Load JS -->
         <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-        <script defer src="{{url_for('static', filename='main.js')}}" rel="text/javascript"></script>
-        <link href="{{url_for('static', filename='main.css')}}" rel="stylesheet" type="text/css">
+        <script defer src="{{url_for('static', filename='js/main.js')}}" rel="text/javascript"></script>
+        
+        <!-- Load CSS -->
+        <link href="{{url_for('static', filename='css/base.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static', filename='css/layout.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static', filename='css/module.css')}}" rel="stylesheet" type="text/css">
 
         <title>{% block title %}{% endblock %} - TL</title>
     {% endblock %}
 </head>
 <body>
-    <header>
-        <!-- TODO: Make header-->
-        HEADER
+    <!-- TODO: Make header-->
+    <header id="main_header" class="l-header">
+        <div class="l-content_wrapper">   
+            HEADER
+        </div>
     </header>
     <main>
         {% block main %}
         {% endblock %}
     </main>
-    <footer>
-        <!-- TODO: Make footer -->
-        FOOTER
+    <!-- TODO: Make footer -->
+    <footer id="main_footer" class="l-footer">
+        <div class="l-content_wrapper">
+            FOOTER
+        </div>
     </footer>
     {% block script %}
-    <script>
-      // Global variable to store routes and use them in JS files
-      // Its not possible to call the urf_for in a JS file, so it must be done on the html template
-      const APP_ROUTES = {
-        'instalocker_bp.start': '{{ url_for("instalocker_bp.start") }}',
-        'instalocker_bp.stop': '{{ url_for("instalocker_bp.stop") }}',
-      };
-    </script>
+        <script>
+        // Global variable to store routes and use them in JS files
+        // Its not possible to call the urf_for in a JS file, so it must be done on the html template
+        const APP_ROUTES = {
+            'instalocker_bp.start': '{{ url_for("instalocker_bp.start") }}',
+            'instalocker_bp.stop': '{{ url_for("instalocker_bp.stop") }}',
+        };
+        </script>
     {% endblock %}
 </body>
 </html>

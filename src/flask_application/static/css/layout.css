@@ -1,0 +1,24 @@
+#main_header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 3em;
+}
+
+#main_footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3em;
+}
+
+.l-header, .l-footer {
+    background-color: var(--neutral_color);
+}
+
+.l-content_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
