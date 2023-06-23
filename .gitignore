@@ -164,3 +164,5 @@ cython_debug/
 
 # Dynaconf secret files
 .secrets.*
+
+src/flask_application/instalocker_bp/profiles/*
