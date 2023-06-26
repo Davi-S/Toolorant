@@ -1,11 +1,15 @@
 import asyncio
+import base64
 import enum
 import json
-from ..abstracts import Publisher
-import threading
 import ssl
+import threading
+
 import websockets
-import base64
+import websockets.exceptions
+
+from ..abstracts import Publisher
+
 
 class Event(enum.Enum):
     PREGAME = "/riot-messaging-service/v1/message/ares-pregame/pregame/v1/matches/"
@@ -26,7 +30,11 @@ class WebSocket(Publisher):
             await websocket.send('[5, "OnJsonApiEvent"]')
 
             while True:
-                response = await websocket.recv()
+                try:
+                    response = await websocket.recv()
+                except websockets.exceptions.ConnectionClosedError as e:
+                    raise e
+                    # TODO: handle error when valorant is closed while the application is running
                 for event in Event:
                     if event.value in response:
                         # Call the listeners on another thread so the ws thread is always running without interruption
