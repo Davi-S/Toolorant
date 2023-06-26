@@ -48,9 +48,11 @@ def index():
         create_profile(new_profile_form)
         return flask.redirect(flask.url_for('instalocker_bp.index'))
 
+    
     return flask.render_template('instalocker/index.html',
                                  select_profile_form=select_profile_form,
-                                 new_profile_form=new_profile_form)
+                                 new_profile_form=new_profile_form,
+                                 instalocker_active=flask.session.get('instalocker_active', False))
 
 
 def set_profile(profile_name):
@@ -83,14 +85,15 @@ def create_profile(form: forms.NewProfileInfo):
             profile_info['map_agent']).dump()
 
 
-# TODO: save state on the session to pass it to the page and load with the checkbox on/off
 @instalocker_bp.route('/start', methods=['POST'])
 def start():
     flask.current_app.websocket.add_listener(instalocker_bp.instalocker)
+    flask.session['instalocker_active'] = True
     return ''
 
 
 @instalocker_bp.route('/stop', methods=['POST'])
 def stop():
     flask.current_app.websocket.remove_listener(instalocker_bp.instalocker)
+    flask.session["instalocker_active"] = False
     return ''

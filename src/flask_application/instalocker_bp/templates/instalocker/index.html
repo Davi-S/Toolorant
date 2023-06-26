@@ -32,6 +32,6 @@
     <br>
     <br>
     <!-- Switch the instalocker on and off -->
-    <input id="start/stop_instalocker" type="checkbox">
+    <input id="start/stop_instalocker" type="checkbox" {{ 'checked' if instalocker_active else '' }}>
     <label for="start/stop_instalocker">Instalocker</label>
 {% endblock %}
