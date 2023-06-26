@@ -2,9 +2,9 @@
     /* Color palette */
     --white_shade: rgb(230, 230, 230);
     --black_shade: rgb(25, 25, 25);
-    --primary_color: rgb(28, 37, 51);
+    --primary_color: rgb(10, 14, 19);
     --accent_color: rgb(250, 68, 84);
-    --neutral_color: rgb(11, 129, 110); /* rgb(61, 165, 255); */
+    --neutral_color: rgb(22 59 119); /* rgb(43, 43, 53); /* rgb(11, 129, 110); /* rgb(61, 165, 255); */
 }
 
 html {

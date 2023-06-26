@@ -14,7 +14,7 @@ def create_app(environment: str = 'development') -> flask.Flask:
     # except Exception:
     #     @app.route('/')
     #     def warning_page():
-    #         return 'Please open valorant and restart the instalocker to use the application'
+    #         return 'Please open valorant and restart Toolorant'
     #     @app.before_request
     #     def before_request():
     #         if flask.request.endpoint != 'warning_page':

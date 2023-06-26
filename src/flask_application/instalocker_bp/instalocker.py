@@ -1,4 +1,4 @@
-# TODO: The fact that the profile can be None is bad because it add a lot of checking. Need to find a way to reduce the amount of checks
+# TODO: The fact that the profile can be None is bad because it adds a lot of checking. Need to find a way to reduce the amount of checks
 import flask
 from .instalocker_cls import Instalocker
 from .profile import Profile, get_all_profiles
@@ -12,7 +12,7 @@ instalocker_bp = flask.Blueprint('instalocker_bp', __name__,
 
 def init_app(app: flask.Flask):
     # Create and configure instalocker
-    instalocker = Instalocker()
+    instalocker = Instalocker(app.client)
     profile_name = app.user_settings.profile
     instalocker.profile = None if profile_name is None else Profile.load(profile_name)
 
