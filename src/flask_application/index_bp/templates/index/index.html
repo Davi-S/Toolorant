@@ -2,6 +2,16 @@
 
 {% block title %}Home{% endblock %}
 
+<!--  -->
 {% block main %}
-    <a href="{{ url_for('instalocker_bp.index') }}">Instalocker</a>
+<div class="vertical_center">
+    <div id="main_menu" class="l-vertical_menu">
+        <ul class="diamond rotating_diamond drawer highlight_link">
+            <li><a href="{{ url_for('instalocker_bp.index') }}">Instalocker</a></li>
+            <li><a href="#">Streamer Hunter</a></li>
+            <li><a href="#">Voice to global</a></li>
+            <li><a href="#">Settings Manager</a></li>
+        </ul>
+    </div>
+</div>
 {% endblock %}

@@ -1,4 +1,6 @@
 :root {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
     /* Color palette */
     --white_shade: rgb(230, 230, 230);
     --black_shade: rgb(25, 25, 25);
@@ -14,16 +16,29 @@ html {
 
 body {
     margin: 0;
-    font-family: 'Lato', sans-serif;
+    padding: 0;
     color: var(--white_shade);
     background-color: var(--primary_color);
 }
 
+body::before {
+    content: '';
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+    background: #ffffff url("../images/background1-dark.png") no-repeat fixed center/cover;
+    /* background-image: url("../images/background3.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; */
+    filter: blur(5px);
+    z-index: -9;
+}
+
 main {
-    margin-top: 3em;
-    margin-bottom: 3em;
-    /* TODO: Remove this later. Just to enable scrolling */
-    height: 1500px; 
+    /* because of the header */
+    /* margin-top: 3em;  */
 }
 
 h1, h2, h3, h4, h5, h6 {

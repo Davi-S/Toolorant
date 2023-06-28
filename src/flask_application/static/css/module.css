@@ -1,0 +1,47 @@
+/* TODO: nest transitions */
+.diamond {
+    list-style-type: none;
+    padding-inline-start: 20px;
+}
+
+.diamond li::before {
+    content: "";
+    display: inline-block;
+    background-color: var(--white_shade);
+    transform: rotate(45deg);
+    /* (√2 / 4) = 0.35 -> half the diagonal of the square */
+    width: 0.35rem;
+    height: 0.35rem;
+    margin-right: 1rem;
+    vertical-align: middle;
+    transition: 0.5s;
+}
+
+.rotating_diamond li:hover::before {
+    /* 180 + 45 (the angle for a square to look like a "diamond" is 45) */
+    transform: rotate(225deg);
+}
+
+.drawer li>* {
+    transition: 0.3s;
+}
+
+.drawer li:hover>* {
+    padding-left: 0.8em;
+}
+
+.highlight_link a {
+    color: var(--white_shade);
+    transition: 0.3s;
+}
+
+.highlight_link li:hover>a {
+    color: var(--accent_color);
+}
+
+.vertical_center {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
