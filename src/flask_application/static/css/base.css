@@ -6,7 +6,8 @@
     --black_shade: rgb(25, 25, 25);
     --primary_color: rgb(10, 14, 19);
     --accent_color: rgb(250, 68, 84);
-    --neutral_color: rgb(22 59 119); /* rgb(43, 43, 53); /* rgb(11, 129, 110); /* rgb(61, 165, 255); */
+    --neutral_color: rgb(22 59 119);
+    /* rgb(43, 43, 53); /* rgb(11, 129, 110); /* rgb(61, 165, 255); */
 }
 
 html {
@@ -17,31 +18,21 @@ html {
 body {
     margin: 0;
     padding: 0;
-    color: var(--white_shade);
-    background-color: var(--primary_color);
-}
-
-body::before {
-    content: '';
-	position: fixed;
-	width: 100vw;
-	height: 100vh;
-    background: #ffffff url("../images/background1-dark.png") no-repeat fixed center/cover;
-    /* background-image: url("../images/background3.png");
-    background-position: center center;
+    color: var(--white_shade);    
+    background-image: url("../images/background1-big-flip-cartoon2.jpg");
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover; */
-    filter: blur(5px);
-    z-index: -9;
+    background-attachment: fixed;       
+    background-position: center;
+    background-size: cover;
 }
 
-main {
-    /* because of the header */
-    /* margin-top: 3em;  */
-}
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Bebas Neue', sans-serif;
 }
 

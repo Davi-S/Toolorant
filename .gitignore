@@ -166,3 +166,5 @@ cython_debug/
 .secrets.*
 
 src/flask_application/instalocker_bp/profiles/*
+
+logs/
