@@ -1,30 +1,33 @@
-#main_menu {
+#main-menu {
     font-size: 2rem;
 }
 
-#main_header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 3em;
+.l-index {
+    background-image: url("../images/background1-big-flip-cartoon2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
 }
 
-.l-header {
-    background-color: var(--neutral_color);
+.l-instalocker {
+    background-image: url("../images/background11-upscaled.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;       
+    background-position: center;
+    background-size: cover;
 }
 
-.l-vertical_menu {
+.l-vertical-menu {
     text-transform: uppercase;
     font-family: 'Bebas Neue', sans-serif;
 }
 
-.l-vertical_menu li {
+.l-vertical-menu li {
     margin: 0.8em 0;
 }
 
-.l-content_wrapper {
+.l-container {
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
 }

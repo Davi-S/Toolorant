@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {% block head %}
-        <!-- Metas -->
+        <!-- Meta -->
         <meta charset="UTF-8"/>
         <meta name="application-name" content="Toolorant"/>
         <meta name="author" content="Davi Sampaio">
@@ -28,14 +28,14 @@
         <title>{% block title %}{% endblock %} - TL</title>
     {% endblock %}
 </head>
-<body>
+<body {% block body_attr %}{% endblock %}>
     <!-- TODO: Make header-->
     <!-- <header id="main_header" class="l-header">
         <div class="l-content_wrapper">   
             HEADER
         </div>
     </header> -->
-    <main>
+    <main {% block main_attr %}{% endblock %}>
         {% block main %}
         {% endblock %}
     </main>

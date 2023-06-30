@@ -17,7 +17,7 @@
     transition: 0.5s;
 }
 
-.rotating_diamond li:hover::before {
+.rotating-diamond li:hover::before {
     /* 180 + 45 (the angle for a square to look like a "diamond" is 45) */
     transform: rotate(225deg);
 }
@@ -30,16 +30,16 @@
     padding-left: 0.8em;
 }
 
-.highlight_link a {
+.highlight-link a {
     color: var(--white_shade);
     transition: 0.3s;
 }
 
-.highlight_link li:hover>a {
+.highlight-link li:hover>a {
     color: var(--accent_color);
 }
 
-.vertical_center {
+.vertical-center {
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);

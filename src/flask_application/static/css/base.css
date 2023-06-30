@@ -12,18 +12,13 @@
 
 html {
     min-height: 100%;
-    position: relative;
 }
 
 body {
     margin: 0;
     padding: 0;
-    color: var(--white_shade);    
-    background-image: url("../images/background1-big-flip-cartoon2.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;       
-    background-position: center;
-    background-size: cover;
+    color: var(--white_shade);
+    background-color: var(--primary_color);
 }
 
 
