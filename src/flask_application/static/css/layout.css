@@ -1,33 +1,48 @@
+#main-header {
+    height: 3em;
+    background-color: var(--black-shade);
+}
+
 #main-menu {
     font-size: 2rem;
+    position: absolute;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue', sans-serif;
+    top: 50%;
+    /* 
+    Make the diamonds be on the center of the main tag border:
+        20px = ul padding-inline-start
+        -0.35rem = Diamond size
+        1px = Fine tune. Make diamond on the center of the border
+    */
+    transform: translate(calc(-20px + -1px + -0.35rem/2), -50%);
 }
 
 .l-index {
+    margin: 0em 5em;
+    border-left: solid 2px var(--text-color);
+    min-height: 100vh;
+}
+
+.l-instalocker {
+    padding: 0.5em 2.5em;
+    /* box-sizing: border-box;
+    height: calc(100vh - 3em);
+    overflow: hidden; */
+}
+
+/* .l-index {
     background-image: url("../images/background1-big-flip-cartoon2.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
-}
+} */
 
-.l-instalocker {
+/* .l-instalocker {
     background-image: url("../images/background11-upscaled-fliped-cropped.png");
     background-repeat: no-repeat;
     background-attachment: fixed;       
     background-position: center;
     background-size: cover;
-}
-
-.l-vertical-menu {
-    text-transform: uppercase;
-    font-family: 'Bebas Neue', sans-serif;
-}
-
-.l-vertical-menu li {
-    margin: 0.8em 0;
-}
-
-.l-container {
-    position: relative;
-    display: flex;
-}
+} */

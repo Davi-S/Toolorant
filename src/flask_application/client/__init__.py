@@ -1,4 +1,4 @@
 from .client import CustomClient
 
 def init_app(app):
-    app.client = CustomClient()
+    app.client = CustomClient('na')

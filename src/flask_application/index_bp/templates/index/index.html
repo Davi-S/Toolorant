@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
-{% block body_attr %}class="l-index"{% endblock %}
+<!-- Remove header -->
+{% block header %}{% endblock %}
+{% block main_attr %}class="l-index"{% endblock %}
 {% block main %}
-<div class="vertical-center">
-    <div id="main-menu" class="l-vertical-menu">
-        <ul class="diamond rotating-diamond drawer highlight-link">
+    <div id="main-menu">
+        <ul class="diamond-list rotating-diamond drawer-list highlight">
             <li><a href="{{ url_for('instalocker_bp.index') }}">Instalocker</a></li>
             <li><a href="#">Streamer Hunter</a></li>
             <li><a href="#">Voice to global</a></li>
             <li><a href="#">Settings Manager</a></li>
         </ul>
     </div>
-</div>
 {% endblock %}

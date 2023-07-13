@@ -13,6 +13,7 @@ class CustomClient(valclient.Client):
     """Is a valclient that don't need a region"""
 
     def __init__(self, region=None, auth=None):
+        # TODO: make it use the inputted region only if the region is not found on the log file
         if not region and (region := self.get_region()) or region:
             super().__init__(region, auth)
             return

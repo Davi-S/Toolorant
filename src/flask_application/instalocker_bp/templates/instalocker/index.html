@@ -1,38 +1,92 @@
 {% extends 'base.html' %}
 {% block title %}Profiles{% endblock %}
-{% block body_attr %}class="l-instalocker"{% endblock %}
+{% block main_attr %}class="l-instalocker"{% endblock %}
 {% block main %}
-    <!-- Select profile -->
-    <!-- TODO: Check if there is no profile. If there is no profile, do not render this form -->
-    <form id="select_profile_form" action="#" method="post">
-        {{ select_profile_form.hidden_tag() }}
-        {% for radio in select_profile_form.profile_name %}
-            {{ radio() }} {{ radio.label() }}
-            <br>
-        {% endfor %}
-        {% for error in select_profile_form.profile_name.errors %}
-            {{ error }}
-            <br>
-        {% endfor %}
-        {{ select_profile_form.set }}
-        {{ select_profile_form.delete }}
-    </form>
-    <br>
-    <br>
-    <!-- Create new profile -->
-    <form id="create_profile_form" action="#" method="post" autocomplete="off">
+    <form id="new-profile-form" action="#" method="post" autocomplete="off">
         {{ new_profile_form.hidden_tag() }}
-        <!-- Do not render hidden because of the labels -->
-        {% for field in new_profile_form if field.widget.input_type != 'hidden' %}
-            {{ field.label() }} {{ field() }}
-            {% for error in field.errors %}{{ error }}{% endfor %}
-            <br>
-        {% endfor %}
-        <button type="submit">Create profile</button>
     </form>
-    <br>
-    <br>
-    <!-- Switch the instalocker on and off -->
-    <input id="start/stop_instalocker" type="checkbox" {{ 'checked' if instalocker_active else '' }}>
-    <label for="start/stop_instalocker">Instalocker</label>
+    <!-- TODO: add the other forms -->
+
+    <section id="left-section">
+        <!-- Start/Stop checkbox button -->
+        <div class="btn checkbox-btn">
+            <label for="instalocker-start-stop-checkbox" class="btn checkbox-btn">
+                <input id="instalocker-start-stop-checkbox" type="checkbox" {{ 'checked' if instalocker_active else '' }}>
+                <span class="label-content to-right to-left border">{{ 'Deactivate' if instalocker_active else 'Activate' }}</span>
+            </label>
+        </div>
+
+        <!-- Profile items. Has the name and game-mode information. Has the select form submit button and the delete form submit button -->
+        <div class="small-item-container">
+            {% for profile in profiles %}
+                <div class="small-item" data-profile-id="{{ profile.name }}" data-profile-type="item">
+                    <!-- Select profile button. Submits the select form to the server -->
+                    <button type="submit" class="btn">
+                        <div class="name">{{ profile.name }}</div>
+                        <div class="game-mode">{{ profile.game_mode }}</div>
+                    </button>
+                    <!-- Delete button. Submits the delete form to the server -->
+                    <button type="submit" class="button delete-button to-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="100" height="100">
+                            <path d="M22 5h-5V4c0-1.1-.9-2-2-2H9C7.9 2 7 2.9 7 4v1H2C1.45 5 1 5.45 1 6s.45 1 1 1v13c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c.55 0 1-.45 1-1s-.45-1-1-1zM9 4h6v1H9V4zm10 16H5V8h14v12zm-5-5h-2v-3h2v3zm3 0h-2v-3h2v3zm1-8H7V7h11v1z" fill="#ffffff" />
+                        </svg>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- New profile name/game-mode input field -->
+        <div class="small-item">
+            <!-- Name and game-mode input fields -->
+            {{ new_profile_form.name(class="name", form="new-profile-form", placeholder='Your profile name') }}
+            {{ new_profile_form.game_mode(class="game-mode", form="new_profile_form") }}
+            <!-- Actual create profile button. Submits the create form to the server -->
+            <button type="submit" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                    <rect x="40" y="0" width="20" height="100" fill="white" />
+                    <rect x="0" y="40" width="100" height="20" fill="white" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Create profile checkbox button. Toggle the create profile inputs -->
+        <div class="btn checkbox-btn primary-button">
+            <label for="create-profile-checkbox">
+                <input id="create-profile-checkbox" type="checkbox">
+                <span class="label-content to-right to-left">Create new profile</span>
+            </label>
+        </div>
+    </section>
+
+    <section id="right-section">
+        <!-- Profiles information input container -->
+        <div class="profile-info-container">
+            <!-- New profile map-agent input fields -->
+            <div class="profile-description">
+                <div class="flex-wrapper">
+                    {% for field in new_profile_form if field.name not in ['name', 'game_mode', 'csrf_token'] %}
+                        <div class="map-agent">
+                            <span class="to-left to-right">{{ field.label }}</span>
+                            <span class="to-left to-right to-bottom">{{ field(form="new_profile_form") }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Existent profiles information -->
+            {% for profile in profiles %}
+                <div class="profile-description" data-profile-id="{{ profile.name }}" data-profile-type="description">
+                    <div class="flex-wrapper">
+                        {% for map, agent in profile.map_agent.items() %}
+                            <div class="map-agent">
+                                <span class="to-left to-right">{{ map }}</span>
+                                <span class="to-left to-right to-bottom">{{ agent }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
 {% endblock %}

@@ -168,3 +168,5 @@ cython_debug/
 src/flask_application/instalocker_bp/profiles/*
 
 logs/
+
+src/flask_application/static/images/*

@@ -1,2 +1,1 @@
-☐ Add support for the testing environments (use the application without the Valorant running). This includes a fake web socket and instalocker
 ☐ Change the project name to "Toolorant"

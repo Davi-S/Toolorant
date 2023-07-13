@@ -22,7 +22,7 @@ class M_MapAgentField(type(fwtf.FlaskForm), type):
 
 
 class NewProfileInfo(fwtf.FlaskForm, metaclass=M_MapAgentField):
-    name = wtf.StringField('Name', validators=[wtf.validators.DataRequired()])
+    name = wtf.StringField('Name: ', validators=[wtf.validators.DataRequired()])
     game_mode = wtf.SelectField('Game Mode',
                                 choices=[mode.name.replace('_', ' ').title()
                                          for mode in gr.GameMode],

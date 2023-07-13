@@ -22,37 +22,43 @@ def init_app(app: flask.Flask):
 
 @instalocker_bp.route('/', methods=['GET', 'POST'])
 def index():
-    # TODO: Check bug where submitting the select_form without fields makes the create_form show errors
-    ##### SELECT PROFILE FORM #####
-    profiles = [profile.name for profile in get_all_profiles()]
-    user_profile = instalocker_bp.instalocker.profile
-    select_profile_form = forms.SelectProfiles(profiles,
-                                               None if user_profile is None
-                                               else profiles.index(user_profile.name))
-    if select_profile_form.validate_on_submit():
-        # Passing the current app as argument
-        if select_profile_form.set.data:
-            set_profile(select_profile_form.profile_name.data)
+    return flask.render_template('instalocker/index.html',
+                                 profiles=get_all_profiles(),
+                                 selected_profile=instalocker_bp.instalocker.profile,
+                                 instalocker_active=flask.session.get('instalocker_active', False),
+                                 new_profile_form=forms.NewProfileInfo())
+# def index():
+#     # TODO: Check bug where submitting the select_form without fields makes the create_form show errors
+#     ##### SELECT PROFILE FORM #####
+#     profiles = [profile.name for profile in get_all_profiles()]
+#     user_profile = instalocker_bp.instalocker.profile
+#     select_profile_form = forms.SelectProfiles(profiles,
+#                                                None if user_profile is None
+#                                                else profiles.index(user_profile.name))
+#     if select_profile_form.validate_on_submit():
+#         # Passing the current app as argument
+#         if select_profile_form.set.data:
+#             set_profile(select_profile_form.profile_name.data)
 
-        elif select_profile_form.delete.data:
-            delete_profile(select_profile_form.profile_name.data)
+#         elif select_profile_form.delete.data:
+#             delete_profile(select_profile_form.profile_name.data)
 
-        return flask.redirect(flask.url_for('instalocker_bp.index'))
-    # Process the form to "reconstruct" the html with the radio default ("checked").
-    # Must be called after the validate_on_submit
-    select_profile_form.process()
+#         return flask.redirect(flask.url_for('instalocker_bp.index'))
+#     # Process the form to "reconstruct" the html with the radio default ("checked").
+#     # Must be called after the validate_on_submit
+#     select_profile_form.process()
 
-    ##### CREATE PROFILE FORM #####
-    new_profile_form = forms.NewProfileInfo()
-    if new_profile_form.validate_on_submit():
-        create_profile(new_profile_form)
-        return flask.redirect(flask.url_for('instalocker_bp.index'))
+#     ##### CREATE PROFILE FORM #####
+#     new_profile_form = forms.NewProfileInfo()
+#     if new_profile_form.validate_on_submit():
+#         create_profile(new_profile_form)
+#         return flask.redirect(flask.url_for('instalocker_bp.index'))
 
     
-    return flask.render_template('instalocker/index.html',
-                                 select_profile_form=select_profile_form,
-                                 new_profile_form=new_profile_form,
-                                 instalocker_active=flask.session.get('instalocker_active', False))
+#     return flask.render_template('instalocker/index.html',
+#                                  select_profile_form=select_profile_form,
+#                                  new_profile_form=new_profile_form,
+#                                  instalocker_active=flask.session.get('instalocker_active', False))
 
 
 def set_profile(profile_name):
