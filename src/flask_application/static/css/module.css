@@ -4,16 +4,16 @@
 }
 
 .diamond-list li::before {
+    background-color: var(--text-color);
     content: "";
     display: inline-block;
-    background-color: var(--text-color);
-    transform: rotate(45deg);
-    /* (√2 / 2 / 2) = 0.35 -> half the diagonal of the square */
-    width: 0.35rem;
     height: 0.35rem;
     margin-right: 1rem;
-    vertical-align: middle;
+    transform: rotate(45deg);
     transition: 0.5s;
+    vertical-align: middle;
+    /* (√2 / 2 / 2) = 0.35 -> half the diagonal of the square */
+    width: 0.35rem;
 }
 
 .diamond-list.rotating-diamond li:hover::before {

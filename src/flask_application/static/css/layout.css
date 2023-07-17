@@ -1,13 +1,13 @@
-#main-header {
-    height: 3em;
+#l-main-header {
     background-color: var(--black-shade);
+    height: 3em;
 }
 
-#main-menu {
+#l-main-menu {
+    font-family: 'Bebas Neue', sans-serif;
     font-size: 2rem;
     position: absolute;
     text-transform: uppercase;
-    font-family: 'Bebas Neue', sans-serif;
     top: 50%;
     /* 
     Make the diamonds be on the center of the main tag border:
@@ -19,12 +19,12 @@
 }
 
 .l-index {
-    margin: 0em 5em;
     border-left: solid 2px var(--text-color);
+    margin: 0em 5em;
     min-height: 100vh;
 }
 
-.l-instalocker {
+.l-instalocker { 
     padding: 0.5em 2.5em;
     /* box-sizing: border-box;
     height: calc(100vh - 3em);
