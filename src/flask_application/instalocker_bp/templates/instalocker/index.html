@@ -23,7 +23,7 @@
                     <div class="small-item" data-profile-id="{{ profile.name }}" data-profile-type="item">
                         <!-- Select profile button. Submits the select form to the server -->
                         <!-- TODO: check if this 'is-checked class is being applied correctly' -->
-                        <button type="submit" class="select-btn btn curtain-btn neutral-curtain checkbox-btn thin-bs-border neutral-thin-bs-border {{ 'is-checked' if selected_profile.name == profile.name else '' }}">
+                        <button type="submit" class="select-btn btn curtain-btn neutral-curtain thin-bs-border neutral-thin-bs-border {{ 'is-checked' if selected_profile.name == profile.name else '' }}">
                             <div class="name">{{ profile.name }}</div>
                             <div class="game-mode">{{ profile.game_mode.name }}</div>
                             <span class="curtain"></span>
