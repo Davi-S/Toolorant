@@ -1,0 +1,12 @@
+.thin-bs-border.checkbox-btn.is-checked::before,
+.thin-bs-border.checkbox-btn.is-checked::after {
+    background-color: transparent;
+}
+
+.curtain-btn.checkbox-btn.is-checked span.curtain {
+    width: 110%;
+}
+
+.curtain-btn.checkbox-btn.is-checked {
+    color: var(--primary-color);
+}
