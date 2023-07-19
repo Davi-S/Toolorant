@@ -135,9 +135,9 @@
 .small-item-container {
     display: flex;
     flex-direction: column;
+    flex: 1;
     /* approximately 16px (1rem) */
     gap: calc(0.025 * 100vh);
-    flex: 1;
 }
 
 .small-item {
@@ -149,8 +149,8 @@
     align-items: flex-start;
     flex-direction: column;
     flex: 1;
-    text-indent: 1rem;
     overflow: hidden;
+    text-indent: 1rem;
 }
 
 .small-item .select-btn .name {

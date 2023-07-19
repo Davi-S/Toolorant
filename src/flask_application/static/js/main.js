@@ -88,7 +88,7 @@ instalockerCheckBox.addEventListener('change', function () {
 const createProfileCheckbox = document.getElementById('create-profile-checkbox')
 createProfileCheckbox.addEventListener('change', function () {
     let label = document.querySelector(`label[for='${this.id}']`)
-    // TODO: make the name label and the map-agent appear and disappear 
+    // TODO: make the name-label and the map-agent appear and disappear. Also deactivate the profile-items buttons
     if (this.checked) {
         label.classList.add("is-checked")
         changeCheckboxLabel(this, 'Cancel')
