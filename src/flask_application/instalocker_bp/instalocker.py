@@ -27,6 +27,7 @@ def index():
                                  selected_profile=instalocker_bp.instalocker.profile,
                                  instalocker_active=flask.session.get('instalocker_active', False),
                                  new_profile_form=forms.NewProfileInfo())
+    
 # def index():
 #     # TODO: Check bug where submitting the select_form without fields makes the create_form show errors
 #     ##### SELECT PROFILE FORM #####
@@ -60,13 +61,14 @@ def index():
 #                                  new_profile_form=new_profile_form,
 #                                  instalocker_active=flask.session.get('instalocker_active', False))
 
-
-def set_profile(profile_name):
+@instalocker_bp.route('/set', methods=['POST'])
+def set_profile():
+    profile_name = flask.request.form.get('profile_name')
     # Set the profile on the instalocker and on the user settings
     instalocker_bp.instalocker.profile = Profile.load(profile_name)
     flask.current_app.user_settings.profile = profile_name
     flask.current_app.user_settings.persist()
-
+    return ''
 
 def delete_profile(profile_name):
     # Create a profile object

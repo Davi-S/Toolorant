@@ -84,6 +84,30 @@ instalockerCheckBox.addEventListener('change', function () {
     }
 })
 
+// Set profile
+// TODO: since this form is not acting like a normal form, change this to handle the data submission in a better-practices way
+const SetProfileForm = document.getElementById('set-profile-form');
+SetProfileForm.addEventListener('submit', function (event) {
+    // Prevent the default form submission to handle it manually.
+    event.preventDefault()
+    const profileName = event.submitter.parentElement.getAttribute('data-profile-id')
+    // Submit the data with AJAX.
+    $.ajax({
+        url: APP_ROUTES["instalocker_bp.set_profile"],
+        type: 'POST',
+        data: {profile_name: profileName},
+    })
+
+    // Handle element classes
+    // Remove the is-checked class from the other buttons
+    const submitButtons = document.querySelectorAll(`button[type='submit'][form='${event.target.id}']`);
+    submitButtons.forEach(button => {
+        button.classList.remove('is-checked')
+    });
+    // Add the is-checked class to the button that was just clicked
+    event.submitter.classList.add("is-checked")
+});
+
 // Create profile
 const createProfileCheckbox = document.getElementById('create-profile-checkbox')
 createProfileCheckbox.addEventListener('change', function () {

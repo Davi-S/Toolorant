@@ -5,6 +5,10 @@
     <form id="new-profile-form" action="#" method="post" autocomplete="off">
         {{ new_profile_form.hidden_tag() }}
     </form>
+    <form id="set-profile-form" method="post" autocomplete="off">
+        <!-- Form made just to easily get the submit buttons.
+            The data will be collected with JS and sent to the server with AJAX -->
+    </form>
     <!-- TODO: add the other forms -->
     <section id="l-section-wrapper">
         <section id="l-left-section">
@@ -23,7 +27,7 @@
                     <div class="small-item" data-profile-id="{{ profile.name }}" data-profile-type="item">
                         <!-- Select profile button. Submits the select form to the server -->
                         <!-- TODO: check if this 'is-checked class is being applied correctly' -->
-                        <button type="submit" class="select-btn btn curtain-btn neutral-curtain thin-bs-border neutral-thin-bs-border {{ 'is-checked' if selected_profile.name == profile.name else '' }}">
+                        <button class="select-btn btn curtain-btn neutral-curtain thin-bs-border neutral-thin-bs-border {{ 'is-checked' if selected_profile.name == profile.name else '' }}" type="submit" form="set-profile-form">
                             <div class="name">{{ profile.name }}</div>
                             <div class="game-mode">{{ profile.game_mode.name }}</div>
                             <span class="curtain"></span>
@@ -40,7 +44,7 @@
             <div class="small-item">
                 <!-- Name and game-mode input fields -->
                 {{ new_profile_form.name(class="select-btn thin-bs-border neutral-thin-bs-border", form="new-profile-form", placeholder='New profile name') }}
-                {{ new_profile_form.game_mode(class="thin-bs-border neutral-thin-bs-border", form="new_profile_form") }}
+                {{ new_profile_form.game_mode(class="thin-bs-border neutral-thin-bs-border", form="new-profile-form") }}
                 <!-- Actual create profile button. Submits the create form to the server -->
                 <button type="submit" class="btn shadow-btn neutral-shadow">
                     <i class="fa-solid fa-plus"></i>
