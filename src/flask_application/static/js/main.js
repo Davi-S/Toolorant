@@ -84,10 +84,10 @@ instalockerCheckBox.addEventListener('change', function () {
     }
 })
 
+// TODO: since the set and delete form is not acting like a normal form, change this to handle the data submission in a better-practices way
 // Set profile
-// TODO: since this form is not acting like a normal form, change this to handle the data submission in a better-practices way
-const SetProfileForm = document.getElementById('set-profile-form');
-SetProfileForm.addEventListener('submit', function (event) {
+const setProfileForm = document.getElementById('set-profile-form');
+setProfileForm.addEventListener('submit', function (event) {
     // Prevent the default form submission to handle it manually.
     event.preventDefault()
     const profileName = event.submitter.parentElement.getAttribute('data-profile-id')
@@ -106,6 +106,22 @@ SetProfileForm.addEventListener('submit', function (event) {
     });
     // Add the is-checked class to the button that was just clicked
     event.submitter.classList.add("is-checked")
+});
+
+// Delete profile
+const deleteProfile = document.getElementById('delete-profile-form');
+deleteProfile.addEventListener('submit', function (event) {
+    // Prevent the default form submission to handle it manually.
+    event.preventDefault()
+    const profileName = event.submitter.parentElement.getAttribute('data-profile-id')
+    // Submit the data with AJAX.
+    $.ajax({
+        url: APP_ROUTES["instalocker_bp.delete_profile"],
+        type: 'POST',
+        data: {profile_name: profileName},
+    })
+    // Reload the page
+    location.reload();
 });
 
 // Create profile

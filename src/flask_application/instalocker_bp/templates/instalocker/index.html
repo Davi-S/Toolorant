@@ -5,12 +5,12 @@
     <form id="new-profile-form" action="#" method="post" autocomplete="off">
         {{ new_profile_form.hidden_tag() }}
     </form>
-    <form id="set-profile-form" method="post" autocomplete="off">
-        <!-- Form made just to easily get the submit buttons.
-            The data will be collected with JS and sent to the server with AJAX -->
-    </form>
+    <!-- set and delete form are made just to easily get the submit buttons.
+        The data will be collected with JS and sent to the server with AJAX -->
+    <form id="set-profile-form" method="post" autocomplete="off"></form>
+    <form id="delete-profile-form" method="post" autocomplete="off"></form>
     <!-- TODO: add the other forms -->
-    <section id="l-section-wrapper">
+    <section id="l-section-wrapper"> 
         <section id="l-left-section">
             <!-- Start/Stop checkbox button -->
             <!-- TODO: make the button darkblue by default instead of transparent -->
@@ -33,7 +33,7 @@
                             <span class="curtain"></span>
                         </button>
                         <!-- Delete button. Submits the delete form to the server -->
-                        <button type="submit" class="btn shadow-btn">
+                        <button class="btn shadow-btn" type="submit" form="delete-profile-form">
                             <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </div>
@@ -60,34 +60,29 @@
         </section>
 
         <section id="l-right-section">
-            <!-- Profiles information input container -->
-            <div class="profile-info-container">
-                <!-- New profile map-agent input fields -->
-                <div class="profile-description">
-                    <div class="flex-wrapper">
-                        {% for field in new_profile_form if field.name not in ['name', 'game_mode', 'csrf_token'] %}
-                            <div class="map-agent">
-                                <span class="to-left to-right">{{ field.label }}</span>
-                                <span class="to-left to-right to-bottom">{{ field(form="new_profile_form") }}</span>
+            <!-- New profile map-agent input fields -->
+            <div>
+                {% for field in new_profile_form if field.name not in ['name', 'game_mode', 'csrf_token'] %}
+                    <div>
+                        <span>{{ field.label }}</span>
+                        <span>{{ field(form="new-profile-form") }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Existent profiles information -->
+            {% for profile in profiles %}
+                <div data-profile-id="{{ profile.name }}" data-profile-type="description">
+                    <div>
+                        {% for map, agent in profile.map_agent.items() %}
+                            <div>
+                                <span>{{ map }}</span>
+                                <span>{{ agent }}</span>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
-
-                <!-- Existent profiles information -->
-                {% for profile in profiles %}
-                    <div class="profile-description" data-profile-id="{{ profile.name }}" data-profile-type="description">
-                        <div class="flex-wrapper">
-                            {% for map, agent in profile.map_agent.items() %}
-                                <div class="map-agent">
-                                    <span class="to-left to-right">{{ map }}</span>
-                                    <span class="to-left to-right to-bottom">{{ agent }}</span>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
         </section>
     </section>
 {% endblock %}

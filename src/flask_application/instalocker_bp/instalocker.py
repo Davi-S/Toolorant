@@ -70,7 +70,9 @@ def set_profile():
     flask.current_app.user_settings.persist()
     return ''
 
-def delete_profile(profile_name):
+@instalocker_bp.route('/delete', methods=['POST'])
+def delete_profile():
+    profile_name = flask.request.form.get('profile_name')
     # Create a profile object
     profile = Profile.load(profile_name)
     # Delete the profile file
