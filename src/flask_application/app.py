@@ -7,7 +7,7 @@ from .configuration import with_dynaconf
 def create_app(environment: str = 'development') -> flask.Flask:
     app = flask.Flask(__name__)
     # TODO: Check if valorant is open using the websocket
-    # TODO: Find a way to stop the application if valorant is closed
+    # TODO: Find a way to stop the application if valorant is closed after the application start
     # Check if valorant is open.
     # If the valorant is not open, the application is unusable.
     # If the valorant is open, proceed with the initialization.

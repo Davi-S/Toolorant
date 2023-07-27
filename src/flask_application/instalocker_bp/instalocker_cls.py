@@ -19,7 +19,7 @@ class Instalocker(Listener):
     def lock(self):
         try:
             match_info = self._client.pregame_fetch_match()
-        except Exception: # TODO: add exception You are not in a pre-game error
+        except Exception: # TODO: add exception You are not in a pre-game error to be more specific about the exception
             return   
         
         # Check if the function is being called multiple times for the same match

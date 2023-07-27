@@ -38,7 +38,7 @@ class WebSocket(Publisher):
                 for event in Event:
                     if event.value in response:
                         # Call the listeners on another thread so the ws thread is always running without interruption
-                        # TODO: Fix the following problem: notify_listeners can be called multiple times for the same event
+                        # TODO: Fix notify_listeners can be called multiple times for the same event
                         threading.Thread(target=self.notify_listeners, args=(event,), daemon=True).start()
                 
                 # with open('logs\event_logs.json', 'a') as f:

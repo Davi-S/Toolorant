@@ -1,7 +1,7 @@
 import enum
 
 
-# TODO: Add the new maps and character
+# TODO: Add the new maps and character (deadlock and related)
 class GameMode(enum.Enum):
     # check for "QueueID" to find if the "Bomb" game mode is competitive
     COMPETITIVE = "Bomb" + "Competitive"

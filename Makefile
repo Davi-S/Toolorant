@@ -6,9 +6,6 @@ ACTIVATE_VENV = cd .venv/Scripts & activate.bat & cd ../.. &
 	python -m venv .venv --upgrade-deps
 	$(ACTIVATE_VENV) pip install -r requirements.txt
 
-# TODO: make target to create the requirements.txt file with the actual packages on the venv
-# TODO: make target to uninstall all venv packages and install the requirements that are on the requirements.txt
-
 # Install the requirements of the requirements.txt in the virtual environment
 # It will only (re)install (the requirements are already installed on the .venv creation) the requirements if requirements.txt is newer than SITE_PACKAGES location (this means that the requirements.txt has been updated).
 .PHONY: requirements

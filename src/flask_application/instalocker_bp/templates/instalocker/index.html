@@ -9,12 +9,10 @@
         The data will be collected with JS and sent to the server with AJAX -->
     <form id="set-profile-form" method="post" autocomplete="off"></form>
     <form id="delete-profile-form" method="post" autocomplete="off"></form>
-    <!-- TODO: add the other forms -->
+
     <section id="l-section-wrapper"> 
         <section id="l-left-section">
             <!-- Start/Stop checkbox button -->
-            <!-- TODO: make the button darkblue by default instead of transparent -->
-            <!-- TODO: make the curtain-btn class not specific for buttons, so it can be used in other stuff. -->
             <label for="instalocker-start-stop" class="btn primary-btn curtain-btn checkbox-btn thin-bs-border {{ 'is-checked' if instalocker_active else '' }}">
                 <input id="instalocker-start-stop" type="checkbox" {{ 'checked' if instalocker_active else '' }}>
                 <span class="label-content">{{ 'Deactivate' if instalocker_active else 'Activate' }}</span>
@@ -26,7 +24,6 @@
                 {% for profile in profiles %}
                     <div class="small-item" data-profile-id="{{ profile.name }}" data-profile-type="item">
                         <!-- Select profile button. Submits the select form to the server -->
-                        <!-- TODO: check if this 'is-checked class is being applied correctly' -->
                         <button class="select-btn btn curtain-btn neutral-curtain thin-bs-border neutral-thin-bs-border {{ 'is-checked' if selected_profile.name == profile.name else '' }}" type="submit" form="set-profile-form">
                             <div class="name">{{ profile.name }}</div>
                             <div class="game-mode">{{ profile.game_mode.name }}</div>

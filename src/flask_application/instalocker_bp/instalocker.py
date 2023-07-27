@@ -1,4 +1,4 @@
-# TODO: The fact that the profile can be None is bad because it adds a lot of checking. Need to find a way to reduce the amount of checks
+# TODO: The fact that the profile can be None is bad because it adds a lot of checking. Need to find a way to reduce the amount of checks for this
 import flask
 from .instalocker_cls import Instalocker
 from .profile import Profile, get_all_profiles
@@ -29,7 +29,6 @@ def index():
                                  new_profile_form=forms.NewProfileInfo())
     
 # def index():
-#     # TODO: Check bug where submitting the select_form without fields makes the create_form show errors
 #     ##### SELECT PROFILE FORM #####
 #     profiles = [profile.name for profile in get_all_profiles()]
 #     user_profile = instalocker_bp.instalocker.profile
