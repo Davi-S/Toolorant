@@ -95,7 +95,7 @@ setProfileForm.addEventListener('submit', function (event) {
     $.ajax({
         url: APP_ROUTES["instalocker_bp.set_profile"],
         type: 'POST',
-        data: {profile_name: profileName},
+        data: { profile_name: profileName },
     })
 
     // Handle element classes
@@ -118,7 +118,7 @@ deleteProfile.addEventListener('submit', function (event) {
     $.ajax({
         url: APP_ROUTES["instalocker_bp.delete_profile"],
         type: 'POST',
-        data: {profile_name: profileName},
+        data: { profile_name: profileName },
     })
     // Reload the page
     location.reload();

@@ -138,11 +138,22 @@
     flex: 1;
     /* approximately 16px (1rem) */
     gap: calc(0.025 * 100vh);
+    overflow-y: auto;
+}
+
+.small-item-container::-webkit-scrollbar {
+    width: 5px;
+    background-color: rgb(191,190,184)
+}
+
+.small-item-container::-webkit-scrollbar-thumb {
+    background-color: rgb(146,147,141);
 }
 
 .small-item {
     display: flex;
     height: 3rem;
+    flex-shrink: 0;
 }
 
 .small-item .select-btn {
