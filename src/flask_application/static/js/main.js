@@ -90,7 +90,8 @@ const setProfileForm = document.getElementById('set-profile-form');
 setProfileForm.addEventListener('submit', function (event) {
     // Prevent the default form submission to handle it manually.
     event.preventDefault()
-    const profileName = event.submitter.parentElement.getAttribute('data-profile-id')
+    const setButton = event.submitter
+    const profileName = setButton.parentElement.getAttribute('data-profile-id')
     // Submit the data with AJAX.
     $.ajax({
         url: APP_ROUTES["instalocker_bp.set_profile"],
@@ -105,7 +106,7 @@ setProfileForm.addEventListener('submit', function (event) {
         button.classList.remove('is-checked')
     });
     // Add the is-checked class to the button that was just clicked
-    event.submitter.classList.add("is-checked")
+    setButton.classList.add("is-checked")
 });
 
 // Delete profile
@@ -113,15 +114,16 @@ const deleteProfile = document.getElementById('delete-profile-form');
 deleteProfile.addEventListener('submit', function (event) {
     // Prevent the default form submission to handle it manually.
     event.preventDefault()
-    const profileName = event.submitter.parentElement.getAttribute('data-profile-id')
+    const deleteButton = event.submitter
+    const profileName = deleteButton.parentElement.getAttribute('data-profile-id')
     // Submit the data with AJAX.
     $.ajax({
         url: APP_ROUTES["instalocker_bp.delete_profile"],
         type: 'POST',
         data: { profile_name: profileName },
     })
-    // Reload the page
-    location.reload();
+    // Delete the profile item
+    deleteButton.parentElement.remove()
 });
 
 // Create profile

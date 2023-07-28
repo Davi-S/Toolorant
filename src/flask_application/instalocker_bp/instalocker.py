@@ -72,15 +72,17 @@ def set_profile():
 @instalocker_bp.route('/delete', methods=['POST'])
 def delete_profile():
     profile_name = flask.request.form.get('profile_name')
-    # Create a profile object
+    # Create a profile object for comparison
     profile = Profile.load(profile_name)
     # Delete the profile file
-    Profile.delete(profile.name)
+    Profile.delete(profile_name)
     # Check if the profile deleted was set on the instalocker and/or user settings and remove its references
     if instalocker_bp.instalocker.profile == profile:
         instalocker_bp.instalocker.profile = None
     if flask.current_app.user_settings.profile == profile.name:
         flask.current_app.user_settings.profile = None
+        flask.current_app.user_settings.persist()
+    return ''
 
 
 def create_profile(form: forms.NewProfileInfo):
