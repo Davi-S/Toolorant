@@ -209,3 +209,7 @@
 .shadow-btn i {
     color: var(--accent-color);
 }
+
+#new-profile-basic-input-container {
+    transition: opacity 0.2s, height 0.5s, margin 0.5s;
+}

@@ -10,3 +10,12 @@
 .curtain-btn.is-checked {
     color: var(--primary-color);
 }
+
+/* Fake hidden does not use "display: none" because of transitions*/
+.is-fake-hidden {
+    transition: opacity 0.2s, height 0.5s, margin 0.5s;
+    height: 0;
+    opacity: 0;
+    margin-top: -40px;
+    pointer-events: none
+}

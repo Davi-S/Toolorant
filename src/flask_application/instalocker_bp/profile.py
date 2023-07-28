@@ -43,5 +43,5 @@ class Profile:
 
 
 def get_all_profiles():
-    profiles_name = [file.rstrip('.json')for file in os.listdir(f'{os.getcwd()}\\{BASE_PROFILES_PATH}')]
+    profiles_name = [file.rstrip('.json') for file in os.listdir(f'{os.getcwd()}\\{BASE_PROFILES_PATH}')]
     return [Profile.load(profile_name) for profile_name in profiles_name]

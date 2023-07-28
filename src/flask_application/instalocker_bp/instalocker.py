@@ -27,38 +27,6 @@ def index():
                                  selected_profile=instalocker_bp.instalocker.profile,
                                  instalocker_active=flask.session.get('instalocker_active', False),
                                  new_profile_form=forms.NewProfileInfo())
-    
-# def index():
-#     ##### SELECT PROFILE FORM #####
-#     profiles = [profile.name for profile in get_all_profiles()]
-#     user_profile = instalocker_bp.instalocker.profile
-#     select_profile_form = forms.SelectProfiles(profiles,
-#                                                None if user_profile is None
-#                                                else profiles.index(user_profile.name))
-#     if select_profile_form.validate_on_submit():
-#         # Passing the current app as argument
-#         if select_profile_form.set.data:
-#             set_profile(select_profile_form.profile_name.data)
-
-#         elif select_profile_form.delete.data:
-#             delete_profile(select_profile_form.profile_name.data)
-
-#         return flask.redirect(flask.url_for('instalocker_bp.index'))
-#     # Process the form to "reconstruct" the html with the radio default ("checked").
-#     # Must be called after the validate_on_submit
-#     select_profile_form.process()
-
-#     ##### CREATE PROFILE FORM #####
-#     new_profile_form = forms.NewProfileInfo()
-#     if new_profile_form.validate_on_submit():
-#         create_profile(new_profile_form)
-#         return flask.redirect(flask.url_for('instalocker_bp.index'))
-
-    
-#     return flask.render_template('instalocker/index.html',
-#                                  select_profile_form=select_profile_form,
-#                                  new_profile_form=new_profile_form,
-#                                  instalocker_active=flask.session.get('instalocker_active', False))
 
 @instalocker_bp.route('/set', methods=['POST'])
 def set_profile():
@@ -84,16 +52,20 @@ def delete_profile():
         flask.current_app.user_settings.persist()
     return ''
 
-
-def create_profile(form: forms.NewProfileInfo):
+@instalocker_bp.route('/create', methods=['POST'])
+def create_profile():
+    form = forms.NewProfileInfo()
     profile_info = {'name': form.name.data,
-                    'game_mode': gr.GameMode[form.game_mode.data.upper()],
+                    # Replacing space for underline because of Spike Rush
+                    'game_mode': gr.GameMode[form.game_mode.data.upper().replace(' ', '_')],
+                    # Dictionary comprehension to dynamically build the map-agent based on the game resources classes and field names.
                     'map_agent': {gr.Map[field_name.upper()]: gr.Agent[field.data.upper()] if field.data.upper() != 'NONE' else None
                                   for field_name, field in form._fields.items()
-                                  if field_name.upper() in [en.name for en in gr.Map]}}
+                                  if field_name.upper() in [game_map.name for game_map in gr.Map]}}
     Profile(profile_info['name'],
             profile_info['game_mode'],
             profile_info['map_agent']).dump()
+    return ''
 
 
 @instalocker_bp.route('/start', methods=['POST'])

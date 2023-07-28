@@ -2,7 +2,7 @@
 {% block title %}Profiles{% endblock %}
 {% block main_attr %}class="l-instalocker"{% endblock %}
 {% block main %}
-    <form id="new-profile-form" action="#" method="post" autocomplete="off">
+    <form id="new-profile-form" method="post" autocomplete="off">
         {{ new_profile_form.hidden_tag() }}
     </form>
     <!-- set and delete form are made just to easily get the submit buttons.
@@ -20,13 +20,14 @@
             </label>
             
             <!-- Profile items. Has the name and game-mode information. Has the select form submit button and the delete form submit button -->
+            <!-- TODO: add shadow when there is content overflowing -->
             <div class="small-item-container">
                 {% for profile in profiles %}
                     <div class="small-item" data-profile-id="{{ profile.name }}" data-profile-type="item">
                         <!-- Select profile button. Submits the select form to the server -->
                         <button class="select-btn btn curtain-btn neutral-curtain thin-bs-border neutral-thin-bs-border {{ 'is-checked' if selected_profile.name == profile.name else '' }}" type="submit" form="set-profile-form">
                             <div class="name">{{ profile.name }}</div>
-                            <div class="game-mode">{{ profile.game_mode.name }}</div>
+                            <div class="game-mode">{{ profile.game_mode.name.replace('_', ' ') }}</div>
                             <span class="curtain"></span>
                         </button>
                         <!-- Delete button. Submits the delete form to the server -->
@@ -38,12 +39,12 @@
             </div>
 
             <!-- New profile name/game-mode input field -->
-            <div class="small-item">
+            <div id="new-profile-basic-input-container" class="small-item is-fake-hidden">
                 <!-- Name and game-mode input fields -->
                 {{ new_profile_form.name(class="select-btn thin-bs-border neutral-thin-bs-border", form="new-profile-form", placeholder='New profile name') }}
-                {{ new_profile_form.game_mode(class="thin-bs-border neutral-thin-bs-border", form="new-profile-form") }}
+                {{ new_profile_form.game_mode(class="thin-bs-border neutral-thin-bs-border", form="new-profile-form", aria_label="label for the select") }}
                 <!-- Actual create profile button. Submits the create form to the server -->
-                <button type="submit" class="btn shadow-btn neutral-shadow">
+                <button class="btn shadow-btn neutral-shadow" type="submit" form="new-profile-form">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
