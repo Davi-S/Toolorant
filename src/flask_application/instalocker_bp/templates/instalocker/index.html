@@ -38,8 +38,9 @@
                 {% endfor %}
             </div>
 
+            <!-- CONTINUE: add profile stuff -->
             <!-- New profile name/game-mode input field -->
-            <div id="new-profile-basic-input-container" class="small-item is-fake-hidden">
+            <div id="new-profile-basic-input-container" class="small-item is-hidden">
                 <!-- Name and game-mode input fields -->
                 {{ new_profile_form.name(class="select-btn thin-bs-border neutral-thin-bs-border", form="new-profile-form", placeholder='New profile name') }}
                 {{ new_profile_form.game_mode(class="thin-bs-border neutral-thin-bs-border", form="new-profile-form", aria_label="label for the select") }}

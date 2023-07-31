@@ -79,11 +79,11 @@ createProfileCheckbox.addEventListener('change', function () {
         label.classList.add("is-checked")
         changeCheckboxLabel(this, 'Cancel')
         // New profile name/game-mode input field
-        newProfileBasicInputContainer.classList.remove('is-fake-hidden')
+        newProfileBasicInputContainer.classList.remove('is-hidden')
     } else {
         label.classList.remove("is-checked")
         changeCheckboxLabel(this, 'Create new profile')
-        newProfileBasicInputContainer.classList.add('is-fake-hidden')
+        newProfileBasicInputContainer.classList.add('is-hidden')
     }
 })
 
