@@ -46,6 +46,16 @@
     position: relative;
 }
 
+.btn:disabled {
+    cursor: initial;
+    background-color: color-mix(in srgb, var(--primary-color) 90%, black); 
+    color: var(--text-color) !important;
+}
+
+.btn:disabled::after, .btn:disabled::before{
+    content: none;
+}
+
 .primary-btn {
     font-size: 1.125rem;
     font-weight: bold;
@@ -189,6 +199,11 @@
     box-shadow: inset -1px 0 0 1px var(--accent-color);
     transition: 0.3s;
     width: 3rem;
+}
+
+.shadow-btn:disabled:hover {
+    /* Remove shadow that fills the button */
+    box-shadow: inset -1px 0 0 1px var(--accent-color);
 }
 
 .shadow-btn:hover {

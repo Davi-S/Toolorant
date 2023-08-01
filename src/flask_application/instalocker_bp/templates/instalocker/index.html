@@ -31,14 +31,13 @@
                             <span class="curtain"></span>
                         </button>
                         <!-- Delete button. Submits the delete form to the server -->
-                        <button class="btn shadow-btn" type="submit" form="delete-profile-form">
+                        <button class="btn shadow-btn" type="submit" form="delete-profile-form" aria-label="delete">
                             <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </div>
                 {% endfor %}
             </div>
 
-            <!-- CONTINUE: add profile stuff -->
             <!-- New profile name/game-mode input field -->
             <div id="new-profile-basic-input-container" class="small-item is-hidden">
                 <!-- Name and game-mode input fields -->
@@ -60,7 +59,7 @@
 
         <section id="l-right-section">
             <!-- New profile map-agent input fields -->
-            <div>
+            <div id="new-profile-map-agent-input-container" class="is-not-display">
                 {% for field in new_profile_form if field.name not in ['name', 'game_mode', 'csrf_token'] %}
                     <div>
                         <span>{{ field.label }}</span>
@@ -71,7 +70,7 @@
 
             <!-- Existent profiles information -->
             {% for profile in profiles %}
-                <div data-profile-id="{{ profile.name }}" data-profile-type="description">
+                <div class="{{ '' if selected_profile.name == profile.name else 'is-not-display' }}" data-profile-id="{{ profile.name }}" data-profile-type="description">
                     <div>
                         {% for map, agent in profile.map_agent.items() %}
                             <div>

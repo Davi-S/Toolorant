@@ -1,5 +1,3 @@
-console.log("Main script started")
-
 function changeCheckboxLabel(checkBox, newLabelContent) {
     let label = document.querySelector(`label[for='${checkBox.id}']`)
     let content = label.getElementsByClassName('label-content')[0]
@@ -41,15 +39,20 @@ setProfileForm.addEventListener('submit', function (event) {
         type: 'POST',
         data: { profile_name: profileName },
     })
-
-    // Handle element classes
     // Remove the is-checked class from the other buttons
     const submitButtons = document.querySelectorAll(`button[type='submit'][form='${this.id}']`);
     submitButtons.forEach(button => {
         button.classList.remove('is-checked')
     });
+    // Add the is-not-display to profile descriptions
+    const profileDescriptions = document.querySelectorAll(`[data-profile-type="description"]`)
+    profileDescriptions.forEach(profile => {
+        profile.classList.add('is-not-display')
+    })
     // Add the is-checked class to the button that was just clicked
     setButton.classList.add("is-checked")
+    // Remove the is-not-display class from the description of the set profile
+    document.querySelectorAll(`[data-profile-id="${profileName}"][data-profile-type="description"]`)[0].classList.remove('is-not-display')
 });
 
 // Delete profile
@@ -74,16 +77,41 @@ const createProfileCheckbox = document.getElementById('create-profile-checkbox')
 createProfileCheckbox.addEventListener('change', function () {
     const label = document.querySelector(`label[for='${this.id}']`)
     const newProfileBasicInputContainer = document.getElementById('new-profile-basic-input-container')
+    const smallItemContainer = document.getElementsByClassName('small-item-container')[0]
+    const mapAgentContainer = document.querySelector('#new-profile-map-agent-input-container')
     // TODO: show and hide stuff
     if (this.checked) {
         label.classList.add("is-checked")
         changeCheckboxLabel(this, 'Cancel')
         // New profile name/game-mode input field
         newProfileBasicInputContainer.classList.remove('is-hidden')
+        // Disable profile buttons and hide descriptions
+        smallItemContainer.querySelectorAll('button').forEach(button => {
+            button.setAttribute("disabled", "disabled")
+        })
+        const profileDescriptions = document.querySelectorAll('[data-profile-type="description"]')
+        profileDescriptions.forEach(profile => {
+            profile.classList.add('is-not-display')
+        })
+        // Show map-agent fields
+        mapAgentContainer.classList.remove('is-not-display')
+
     } else {
         label.classList.remove("is-checked")
         changeCheckboxLabel(this, 'Create new profile')
+        // New profile name/game-mode input field
         newProfileBasicInputContainer.classList.add('is-hidden')
+        // Enable profile buttons and show the selected profile description
+        smallItemContainer.querySelectorAll('button').forEach(button => {
+            button.removeAttribute("disabled")
+            if (button.classList.contains('is-checked')) {
+                let profileId = button.parentElement.getAttribute('data-profile-id')
+                let ProfileDescription = document.querySelectorAll(`[data-profile-id="${profileId}"][data-profile-type="description"]`)[0]
+                ProfileDescription.classList.remove('is-not-display')
+            }
+        })
+        // Hide map-agent fields
+        mapAgentContainer.classList.add('is-not-display')
     }
 })
 

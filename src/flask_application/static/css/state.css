@@ -21,3 +21,7 @@
     pointer-events: none;
     transition: opacity 0.2s, height 0.5s, margin 0.5s;
 }
+
+.is-not-display {
+    display: none;
+}
