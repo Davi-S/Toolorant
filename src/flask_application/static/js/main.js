@@ -25,6 +25,7 @@ instalockerCheckBox.addEventListener('change', function () {
     }
 })
 
+// TODO: show profile description when hovering a profile item
 // TODO: since the set and delete form is not acting like a normal form, change this to handle the data submission in a better-practices way
 // Set profile
 const setProfileForm = document.getElementById('set-profile-form');
