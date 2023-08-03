@@ -71,14 +71,12 @@
             <!-- Existent profiles information -->
             {% for profile in profiles %}
                 <div class="{{ '' if selected_profile.name == profile.name else 'is-not-display' }}" data-profile-id="{{ profile.name }}" data-profile-type="description">
-                    <div>
-                        {% for map, agent in profile.map_agent.items() %}
-                            <div>
-                                <span>{{ map }}</span>
-                                <span>{{ agent }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
+                    {% for map, agent in profile.map_agent.items() %}
+                        <div>
+                            <span>{{ map }}</span>
+                            <span>{{ agent }}</span>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endfor %}
         </section>
