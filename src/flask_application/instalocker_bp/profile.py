@@ -43,5 +43,6 @@ class Profile:
 
 
 def get_all_profiles():
+    # BUG: There is something wrong with this function. Some filenames can't be read and raise a error. Maybe something wrong with the letter "s"
     profiles_name = [file.rstrip('.json') for file in os.listdir(f'{os.getcwd()}\\{BASE_PROFILES_PATH}')]
     return [Profile.load(profile_name) for profile_name in profiles_name]

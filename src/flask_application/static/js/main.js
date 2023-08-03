@@ -25,7 +25,6 @@ instalockerCheckBox.addEventListener('change', function () {
     }
 })
 
-// TODO: show profile description when hovering a profile item
 // TODO: since the set and delete form is not acting like a normal form, change this to handle the data submission in a better-practices way
 // Set profile
 const setProfileForm = document.getElementById('set-profile-form');
@@ -69,9 +68,9 @@ deleteProfileForm.addEventListener('submit', function (event) {
         type: 'POST',
         data: { profile_name: profileName },
     })
-    // Delete the profile item
+    // Delete the profile item and description
     deleteButton.parentElement.remove()
-    // TODO: delete the profile description too
+    document.querySelectorAll(`[data-profile-id="${profileName}"][data-profile-type="description"]`)[0].remove()
 });
 
 // Create profile button
@@ -81,7 +80,6 @@ createProfileCheckbox.addEventListener('change', function () {
     const newProfileBasicInputContainer = document.getElementById('new-profile-basic-input-container')
     const smallItemContainer = document.getElementsByClassName('small-item-container')[0]
     const mapAgentContainer = document.querySelector('#new-profile-map-agent-input-container')
-    // TODO: show and hide stuff
     if (this.checked) {
         label.classList.add("is-checked")
         changeCheckboxLabel(this, 'Cancel')
