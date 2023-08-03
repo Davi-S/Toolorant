@@ -58,23 +58,26 @@
         </section>
 
         <section id="l-right-section">
+            <!-- TODO: Make the select box alphabetic ordered -->
             <!-- New profile map-agent input fields -->
-            <div id="new-profile-map-agent-input-container" class="is-not-display">
+            <div id="new-profile-map-agent-input-container" class="map-agent-container is-not-display">
                 {% for field in new_profile_form if field.name not in ['name', 'game_mode', 'csrf_token'] %}
-                    <div>
-                        <span>{{ field.label }}</span>
-                        <span>{{ field(form="new-profile-form") }}</span>
+                    <div class="map-agent thin-bs-border neutral-thin-bs-border">
+                        <div class="map"><span>{{ field.label }}</span></div>
+                        <span class="line"></span>
+                        <div class="agent"><span>{{ field(form="new-profile-form") }}</span></div>
                     </div>
                 {% endfor %}
             </div>
 
             <!-- Existent profiles information -->
             {% for profile in profiles %}
-                <div class="{{ '' if selected_profile.name == profile.name else 'is-not-display' }}" data-profile-id="{{ profile.name }}" data-profile-type="description">
+                <div class="map-agent-container {{ '' if selected_profile.name == profile.name else 'is-not-display' }}" data-profile-id="{{ profile.name }}" data-profile-type="description">
                     {% for map, agent in profile.map_agent.items() %}
-                        <div>
-                            <span>{{ map }}</span>
-                            <span>{{ agent }}</span>
+                        <div class="map-agent thin-bs-border neutral-thin-bs-border">
+                            <div class="map"><span>{{ map.name.title() }}</span></div>
+                            <span class="line"></span>
+                            <div class="agent"><span>{{ agent.name.title() if agent else '•••' }}</span></div>
                         </div>
                     {% endfor %}
                 </div>

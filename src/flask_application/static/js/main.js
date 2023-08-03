@@ -71,6 +71,7 @@ deleteProfileForm.addEventListener('submit', function (event) {
     })
     // Delete the profile item
     deleteButton.parentElement.remove()
+    // TODO: delete the profile description too
 });
 
 // Create profile button
