@@ -1,7 +1,6 @@
 import asyncio
 import base64
 import enum
-import json
 import ssl
 import threading
 
@@ -14,6 +13,7 @@ from ..abstracts import Publisher
 class Event(enum.Enum):
     PREGAME = "/riot-messaging-service/v1/message/ares-pregame/pregame/v1/matches/"
 
+
 class WebSocket(Publisher):
     def __init__(self):
         super().__init__()
@@ -24,34 +24,33 @@ class WebSocket(Publisher):
         ssl_context.check_hostname = False
         ssl_context.verify_mode = ssl.CERT_NONE
 
-        async with websockets.connect(f"wss://127.0.0.1:{port}", ssl=ssl_context,
+        async with websockets.connect(f"wss://127.0.0.1:{port}",
+                                      ssl=ssl_context,
                                       extra_headers={'Authorization': f"Basic {base64.b64encode(f'riot:{password}'.encode()).decode()}"}) as websocket:
-
             await websocket.send('[5, "OnJsonApiEvent"]')
-
             while True:
                 try:
                     response = await websocket.recv()
                 except websockets.exceptions.ConnectionClosedError as e:
                     self.is_running = False
-                    return 
+                    return
                 for event in Event:
                     if event.value in response:
                         # Call the listeners on another thread so the ws thread is always running without interruption
                         # TODO: Fix notify_listeners can be called multiple times for the same event
                         threading.Thread(target=self.notify_listeners, args=(event,), daemon=True).start()
-                
-                # with open('logs\event_logs.json', 'a') as f:
-                #     json.dump(json.loads(response)[2], f, indent=4)
 
     def start(self, lockfile):
         if self.is_running:
             return False
         self.is_running = True
-        t = threading.Thread(target=self._start, args=(lockfile['port'], lockfile['password']), daemon=True, name='ws_Thread')
+        t = threading.Thread(target=self._start,
+                             args=(lockfile['port'], lockfile['password']),
+                             daemon=True,
+                             name='WSThread')
         t.start()
         return t.is_alive()
-    
+
     def _start(self, port, password):
         asyncio.run(self._web_socket(port, password))
 
@@ -60,5 +59,3 @@ class WebSocket(Publisher):
             return False
         self.is_running = False
         return True
-    
-    

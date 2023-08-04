@@ -1,5 +1,6 @@
 # TODO: Give name to all new threads created on the application
 import contextlib
+
 import flask
 
 from .configuration import with_dynaconf
@@ -14,6 +15,5 @@ def create_app(environment: str = 'development') -> flask.Flask:
     with contextlib.suppress(Exception):
         app.client.activate()
         app.websocket.start(app.client.lockfile)
-        
-    return app
 
+    return app

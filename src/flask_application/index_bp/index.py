@@ -1,6 +1,5 @@
 import flask
 
-
 index_bp = flask.Blueprint('index_bp', __name__,
                            template_folder='templates')
 

@@ -42,6 +42,7 @@ instalockerCheckBox.addEventListener('change', function () {
 })
 
 // TODO: since the set and delete form is not acting like a normal form, change this to handle the data submission in a better-practices way
+// TODO: Do not make ajax request if trying to set a profile that is already set 
 // Set profile
 const setProfileForm = document.getElementById('set-profile-form');
 setProfileForm.addEventListener('submit', function (event) {

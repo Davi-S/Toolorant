@@ -1,9 +1,11 @@
 # TODO: The fact that the profile can be None is bad because it adds a lot of checking. Need to find a way to reduce the amount of checks for this
+# TODO: Add feature to set a delay on selecting and locking the character to prevent account suspension
 import flask
-from .instalocker_cls import Instalocker
-from .profile import Profile, get_all_profiles
+
 from .. import forms
 from .. import game_resources as gr
+from .instalocker_cls import Instalocker
+from .profile import Profile, get_all_profiles
 
 
 instalocker_bp = flask.Blueprint('instalocker_bp', __name__,
@@ -28,6 +30,7 @@ def index():
                                  instalocker_active=flask.session.get('instalocker_active', False),
                                  new_profile_form=forms.NewProfileInfo())
 
+
 @instalocker_bp.route('/set', methods=['POST'])
 def set_profile():
     profile_name = flask.request.form.get('profile_name')
@@ -36,6 +39,7 @@ def set_profile():
     flask.current_app.user_settings.profile = profile_name
     flask.current_app.user_settings.persist()
     return ''
+
 
 @instalocker_bp.route('/delete', methods=['POST'])
 def delete_profile():
@@ -51,6 +55,7 @@ def delete_profile():
         flask.current_app.user_settings.profile = None
         flask.current_app.user_settings.persist()
     return ''
+
 
 @instalocker_bp.route('/create', methods=['POST'])
 def create_profile():

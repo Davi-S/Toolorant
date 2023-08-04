@@ -1,6 +1,8 @@
-import wtforms as wtf
 import flask_wtf as fwtf
+import wtforms as wtf
+
 from . import game_resources as gr
+
 
 ########## BLACK MAGIC ZONE ##########
 # This metaclass creates the map-agent fields as class attributes dynamically from the dataclasses.

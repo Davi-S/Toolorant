@@ -1,7 +1,6 @@
-import flask
+from .. import game_resources as gr
 from ..abstracts import Listener
 from ..websocket.websocket import Event
-from .. import game_resources as gr
 
 
 class Instalocker(Listener):
@@ -19,9 +18,9 @@ class Instalocker(Listener):
     def lock(self):
         try:
             match_info = self._client.pregame_fetch_match()
-        except Exception: # TODO: add exception You are not in a pre-game error to be more specific about the exception
-            return   
-        
+        except Exception:  # TODO: add exception "You are not in a pre-game error" to be more specific about the exception
+            return
+
         # Check if the function is being called multiple times for the same match
         # This is needed because the WS can notify the same event multiple times
         if match_info['ID'] in self._seen_matches:
@@ -40,9 +39,9 @@ class Instalocker(Listener):
             return
 
         # Try to instalock the character
-        # TODO: treat errors that can happen when locking the character
         try:
             lock_info = self._client.pregame_lock_character(agent.value)
+        # TODO: treat errors that can happen when locking the character
         except Exception:
             return
 

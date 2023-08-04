@@ -1,5 +1,6 @@
-import valclient
 import os
+
+import valclient
 
 
 class RegionError(Exception):
@@ -13,7 +14,6 @@ class CustomClient(valclient.Client):
     """Is a valclient that don't need a region"""
 
     def __init__(self, region=None, auth=None):
-        # TODO: make it use the inputted region only if the region is not found on the log file
         if file_region := self.get_region():
             super().__init__(file_region, auth)
             return
@@ -32,5 +32,3 @@ class CustomClient(valclient.Client):
                     return region.decode()
         except Exception:
             return ''
-
-    

@@ -1,3 +1,4 @@
+# TODO: move the "user_settings.json" to this folder
 from dynaconf import Dynaconf, loaders
 
 

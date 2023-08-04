@@ -1,6 +1,7 @@
 import dataclasses
 import json
 import os
+
 from .. import game_resources as gr
 
 BASE_PROFILES_PATH = 'src\\flask_application\\instalocker_bp\\profiles\\'
