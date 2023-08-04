@@ -12,6 +12,14 @@ instalockerCheckBox.addEventListener('change', function () {
         $.ajax({
             url: APP_ROUTES["instalocker_bp.start"],
             type: 'POST',
+            success: function(data) {
+                // Check if the response contains a new template (non-empty string)
+                // A new template means a error message. (valorant was closed while the application is running)
+                if (typeof data === 'string' && data.trim().length > 0) {
+                    // If the response is a new template, reload the page
+                    window.location.reload();
+                }
+            }
         })
         label.classList.add("is-checked")
         changeCheckboxLabel(this, 'Deactivate')
@@ -19,6 +27,14 @@ instalockerCheckBox.addEventListener('change', function () {
         $.ajax({
             url: APP_ROUTES["instalocker_bp.stop"],
             type: 'POST',
+            success: function(data) {
+                // Check if the response contains a new template (non-empty string)
+                // A new template means a error message. (valorant was closed while the application is running)
+                if (typeof data === 'string' && data.trim().length > 0) {
+                    // If the response is a new template, reload the page
+                    window.location.reload();
+                }
+            }
         })
         label.classList.remove("is-checked")
         changeCheckboxLabel(this, 'Activate')
@@ -38,6 +54,14 @@ setProfileForm.addEventListener('submit', function (event) {
         url: APP_ROUTES["instalocker_bp.set_profile"],
         type: 'POST',
         data: { profile_name: profileName },
+        success: function(data) {
+            // Check if the response contains a new template (non-empty string)
+            // A new template means a error message. (valorant was closed while the application is running)
+            if (typeof data === 'string' && data.trim().length > 0) {
+                // If the response is a new template, reload the page
+                window.location.reload();
+            }
+        }
     })
     // Remove the is-checked class from the other buttons
     const submitButtons = document.querySelectorAll(`button[type='submit'][form='${this.id}']`);
@@ -67,6 +91,14 @@ deleteProfileForm.addEventListener('submit', function (event) {
         url: APP_ROUTES["instalocker_bp.delete_profile"],
         type: 'POST',
         data: { profile_name: profileName },
+        success: function(data) {
+            // Check if the response contains a new template (non-empty string)
+            // A new template means a error message. (valorant was closed while the application is running)
+            if (typeof data === 'string' && data.trim().length > 0) {
+                // If the response is a new template, reload the page
+                window.location.reload();
+            }
+        }
     })
     // Delete the profile item and description
     deleteButton.parentElement.remove()
@@ -125,6 +157,14 @@ newProfileForm.addEventListener('submit', function (event) {
         url: APP_ROUTES["instalocker_bp.create_profile"],
         type: 'POST',
         data: $(this).serialize(),
+        success: function(data) {
+            // Check if the response contains a new template (non-empty string)
+            // A new template means a error message. (valorant was closed while the application is running)
+            if (typeof data === 'string' && data.trim().length > 0) {
+                // If the response is a new template, reload the page
+                window.location.reload();
+            }
+        }
     })
     // TODO: add the profile info to the page manually to not reload the page
     // Reload the page to get the new profile from the server

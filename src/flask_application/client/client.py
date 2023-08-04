@@ -14,11 +14,13 @@ class CustomClient(valclient.Client):
 
     def __init__(self, region=None, auth=None):
         # TODO: make it use the inputted region only if the region is not found on the log file
-        if not region and (region := self.get_region()) or region:
+        if file_region := self.get_region():
+            super().__init__(file_region, auth)
+            return
+        if region:
             super().__init__(region, auth)
             return
-        else:
-            raise RegionError('Unable to get region')
+        raise RegionError('Unable to get region')
 
     def get_region(self):
         try:

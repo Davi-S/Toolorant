@@ -13,6 +13,7 @@ def init_app(app: flask.Flask):
 def index():
     return flask.render_template('index/index.html')
 
+
 @index_bp.route('/in-development')
 def in_development():
     return flask.render_template('index/in_development.html')

@@ -17,7 +17,7 @@ class Event(enum.Enum):
 class WebSocket(Publisher):
     def __init__(self):
         super().__init__()
-        self.__running = False
+        self.is_running = False
 
     async def _web_socket(self, port, password):
         ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
@@ -33,8 +33,8 @@ class WebSocket(Publisher):
                 try:
                     response = await websocket.recv()
                 except websockets.exceptions.ConnectionClosedError as e:
-                    raise e
-                    # TODO: handle error when valorant is closed while the application is running
+                    self.is_running = False
+                    return 
                 for event in Event:
                     if event.value in response:
                         # Call the listeners on another thread so the ws thread is always running without interruption
@@ -45,10 +45,10 @@ class WebSocket(Publisher):
                 #     json.dump(json.loads(response)[2], f, indent=4)
 
     def start(self, lockfile):
-        if self.__running:
+        if self.is_running:
             return False
-        self.__running = True
-        t = threading.Thread(target=self._start, args=(lockfile['port'], lockfile['password']), daemon=True)
+        self.is_running = True
+        t = threading.Thread(target=self._start, args=(lockfile['port'], lockfile['password']), daemon=True, name='ws_Thread')
         t.start()
         return t.is_alive()
     
@@ -56,13 +56,9 @@ class WebSocket(Publisher):
         asyncio.run(self._web_socket(port, password))
 
     def stop(self):
-        if not self.__running:
+        if not self.is_running:
             return False
-        self.__running = False
+        self.is_running = False
         return True
-    
-    def is_running(self):
-        return self.__running
-
     
     
