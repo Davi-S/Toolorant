@@ -16,7 +16,22 @@
     width: 0.35rem;
 }
 
-.diamond-list.rotating-diamond li:hover::before {
+.diamond-list-light.diamond-list li::before {
+    background-color: var(--primary-color);
+}
+
+.diamond-list-horizontal.diamond-list li {
+    display: inline;
+    position: relative;
+}
+
+.diamond-list-horizontal.diamond-list li::before {
+    position: absolute;
+    margin-top: -0.7rem;
+    left: calc(50% - 0.35rem/2);
+}
+
+.rotating-diamond.diamond-list li:hover::before {
     /* 180 + 45 (the angle for a square to look like a "diamond" is 45) */
     transform: rotate(225deg);
 }
@@ -26,7 +41,7 @@
 }
 
 .drawer-list li:hover>* {
-    padding-left: 0.8em;
+    padding: 0 0 0 0.8em;
 }
 
 .highlight li * {
@@ -36,6 +51,34 @@
 
 .highlight li:hover * {
     color: var(--accent-color);
+}
+
+.highlight-light.highlight li * {
+    color: var(--primary-color);
+}
+
+.highlight-light.highlight li:hover * {
+    color: var(--accent-color);
+}
+
+#header-list {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    padding: 0 1.5rem 0 1.5rem;
+    text-transform: uppercase;
+    transform: translateY(calc(-1px + -0.35rem/2 + -0.5rem));
+}
+
+#header-list li {
+    margin: 0 1rem 0 1rem;
+}
+
+#header-line {
+    position: absolute;
+    width: 100%;
+    border-top: 2px solid var(--primary-color);
+    margin-top: 0.5rem;
 }
 
 .btn {

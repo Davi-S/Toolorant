@@ -33,7 +33,12 @@
     {% block header %}
         <!-- TODO: Make header -->
         <header id="l-main-header">
-            HEADER
+            <div id="header-line">
+                <ul id="header-list" class="diamond-list diamond-list-light diamond-list-horizontal rotating-diamond highlight highlight-light">
+                    <li><a href="{{ url_for('index_bp.index') }}">Menu</a></li>
+                    <!-- TODO: make it show all other tools except for the one in use -->
+                </ul>
+            </div>
         </header>
     {% endblock %}
     <main {% block main_attr %}{% endblock %}>

@@ -1,4 +1,5 @@
 #l-main-header {
+    position: relative;
     background-color: var(--black-shade);
     height: 3em;
 }
@@ -24,8 +25,8 @@
     min-height: 100vh;
 }
 
-.l-instalocker { 
-    padding: 0.5em 2.5em;
+.l-instalocker {
+    padding: 0.5rem 2.5rem;
     /* box-sizing: border-box;
     height: calc(100vh - 3em);
     overflow: hidden; */
