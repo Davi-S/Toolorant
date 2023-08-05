@@ -12,6 +12,7 @@ def create_app(environment: str = 'development') -> flask.Flask:
     with_dynaconf.init_app(app, environment)
 
     # Suppressing errors while loading the client/ws when trying to open the application with valorant closed
+    # TODO: suppress the right and specific error
     with contextlib.suppress(Exception):
         app.client.activate()
         app.websocket.start(app.client.lockfile)

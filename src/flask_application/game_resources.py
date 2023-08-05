@@ -5,7 +5,8 @@ import enum
 class GameMode(enum.Enum):
     # check for "QueueID" to find if the "Bomb" game mode is competitive
     COMPETITIVE = "Bomb" + "Competitive"
-    UNRATED = "Bomb"
+    # TODO: Check why "ValueError: 'BombUnrated' is not a valid GameMode"
+    UNRATED = "Bomb" # + "Unrated"
     SWIFTPLAY = "Swiftplay_EndOfRoundCredits"
     REPLICATION = "OneForAll"
     SPIKE_RUSH = "QuickBomb"
