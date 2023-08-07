@@ -31,12 +31,14 @@
 </head>
 <body {% block body_attr %}{% endblock %}>
     {% block header %}
-        <!-- TODO: Make header -->
         <header id="l-main-header">
-            <div id="header-line">
-                <ul id="header-list" class="diamond-list diamond-list-light diamond-list-horizontal rotating-diamond highlight highlight-light">
+            <div id="main-header-line">
+                <ul id="main-header-menu" class="horizontal-diamond-list rotating-diamond horizontal-drawer-list">
+                    <!-- TODO: show all other tools except for the one in use -->
                     <li><a href="{{ url_for('index_bp.index') }}">Menu</a></li>
-                    <!-- TODO: make it show all other tools except for the one in use -->
+                    <li><a href="{{ url_for('index_bp.in_development') }}">Streamer Hunter</a></li>
+                    <li><a href="{{ url_for('index_bp.in_development') }}">Voice to global</a></li>
+                    <li><a href="{{ url_for('index_bp.in_development') }}">Settings Manager</a></li>
                 </ul>
             </div>
         </header>

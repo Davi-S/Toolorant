@@ -16,7 +16,7 @@
     height: 0;
     /* TODO: replace absolute margin with calc.
        TODO: put this margin in a separated class just for the #new-profile-basic-input-container */
-    margin-top: -40px; 
+    margin-top: -40px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s, height 0.5s, margin 0.5s;

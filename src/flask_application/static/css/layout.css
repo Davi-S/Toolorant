@@ -2,6 +2,7 @@
     position: relative;
     background-color: var(--black-shade);
     height: 3em;
+    overflow: hidden;
 }
 
 #l-main-menu {
@@ -26,10 +27,7 @@
 }
 
 .l-instalocker {
-    padding: 0.5rem 2.5rem;
-    /* box-sizing: border-box;
-    height: calc(100vh - 3em);
-    overflow: hidden; */
+    padding: 0.5em 2.5em;
 }
 
 #l-section-wrapper {
@@ -53,10 +51,10 @@
 }
 
 /* TODO: remove some margin to prevent scroll bar to appear */
-.simple-message {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
+.l-simple-message {
     align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
     margin: 0;
 }
