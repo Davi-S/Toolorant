@@ -31,9 +31,15 @@
 </head>
 <body {% block body_attr %}{% endblock %}>
     {% block header %}
-        <!-- TODO: Make header -->
         <header id="l-main-header">
-            HEADER
+            <div id="main-header-line">
+                <ul id="main-header-menu" class="horizontal-diamond-list rotating-diamond">
+                    <li><a href="{{ url_for('instalocker_bp.index') }}">Instalocker</a></li>
+                    <li><a href="{{ url_for('index_bp.in_development') }}">Streamer Hunter</a></li>
+                    <li><a href="{{ url_for('index_bp.in_development') }}">Voice to global</a></li>
+                    <li><a href="{{ url_for('index_bp.in_development') }}">Settings Manager</a></li>
+                </ul>
+            </div>
         </header>
     {% endblock %}
     <main {% block main_attr %}{% endblock %}>

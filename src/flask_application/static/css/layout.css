@@ -1,6 +1,7 @@
 #l-main-header {
     background-color: var(--black-shade);
     height: 3em;
+    overflow: hidden;
 }
 
 #l-main-menu {
@@ -49,7 +50,7 @@
 }
 
 /* TODO: remove some margin to prevent scroll bar to appear */
-.simple-message {
+.l-simple-message {
     align-items: center;
     display: flex;
     height: 100vh;

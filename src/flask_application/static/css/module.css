@@ -16,7 +16,7 @@
     width: 0.35rem;
 }
 
-.diamond-list.rotating-diamond li:hover::before {
+.rotating-diamond li:hover::before {
     /* 180 + 45 (the angle for a square to look like a "diamond" is 45) */
     transform: rotate(225deg);
 }
@@ -38,6 +38,41 @@
     color: var(--accent-color);
 }
 
+#main-header-line {
+    height: 100%;
+    margin-top: 0.5rem;
+    border-top: solid 2px var(--primary-color);
+    box-sizing: border-box;
+}
+
+#main-header-menu {
+    transform: translateY(calc(-1px + -0.35rem/2));
+}
+
+.horizontal-diamond-list {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.horizontal-diamond-list li {
+    padding: 0 1rem;
+    position: relative;
+}
+
+.horizontal-diamond-list li::before {
+    background-color: var(--primary-color);
+    content: "";
+    display: block;
+    height: 0.35rem;
+    left: calc(50% + -0.35rem);
+    margin-bottom: 0.25rem;
+    position: relative;
+    transform: rotate(45deg);
+    transition: 0.5s;
+    /* (√2 / 2 / 2) = 0.35 -> half the diagonal of the square */
+    width: 0.35rem;
+}
 .btn {
     align-items: center;
     cursor: pointer;
