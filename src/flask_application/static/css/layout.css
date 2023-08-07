@@ -24,11 +24,8 @@
     min-height: 100vh;
 }
 
-.l-instalocker { 
+.l-instalocker {
     padding: 0.5em 2.5em;
-    /* box-sizing: border-box;
-    height: calc(100vh - 3em);
-    overflow: hidden; */
 }
 
 #l-section-wrapper {
@@ -53,9 +50,9 @@
 
 /* TODO: remove some margin to prevent scroll bar to appear */
 .simple-message {
-    display: flex;
-    justify-content: center;
-    height: 100vh;
     align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
     margin: 0;
 }
