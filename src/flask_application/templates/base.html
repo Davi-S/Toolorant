@@ -33,8 +33,9 @@
     {% block header %}
         <header id="l-main-header">
             <div id="main-header-line">
-                <ul id="main-header-menu" class="horizontal-diamond-list rotating-diamond">
-                    <li><a href="{{ url_for('instalocker_bp.index') }}">Instalocker</a></li>
+                <ul id="main-header-menu" class="horizontal-diamond-list rotating-diamond horizontal-drawer-list">
+                    <!-- TODO: show all other tools except for the one in use -->
+                    <li><a href="{{ url_for('index_bp.index') }}">Menu</a></li>
                     <li><a href="{{ url_for('index_bp.in_development') }}">Streamer Hunter</a></li>
                     <li><a href="{{ url_for('index_bp.in_development') }}">Voice to global</a></li>
                     <li><a href="{{ url_for('index_bp.in_development') }}">Settings Manager</a></li>

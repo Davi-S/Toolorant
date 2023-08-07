@@ -47,6 +47,14 @@
 
 #main-header-menu {
     transform: translateY(calc(-1px + -0.35rem/2));
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    font-size: 1.2rem;
+    margin: 0 1.5rem;
+}
+
+#main-header-menu>*:first-child {
+    margin-right: auto;
 }
 
 .horizontal-diamond-list {
@@ -57,7 +65,6 @@
 
 .horizontal-diamond-list li {
     padding: 0 1rem;
-    position: relative;
 }
 
 .horizontal-diamond-list li::before {
@@ -65,7 +72,7 @@
     content: "";
     display: block;
     height: 0.35rem;
-    left: calc(50% + -0.35rem);
+    left: calc(50% + -0.35rem/2);
     margin-bottom: 0.25rem;
     position: relative;
     transform: rotate(45deg);
@@ -73,6 +80,11 @@
     /* (√2 / 2 / 2) = 0.35 -> half the diagonal of the square */
     width: 0.35rem;
 }
+
+.horizontal-drawer-list li:hover::before {
+    margin-bottom: 0.5em;
+}
+
 .btn {
     align-items: center;
     cursor: pointer;
