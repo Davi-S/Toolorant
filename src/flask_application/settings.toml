@@ -1,11 +1,11 @@
-[default]
 # SECRET_KEY defined in the .secrets.toml file
-ENVIRONMENT_NAME = 'default'  # Will be overide by the other environments
+[default]
+ENVIRONMENT_NAME = 'default'
 EXTENSIONS = [
     'src.flask_application.user_settings.with_dynaconf:init_app',
     'src.flask_application.client:init_app',
     'src.flask_application.websocket:init_app',
-    'src.flask_application.valorant_watcher_bp.watcher:init_app',
+    # 'src.flask_application.valorant_watcher_bp.watcher:init_app',
     'src.flask_application.index_bp.index:init_app',
     'src.flask_application.instalocker_bp.instalocker:init_app',
 ]
@@ -14,8 +14,22 @@ EXTENSIONS = [
 [production]
 ENVIRONMENT_NAME = 'production'
 
+
 [development]
 ENVIRONMENT_NAME = 'development'
 
+
 [testing]
 ENVIRONMENT_NAME = 'testing'
+
+
+[desktop]
+ENVIRONMENT_NAME = 'desktop'
+EXTENSIONS = [
+    'flask_application.user_settings.with_dynaconf:init_app',
+    'flask_application.client:init_app',
+    'flask_application.websocket:init_app',
+    'flask_application.valorant_watcher_bp.watcher:init_app',
+    'flask_application.index_bp.index:init_app',
+    'flask_application.instalocker_bp.instalocker:init_app',
+]

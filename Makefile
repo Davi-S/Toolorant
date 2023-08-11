@@ -6,6 +6,7 @@ ACTIVATE_VENV = cd .venv/Scripts & activate.bat & cd ../.. &
 	python -m venv .venv --upgrade-deps
 	$(ACTIVATE_VENV) pip install -r requirements.txt
 
+
 # Install the requirements of the requirements.txt in the virtual environment
 # It will only (re)install (the requirements are already installed on the .venv creation) the requirements if requirements.txt is newer than SITE_PACKAGES location (this means that the requirements.txt has been updated).
 .PHONY: requirements
@@ -19,13 +20,13 @@ clean:
 	$(ACTIVATE_VENV) pyclean .
 
 
+# TODO: make these variables abbreviated
 # Run the flask server and application
 FLASK_ENVIRONMENT = development
 # Check if the environment is valid
 ifeq (,$(filter $(FLASK_ENVIRONMENT),development testing production))
     override FLASK_ENVIRONMENT = development
 endif
-
 # If FLASK_DEBUG is "" (nothing) the "--debug" flag will not be passed to the flask command.
 FLASK_DEBUG =
 ifeq ($(FLASK_DEBUG),on)
@@ -36,6 +37,12 @@ endif
 .PHONY: run_flask
 run_flask:
 	$(ACTIVATE_VENV) flask --app src.flask_application.app:create_app('$(FLASK_ENVIRONMENT)') $(FLASK_DEBUG) run
+
+
+# Run the project tests 
+.PHONY: run_desktop
+run_desktop:
+	$(ACTIVATE_VENV) python src/desktop.py
 
 
 # Run the project tests 

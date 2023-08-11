@@ -1,2 +1,7 @@
 # Use pywebview to create desktop application
-# https://github.com/deadly/valorant-agent-yoinker/blob/development/src/main.pyw
+import webview
+from flask_application.app import create_app
+
+server = create_app('desktop')
+webview.create_window('Toolorant', server)
+webview.start()
