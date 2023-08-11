@@ -14,9 +14,9 @@
 - [Support and community](#support-and-community)
 - [Contributing](#contributing)
   - [Joining the community](#joining-the-community)
-  - [Submitting a Pull Request TODO: add pull request link](#submitting-a-pull-request-todo-add-pull-request-link)
-  - [Reporting bugs and issues TODO: add issues link](#reporting-bugs-and-issues-todo-add-issues-link)
-  - [Donating TODO: Add donation link](#donating-todo-add-donation-link)
+  - [Submitting a Pull Request](#submitting-a-pull-request)
+  - [Reporting bugs and issues](#reporting-bugs-and-issues)
+  - [Donating](#donating)
 - [Outro](#outro)
 
 
@@ -31,7 +31,7 @@ Find the live stream of your opponent and get privileged information.
 Use your mic to send text messages to the enemy team. 
 
 - *Settings manager:
-Save your Valorant settings to easily load and share them.
+Save your Valorant settings to load and share them easily.
 
 *[(\*) In development](#outro)*
 
@@ -39,7 +39,7 @@ Save your Valorant settings to easily load and share them.
 
 To get the latest version of Toolorant up and running on your computer, follow these steps:
 
-1. Visit the Releases page on the GitHub repository.
+1. Visit the [Releases page](https://github.com/Davi-S/Toolorant/releases) on the [GitHub repository](https://github.com/Davi-S/Toolorant).
 
 2. Look for the latest release version and click on it to open the release notes.
 
@@ -47,7 +47,7 @@ To get the latest version of Toolorant up and running on your computer, follow t
   
 4. You will see a `run.VBS` file. This is the "executable". Double-click on it to open Toolorant.
    
-If you want, you can create a shortcut for the `run.VBS` on your desktop
+If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-desktop-shortcut-windows-10#:~:text=Create%20Desktop%20Shortcut%20in%20Windows%2010.%201%5D%20The,shortcut%20has%20been%20created%20on%20your%20Windows%20desktop.) for the `run.VBS` on your desktop
 
 # Is This "bannable"?
 **USE AT YOUR OWN RISK.**
@@ -79,13 +79,13 @@ You can request new features, report bugs you encounter, and help other members 
 
 See the [Support and community](#support-and-community) topic for more details.
 
-## Submitting a Pull Request TODO: add pull request link
+## [Submitting a Pull Request](https://github.com/Davi-S/Toolorant/pulls)
 Submit a pull request to the project with a clear and concise commit message including the reasoning behind them.
 
-## Reporting bugs and issues TODO: add issues link
+## [Reporting bugs and issues](https://github.com/Davi-S/Toolorant/issues)
 If you found something wrong with Toolorant you can open a new issue on the "Issues" tab at the top of the repository.
 
-## Donating TODO: Add donation link
+## Donating
 If you're interested in supporting the project and helping the developers dedicate more time to enhancing it, you can make a financial contribution by following these simple steps:
 
 # Outro
