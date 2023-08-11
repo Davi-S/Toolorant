@@ -5,7 +5,7 @@ EXTENSIONS = [
     'src.flask_application.user_settings.with_dynaconf:init_app',
     'src.flask_application.client:init_app',
     'src.flask_application.websocket:init_app',
-    # 'src.flask_application.valorant_watcher_bp.watcher:init_app',
+    'src.flask_application.valorant_watcher_bp.watcher:init_app',
     'src.flask_application.index_bp.index:init_app',
     'src.flask_application.instalocker_bp.instalocker:init_app',
 ]
