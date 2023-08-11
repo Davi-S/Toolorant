@@ -53,6 +53,7 @@
         <script>
         // Global variable to store routes and use them in JS files
         // Its not possible to call the urf_for in a JS file, so it must be done on the html template
+        // TODO: separate blueprint routes
         const APP_ROUTES = {
             'instalocker_bp.start': '{{ url_for("instalocker_bp.start") }}',
             'instalocker_bp.stop': '{{ url_for("instalocker_bp.stop") }}',
