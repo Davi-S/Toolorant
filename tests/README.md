@@ -1,7 +1,7 @@
 # Brief Folder information
 This folder contains the project tests using pytest.
 
-# How to run
+# Basic run
 from the root directory run:
 ```
 $ make run_tests
@@ -11,7 +11,7 @@ See the make file for the full command
 
 # Conventions
 ## Tests file
-Must be placed inside `tests\tests\`. This prevents mixing up with the tests config files and reports in `tests\`.
+Must be placed inside `tests\tests`. This prevents mixing up with the tests configuration files and reports in `tests\`.
 
 ## Test functions docstring
 The docstring for the test functions follows the convention:
@@ -25,9 +25,7 @@ THEN: {The expected response}
 See the test files for examples.
 
 ## Coverage reports
-- coverage report files/folder must end with "_coverage_report".
- For example, an HTML report should be named "html_coverage_report".
-
+coverage report files/folder must end with "_coverage_report".
 
 # Useful links
 - [Overall testing with pytest](https://www.youtube.com/watch?v=OcD52lXq0e8)

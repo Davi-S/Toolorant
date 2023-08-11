@@ -20,6 +20,7 @@ clean:
 	$(ACTIVATE_VENV) pyclean .
 
 
+# TODO: make these variables abbreviated
 # Run the flask server and application
 FLASK_ENVIRONMENT = development
 # Check if the environment is valid
