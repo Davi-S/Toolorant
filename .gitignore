@@ -166,6 +166,6 @@ cython_debug/
 .secrets.*
 
 src/flask_application/instalocker_bp/profiles/*
-src/flask_application/static/images/*
+# src/flask_application/static/images/*
 logs/
 src/flask_application/websocket/websocket_test.py
