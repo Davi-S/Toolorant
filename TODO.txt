@@ -1,0 +1,2 @@
+• Make the project an ".exe"
+• Write tests for the project
