@@ -10,6 +10,9 @@
 - [Table of Contents](#table-of-contents)
 - [Features](#features)
 - [Getting Started](#getting-started)
+  - [Python](#python)
+  - [Toolorant](#toolorant-1)
+  - [Running it](#running-it)
 - [Is This "bannable"?](#is-this-bannable)
 - [Support and community](#support-and-community)
 - [Contributing](#contributing)
@@ -36,24 +39,34 @@ Save your Valorant settings to load and share them easily.
 *[(\*) In development](#outro)*
 
 # Getting Started
+TODO: check if the program will work following these steps.
+To use Toolorant you need to have **Python** and **Toolorant** (duh) on your computer. 
 
-To get the latest version of Toolorant up and running on your computer, follow these steps:
+## Python
+Python is the program used to run the Toolorant files.
+To install python just follow this simple tutorial: https://realpython.com/installing-python.
+
+## Toolorant
+To get the latest version of Toolorant, follow these steps:
 
 1. Visit the [Releases page](https://github.com/Davi-S/Toolorant/releases) on the [GitHub repository](https://github.com/Davi-S/Toolorant).
-
 2. Look for the latest release version and click on it to open the release notes.
-
-3. You'll find download links for the release. Download the zip file, save it on your computer, and extract it.
-  
-4. You will see a `run.VBS` file. This is the "executable". Double-click on it to open Toolorant.
+3. You'll find download links for the release. Download the zip file, save it on your computer, and extract it anywhere you want.
    
-If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-desktop-shortcut-windows-10#:~:text=Create%20Desktop%20Shortcut%20in%20Windows%2010.%201%5D%20The,shortcut%20has%20been%20created%20on%20your%20Windows%20desktop.) for the `run.VBS` on your desktop
+## Running it
+Now lets assume that you have python and Toolorant on your computer.
+
+On the Toolorant folder you will find a file called "`Toolorant.VBS`". Double-click on it to open Toolorant.
+
+If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-desktop-shortcut-windows-10#:~:text=Create%20Desktop%20Shortcut%20in%20Windows%2010.%201%5D%20The,shortcut%20has%20been%20created%20on%20your%20Windows%20desktop.) for the `Toolorant.VBS` on your desktop
+
+**If you did not manage to get Toolorant up and running, check the [Support and community](#support-and-community) topic to get support.**
 
 # Is This "bannable"?
 **USE AT YOUR OWN RISK.**
 
 No **bans** have been reported so far from using this program.
-Some players reported receiving a two-week **suspension** for using the instalocker tool excessively
+Some players reported receiving a two-week competitive **suspension** for using the instalocker tool excessively
 
 This program does not use an auto-clicker, read the game's memory or files; therefore, the anti-cheat should not be triggered.
 
@@ -65,8 +78,8 @@ Be welcome to the [Toolorant community](https://discord.gg/tXFydKvSzA)! We belie
 In the [Discord server](https://discord.gg/tXFydKvSzA) you can:
 - Get Help
 - Request Features
-- Report Bugs
 - Connect with gamers and coders
+- Report Bugs
 - See more Valorant content
 
 **JOIN LINK**: https://discord.gg/tXFydKvSzA
@@ -79,14 +92,16 @@ You can request new features, report bugs you encounter, and help other members 
 
 See the [Support and community](#support-and-community) topic for more details.
 
+TODO: change "Submitting a Pull Request" to "improving the code", and make a longer message for this
 ## [Submitting a Pull Request](https://github.com/Davi-S/Toolorant/pulls)
-Submit a pull request to the project with a clear and concise commit message including the reasoning behind them.
+Submit a pull request to the project with a clear and concise commit message.
 
 ## [Reporting bugs and issues](https://github.com/Davi-S/Toolorant/issues)
 If you found something wrong with Toolorant you can open a new issue on the "Issues" tab at the top of the repository.
 
 ## Donating
 If you're interested in supporting the project and helping the developers dedicate more time to enhancing it, you can make a financial contribution by following these simple steps:
+TODO: add steps
 
 # Outro
 Please note that the project is currently under active development, and many features are in the beta phase and/or yet to be implemented.
