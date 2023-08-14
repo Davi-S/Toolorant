@@ -12,14 +12,13 @@
 - [Getting Started](#getting-started)
   - [Python](#python)
   - [Toolorant](#toolorant-1)
-  - [Running it](#running-it)
+  - [Setup](#setup)
+  - [Run it](#run-it)
 - [Is This "bannable"?](#is-this-bannable)
 - [Support and community](#support-and-community)
 - [Contributing](#contributing)
   - [Joining the community](#joining-the-community)
-  - [Submitting a Pull Request](#submitting-a-pull-request)
-  - [Reporting bugs and issues](#reporting-bugs-and-issues)
-  - [Donating](#donating)
+  - [Improving the code](#improving-the-code)
 - [Outro](#outro)
 
 
@@ -39,12 +38,11 @@ Save your Valorant settings to load and share them easily.
 *[(\*) In development](#outro)*
 
 # Getting Started
-TODO: check if the program will work following these steps.
 To use Toolorant you need to have **Python** and **Toolorant** (duh) on your computer. 
 
 ## Python
 Python is the program used to run the Toolorant files.
-To install python just follow this simple tutorial: https://realpython.com/installing-python.
+To install Python just follow this simple tutorial: https://realpython.com/installing-python.
 
 ## Toolorant
 To get the latest version of Toolorant, follow these steps:
@@ -53,10 +51,15 @@ To get the latest version of Toolorant, follow these steps:
 2. Look for the latest release version and click on it to open the release notes.
 3. You'll find download links for the release. Download the zip file, save it on your computer, and extract it anywhere you want.
    
-## Running it
-Now lets assume that you have python and Toolorant on your computer.
+## Setup
+Once you have Python and Toolorant on your computer, open the Toolorant folder and double-click the `setup.bat` file.
 
-On the Toolorant folder you will find a file called "`Toolorant.VBS`". Double-click on it to open Toolorant.
+It will open a terminal window to perform some tasks to make Toolorant run on your computer. It should take less than one minute. The window will close automatically and you can proceed to the next step.
+
+You only need to do this once.
+
+## Run it
+On the Toolorant folder you will find a file called "`Toolorant.VBS`". just double-click on it to open Toolorant!
 
 If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-desktop-shortcut-windows-10#:~:text=Create%20Desktop%20Shortcut%20in%20Windows%2010.%201%5D%20The,shortcut%20has%20been%20created%20on%20your%20Windows%20desktop.) for the `Toolorant.VBS` on your desktop
 
@@ -72,17 +75,17 @@ This program does not use an auto-clicker, read the game's memory or files; ther
 
 However, using the VALORANT API in this manner is against Riot's Terms of Service, since you are getting an advantage over other players. So there is always a risk.
 
-# [Support and community](https://discord.gg/tXFydKvSzA)
-Be welcome to the [Toolorant community](https://discord.gg/tXFydKvSzA)! We believe that collaboration and interaction are essential for the growth of any project and community. Whether you're a developer or a user, you're invited to join our [Discord server](https://discord.gg/tXFydKvSzA).
+# [Support and community](https://discord.gg/gbaGu3ermT)
+Be welcome to the [Toolorant community](https://discord.gg/gbaGu3ermT)! We believe that collaboration and interaction are essential for the growth of any project and community. Whether you're a developer or a user, you're invited to join our [Discord server](https://discord.gg/gbaGu3ermT).
 
-In the [Discord server](https://discord.gg/tXFydKvSzA) you can:
+In the [Discord server](https://discord.gg/gbaGu3ermT), you can:
 - Get Help
 - Request Features
 - Connect with gamers and coders
 - Report Bugs
 - See more Valorant content
 
-**JOIN LINK**: https://discord.gg/tXFydKvSzA
+**JOIN LINK**: https://discord.gg/gbaGu3ermT
 
 # Contributing
 By contributing, you can help improve the project and make it better for everyone. Please read this guide to understand how you can contribute to the project.
@@ -90,18 +93,10 @@ By contributing, you can help improve the project and make it better for everyon
 ## [Joining the community](#support-and-community)
 You can request new features, report bugs you encounter, and help other members of the community.
 
-See the [Support and community](#support-and-community) topic for more details.
+See the [Support and Community](#support-and-community) topic for more details.
 
-TODO: change "Submitting a Pull Request" to "improving the code", and make a longer message for this
-## [Submitting a Pull Request](https://github.com/Davi-S/Toolorant/pulls)
-Submit a pull request to the project with a clear and concise commit message.
-
-## [Reporting bugs and issues](https://github.com/Davi-S/Toolorant/issues)
-If you found something wrong with Toolorant you can open a new issue on the "Issues" tab at the top of the repository.
-
-## Donating
-If you're interested in supporting the project and helping the developers dedicate more time to enhancing it, you can make a financial contribution by following these simple steps:
-TODO: add steps
+## Improving the code
+If you know how to code, you can [submit a pull request](https://github.com/Davi-S/Toolorant/pulls) to the project with new features and code improvements. Also, if you found something wrong with Toolorant you can open a new issue on the [issues](https://github.com/Davi-S/Toolorant/issues) tab at the top of the repository.
 
 # Outro
 Please note that the project is currently under active development, and many features are in the beta phase and/or yet to be implemented.
