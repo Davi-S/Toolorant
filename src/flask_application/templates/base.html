@@ -47,13 +47,12 @@
         {% block main %}
         {% endblock %}
     </main>
-    <!-- TODO: make footer.
-        It will be used to add configuration options or other settings to a tool -->
+    <!-- TODO: make footer -->
     {% block script %}
         <script>
         // Global variable to store routes and use them in JS files
         // Its not possible to call the urf_for in a JS file, so it must be done on the html template
-        // TODO: separate blueprint routes
+        // TODO: nest blueprint routes
         const APP_ROUTES = {
             'instalocker_bp.start': '{{ url_for("instalocker_bp.start") }}',
             'instalocker_bp.stop': '{{ url_for("instalocker_bp.stop") }}',

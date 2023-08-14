@@ -14,8 +14,6 @@
 /* Fake hidden does not use "display: none" because of transitions */
 .is-hidden {
     height: 0;
-    /* TODO: replace absolute margin with calc.
-       TODO: put this margin in a separated class just for the #new-profile-basic-input-container */
     margin-top: -40px;
     opacity: 0;
     pointer-events: none;

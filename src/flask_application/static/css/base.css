@@ -44,7 +44,6 @@ select {
     padding: 0 0.2rem 0 0.2rem;
 }
 
-/* TODO: check how it will affect other input that are not text inputs */
 input {
     text-indent: 1rem;
 }
