@@ -26,6 +26,9 @@
         <link href="{{url_for('static', filename='css/module.css')}}" rel="stylesheet" type="text/css">
         <link href="{{url_for('static', filename='css/state.css')}}" rel="stylesheet" type="text/css">
 
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
         <title>{% block title %}{% endblock %} - TL</title>
     {% endblock %}
 </head>
@@ -36,9 +39,6 @@
                 <ul id="main-header-menu" class="horizontal-diamond-list rotating-diamond horizontal-drawer-list">
                     <!-- TODO: show all other tools except for the one in use -->
                     <li><a href="{{ url_for('index_bp.index') }}">Menu</a></li>
-                    <li><a href="{{ url_for('index_bp.in_development') }}">Streamer Hunter</a></li>
-                    <li><a href="{{ url_for('index_bp.in_development') }}">Voice to global</a></li>
-                    <li><a href="{{ url_for('index_bp.in_development') }}">Settings Manager</a></li>
                 </ul>
             </div>
         </header>

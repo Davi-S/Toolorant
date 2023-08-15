@@ -1,2 +1,3 @@
-• Make the project an ".exe"
+• Make the project a ".exe"
 • Write tests for the project
+• Change desktop icon
