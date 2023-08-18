@@ -22,7 +22,8 @@ class Instalocker(Listener):
             return
 
         # Check if the function is being called multiple times for the same match
-        # This is needed because the WS can notify the same event multiple times
+        # This is needed because the WS can notify the same event multiple times.
+        # TODO: See the websocket file to fix this
         if match_info['ID'] in self._seen_matches:
             return
         self._seen_matches.add(match_info['ID'])

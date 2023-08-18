@@ -30,8 +30,6 @@ class Profile:
     def delete(cls, profile_name: str) -> None:
         os.remove(f'{BASE_PROFILES_PATH}\\{profile_name}.json')
 
-    # TODO: Create classmethod to create profile by form or some other data structure
-
     def dump(self) -> None:
         # Dump dataclass instances to JSON
         game_data_dict = {
@@ -44,6 +42,6 @@ class Profile:
 
 
 def get_all_profiles():
-    # BUG: There is something wrong with this function. Some filenames can't be read and raise a error. Maybe something wrong with the letter "s"
+    # BUG: Some filenames can't be read and raise a error. Maybe something wrong with the letter "s"
     profiles_name = [file.rstrip('.json') for file in os.listdir(f'{os.getcwd()}\\{BASE_PROFILES_PATH}')]
     return [Profile.load(profile_name) for profile_name in profiles_name]
