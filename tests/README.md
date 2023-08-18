@@ -1,14 +1,12 @@
-TODO: improve this readme
 # Brief Folder information
 This folder contains the project tests using pytest.
 
-# Basic run
-from the root directory run:
+# Basic start
+If you have `Make` installed, from the root directory run the following command:
 ```
 $ make run_tests
 ```
-
-See the make file for the full command
+*See the `Makefile` file for the full command*
 
 # Conventions
 ## Tests file

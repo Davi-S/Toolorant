@@ -20,7 +20,6 @@ clean:
 	$(ACTIVATE_VENV) pyclean .
 
 
-# TODO: make these variables abbreviated
 # Run the flask server and application
 FLASK_ENVIRONMENT = development
 # Check if the environment is valid
@@ -39,7 +38,7 @@ run_flask:
 	$(ACTIVATE_VENV) flask --app src.flask_application.app:create_app('$(FLASK_ENVIRONMENT)') $(FLASK_DEBUG) run
 
 
-# Run the project tests 
+# Run the desktop file
 .PHONY: run_desktop
 run_desktop:
 	$(ACTIVATE_VENV) python src/desktop.py
