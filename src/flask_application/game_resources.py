@@ -1,7 +1,6 @@
 import enum
 
 
-# TODO: Add the new maps and character (deadlock and related)
 class GameMode(enum.Enum):
     # check for "QueueID" to find if the "Bomb" game mode is competitive
     COMPETITIVE = "Bomb" + "Competitive"
@@ -46,3 +45,4 @@ class Agent(enum.Enum):
     FADE = "dade69b4-4f5a-8528-247b-219e5a1facd6"
     HARBOR = "95b78ed7-4637-86d9-7e41-71ba8c293152"
     GEKKO = "e370fa57-4757-3604-3648-499e1f642d3f"
+    DEADLOCK = "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235"
