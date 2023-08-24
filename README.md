@@ -38,6 +38,8 @@ Save your Valorant settings to load and share them easily.
 *[(\*) In development](#outro)*
 
 # Getting Started
+Follow these steps or watch [this video](https://youtu.be/4Iwrv3aTVKg) (https://youtu.be/4Iwrv3aTVKg) to get it up and running.
+
 To use Toolorant you need to have **Python** and **Toolorant** (duh) on your computer. 
 
 ## Python
