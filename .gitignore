@@ -162,8 +162,7 @@ cython_debug/
 # VSCode workspace config files
 .vscode/
 
-# Dynaconf secret files
-.secrets.*
+*.mp4
 
 src/flask_application/instalocker_bp/profiles/*
 src/flask_application/websocket/websocket_test.py
