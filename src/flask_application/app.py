@@ -1,4 +1,5 @@
 # TODO: Give name to all new threads created on the application
+# TODO: Add logging to all files
 import contextlib
 
 import flask
