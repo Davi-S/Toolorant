@@ -23,7 +23,6 @@ class CustomClient(valclient.Client):
         raise RegionError('Unable to get region')
 
     def get_region(self):
-        # BUG: this function is not finding the region
         try:
             with open(os.path.join(os.getenv('LOCALAPPDATA'), R'VALORANT\Saved\Logs\ShooterGame.log'), 'rb') as f:
                 lines = f.readlines()
