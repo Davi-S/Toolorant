@@ -162,7 +162,5 @@ cython_debug/
 # VSCode workspace config files
 .vscode/
 
-*.mp4
-
 src/flask_application/instalocker_bp/profiles/*
 src/flask_application/websocket/websocket_test.py

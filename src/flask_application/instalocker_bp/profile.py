@@ -4,8 +4,12 @@ import os
 
 from .. import game_resources as gr
 
-BASE_PROFILES_PATH = 'src\\flask_application\\instalocker_bp\\profiles\\'
-
+# If the desktop file is being run by the 'flask_application' folder, the 'src' path will not be found
+# If the desktop is being run by the 'toolorant' folder, the 'src' path will be found
+if os.path.exists('src\\flask_application\\instalocker_bp\\profiles\\'):
+    BASE_PROFILES_PATH = 'src\\flask_application\\instalocker_bp\\profiles\\'
+else:
+    BASE_PROFILES_PATH = 'flask_application\\instalocker_bp\\profiles\\'
 
 @dataclasses.dataclass
 class Profile:
