@@ -41,7 +41,7 @@ run_flask:
 # Run the desktop file
 .PHONY: run_desktop
 run_desktop:
-	$(ACTIVATE_VENV) python src/desktop.py
+	$(ACTIVATE_VENV) python src/desktop.pyw
 
 
 # Run the project tests 
