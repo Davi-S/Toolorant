@@ -14,10 +14,15 @@ requirements: .venv\Lib\site-packages
 .venv\Lib\site-packages: requirements.txt
 	$(ACTIVATE_VENV) pip install -r requirements.txt
 
-
+# Remove pycache files
 .PHONY: clean
 clean:
 	$(ACTIVATE_VENV) pyclean .
+
+# Remove logging files
+.PHONY: clean_logs
+clean_logs:
+	del logs\*.log
 
 
 # Run the flask server and application
