@@ -9,16 +9,13 @@ CONFIG_DICT = {
             'format': '%(levelname)s:%(name)s:%(message)s'
         },
         'simple': {
-            'format': '%(filename)s : %(levelname)s : %(message)s'
+            'format': '%(name)s : %(levelname)s : %(message)s'
         },
         'simple_precise': {
-            'format': '%(asctime)s : %(funcName)s : %(levelname)s : %(message)s'
+            'format': '%(asctime)s : %(name)s : %(levelname)s : %(message)s'
         },
         'precise': {
-            'format': '%(asctime)s : %(filename)s : %(funcName)s : %(levelname)s : %(message)s'
-        },
-        'full_precise': {
-            'format': '%(asctime)s : %(filename)s : %(funcName)s :  %(name)s : %(levelname)s : %(message)s'
+            'format': '%(asctime)s : %(name)s : %(funcName)s : %(levelname)s : %(message)s'
         }
     },
 
@@ -35,7 +32,7 @@ CONFIG_DICT = {
         'to_file_spam': { 
             'class': 'logging.FileHandler',
             'filename': 'logs\\spam.log',
-            'formatter': 'full_precise'
+            'formatter': 'precise'
         }
     },
     'loggers': {},
@@ -48,7 +45,7 @@ CONFIG_DICT = {
 
 
 def create_file_handler(filename, mode='a', encoding=None, delay=False, errors=None,
-                        formatter_str=CONFIG_DICT['formatters']['simple_precise']['format'],
+                        formatter_str=CONFIG_DICT['formatters']['precise']['format'],
                         level='WARNING'):
     filename = f'logs\\{filename}.log'
     file_handler = logging.FileHandler(filename, mode, encoding, delay, errors)
