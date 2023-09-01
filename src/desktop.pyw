@@ -1,3 +1,4 @@
+# TODO: add option to pass command line arguments to create the flask app with other environments and set logging levels
 # Use pywebview to create desktop application
 # Setup logging first
 import logging

@@ -1,12 +1,20 @@
 # TODO: The fact that the profile can be None is bad because it adds a lot of checking. Need to find a way to reduce the amount of checks for this
 # TODO: Add feature to set a delay on selecting and locking the character to prevent account suspension
+import logging
+
 import flask
+
+from logging_configuration import create_file_handler
 
 from .. import forms
 from .. import game_resources as gr
 from .instalocker_cls import Instalocker
 from .profile import Profile, get_all_profiles
 
+
+# Get the file logger and its handler
+log = logging.getLogger(__name__)
+log.addHandler(create_file_handler(__name__))
 
 instalocker_bp = flask.Blueprint('instalocker_bp', __name__,
                                  template_folder='templates')
@@ -20,6 +28,7 @@ def init_app(app: flask.Flask):
 
     instalocker_bp.instalocker = instalocker
     app.register_blueprint(instalocker_bp, url_prefix='/instalocker')
+    log.info('Instalocker blueprint registered')
 
 
 @instalocker_bp.route('/', methods=['GET', 'POST'])
@@ -38,6 +47,7 @@ def set_profile():
     instalocker_bp.instalocker.profile = Profile.load(profile_name)
     flask.current_app.user_settings.profile = profile_name
     flask.current_app.user_settings.persist()
+    # TODO: add check to see if the profile was set successfully and return a descriptive value. Also add logging
     return ''
 
 
@@ -54,6 +64,7 @@ def delete_profile():
     if flask.current_app.user_settings.profile == profile.name:
         flask.current_app.user_settings.profile = None
         flask.current_app.user_settings.persist()
+    # TODO: add check to see if the profile was deleted successfully and return a descriptive value. Also add logging
     return ''
 
 
@@ -70,6 +81,7 @@ def create_profile():
     Profile(profile_info['name'],
             profile_info['game_mode'],
             profile_info['map_agent']).dump()
+    # TODO: add check to see if the profile was created successfully and return a descriptive value. Also add logging
     return ''
 
 
@@ -77,6 +89,7 @@ def create_profile():
 def start():
     flask.current_app.websocket.add_listener(instalocker_bp.instalocker)
     flask.session['instalocker_active'] = True
+    # TODO: add check to see if the instalocker was started successfully and return a descriptive value. Also add logging
     return ''
 
 
@@ -84,4 +97,5 @@ def start():
 def stop():
     flask.current_app.websocket.remove_listener(instalocker_bp.instalocker)
     flask.session["instalocker_active"] = False
+    # TODO: add check to see if the instalocker was stopped successfully and return a descriptive value. Also add logging
     return ''

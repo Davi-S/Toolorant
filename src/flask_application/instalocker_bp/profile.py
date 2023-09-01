@@ -1,8 +1,16 @@
 import dataclasses
 import json
+import logging
 import os
 
+from logging_configuration import create_file_handler
+
 from .. import game_resources as gr
+
+
+# Get the file logger and its handler
+log = logging.getLogger(__name__)
+log.addHandler(create_file_handler(__name__))
 
 # If the desktop file is being run by the 'flask_application' folder, the 'src' path will not be found
 # If the desktop is being run by the 'toolorant' folder, the 'src' path will be found
@@ -10,6 +18,8 @@ if os.path.exists('src\\flask_application\\instalocker_bp\\profiles\\'):
     BASE_PROFILES_PATH = 'src\\flask_application\\instalocker_bp\\profiles\\'
 else:
     BASE_PROFILES_PATH = 'flask_application\\instalocker_bp\\profiles\\'
+    
+log.debug(f'{BASE_PROFILES_PATH=}')
 
 @dataclasses.dataclass
 class Profile:

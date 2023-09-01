@@ -1,4 +1,5 @@
 import logging
+import colorlog
 
 CONFIG_DICT = {
     'version': 1,
@@ -25,7 +26,7 @@ CONFIG_DICT = {
         'to_console': { 
             'class': 'logging.StreamHandler',
             'formatter': 'precise',
-            'level': 'WARNING'
+            'level': 'INFO'
         },
         'to_console_spam': { 
             'class': 'logging.StreamHandler',
@@ -34,7 +35,7 @@ CONFIG_DICT = {
         'to_file_spam': { 
             'class': 'logging.FileHandler',
             'filename': 'logs\\spam.log',
-            'formatter': 'precise'
+            'formatter': 'full_precise'
         }
     },
     'loggers': {},
