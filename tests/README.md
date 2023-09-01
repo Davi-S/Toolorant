@@ -1,20 +1,28 @@
 # Brief Folder information
+
 This folder contains the project tests using pytest.
 
 # Basic start
+
 If you have `Make` installed, from the root directory run the following command:
+
+``` Make
+make run_tests
 ```
-$ make run_tests
-```
+
 *See the `Makefile` file for the full command*
 
 # Conventions
+
 ## Tests file
+
 Must be placed inside `tests\tests`. This prevents mixing up with the tests configuration files and reports in `tests\`.
 
 ## Test functions docstring
+
 The docstring for the test functions follows the convention:
-```
+
+``` Text
 GIVEN: {Test initial conditions}
 WHEN: {What needs to be tested}
 THEN: {The expected response}
@@ -24,10 +32,12 @@ THEN: {The expected response}
 See the test files for examples.
 
 ## Coverage reports
+
 coverage report files/folder must end with "_coverage_report".
 
 # Useful links
-- [Overall testing with pytest](https://www.youtube.com/watch?v=OcD52lXq0e8)
-- [Unit vs Functional tests](https://stackoverflow.com/a/2741845/14593213)
+
+- [Overall testing with Pytest](https://www.youtube.com/watch?v=OcD52lXq0e8)
+- [Unit vs. Functional tests](https://stackoverflow.com/a/2741845/14593213)
 - [Pytest and coverage report](https://pytest-cov.readthedocs.io/en/latest/reporting.html)
 - [Coverage config file](https://coverage.readthedocs.io/en/latest/config.html#)

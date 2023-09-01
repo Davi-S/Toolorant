@@ -1,3 +1,5 @@
 • Make the project a ".exe"
 • Write tests for the project
 • Change the desktop icon
+• Use pathlib instead of string paths 
+• Give name to all new threads created
