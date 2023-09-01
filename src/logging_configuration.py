@@ -1,5 +1,5 @@
 import logging
-import colorlog
+
 
 CONFIG_DICT = {
     'version': 1,
@@ -36,7 +36,7 @@ CONFIG_DICT = {
         }
     },
     'loggers': {},
-    
+
     'root': {
         'level': 'DEBUG',
         'handlers': ['to_file_spam', 'to_console']
