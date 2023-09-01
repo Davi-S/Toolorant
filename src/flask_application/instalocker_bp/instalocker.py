@@ -33,6 +33,7 @@ def init_app(app: flask.Flask):
 
 @instalocker_bp.route('/', methods=['GET', 'POST'])
 def index():
+    log.debug('"index" endpoint called')
     return flask.render_template('instalocker/index.html',
                                  profiles=get_all_profiles(),
                                  selected_profile=instalocker_bp.instalocker.profile,
@@ -42,17 +43,20 @@ def index():
 
 @instalocker_bp.route('/set', methods=['POST'])
 def set_profile():
+    log.debug('"set_profile" endpoint called')
     profile_name = flask.request.form.get('profile_name')
     # Set the profile on the instalocker and on the user settings
     instalocker_bp.instalocker.profile = Profile.load(profile_name)
     flask.current_app.user_settings.profile = profile_name
     flask.current_app.user_settings.persist()
     # TODO: add check to see if the profile was set successfully and return a descriptive value. Also add logging
+    log.info(f'Profile {profile_name} set')
     return ''
 
 
 @instalocker_bp.route('/delete', methods=['POST'])
 def delete_profile():
+    log.debug('"delete_profile" endpoint called')
     profile_name = flask.request.form.get('profile_name')
     # Create a profile object for comparison
     profile = Profile.load(profile_name)
@@ -65,11 +69,13 @@ def delete_profile():
         flask.current_app.user_settings.profile = None
         flask.current_app.user_settings.persist()
     # TODO: add check to see if the profile was deleted successfully and return a descriptive value. Also add logging
+    log.info(f'Profile {profile_name} deleted')
     return ''
 
 
 @instalocker_bp.route('/create', methods=['POST'])
 def create_profile():
+    log.debug('"create_profile" endpoint called')
     form = forms.NewProfileInfo()
     profile_info = {'name': form.name.data,
                     # Replacing space for underline because of Spike Rush
@@ -82,20 +88,25 @@ def create_profile():
             profile_info['game_mode'],
             profile_info['map_agent']).dump()
     # TODO: add check to see if the profile was created successfully and return a descriptive value. Also add logging
+    log.info(f'Profile {profile_info["name"]} created')
     return ''
 
 
 @instalocker_bp.route('/start', methods=['POST'])
 def start():
+    log.debug('"start" endpoint called')
     flask.current_app.websocket.add_listener(instalocker_bp.instalocker)
     flask.session['instalocker_active'] = True
     # TODO: add check to see if the instalocker was started successfully and return a descriptive value. Also add logging
+    log.info('Instalocker started')
     return ''
 
 
 @instalocker_bp.route('/stop', methods=['POST'])
 def stop():
+    log.debug('"stop" endpoint called')
     flask.current_app.websocket.remove_listener(instalocker_bp.instalocker)
     flask.session["instalocker_active"] = False
     # TODO: add check to see if the instalocker was stopped successfully and return a descriptive value. Also add logging
+    log.info('Instalocker stopped')
     return ''
