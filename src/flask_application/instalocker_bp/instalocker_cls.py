@@ -64,10 +64,10 @@ class Instalocker(Listener):
 
     def get_match_game_mode(self, match_info: dict):
         game_mode = match_info['Mode'].split('/')[-2]
-        # "QueueID" tells if the game is competitive.
-        # If the game is NOT competitive, "QueueID" will be a empty string. Tus, not affecting "game_mode"
-        # If the game IS competitive, "QueueID" will be "Competitive".
-        game_mode = game_mode + match_info['QueueID'].title()
+        # "QueueID" tells if the game is competitive or unrated.
+        # Only add the suffix for unrated or competitive game mode 
+        queue_id = match_info['QueueID'].title()
+        game_mode = game_mode + (queue_id if queue_id in ['Unrated', 'Competitive'] else '')
         log.debug(f'Match game mode: {game_mode}')
         return gr.GameMode(game_mode)
 
