@@ -45,7 +45,7 @@ class WebSocket(Publisher):
                 
                 for event in Event:
                     if event.value in response:
-                        log.info(f'Important response received ({event.name}): """{response}"""')
+                        log.info(f'Important response received {event.name}')
                         # Call the listeners on another thread so the ws thread is always running without interruption
                         # TODO: Fix notify_listeners can be called multiple times for the same event
                         threading.Thread(target=self.notify_listeners, args=(event,), daemon=True).start()

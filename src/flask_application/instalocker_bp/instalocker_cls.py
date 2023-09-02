@@ -38,6 +38,7 @@ class Instalocker(Listener):
         if match_info['ID'] in self._seen_matches:
             log.warning('Repeated match ID. Will not lock')
             return
+        log.debug(f'Match info: {match_info}')
         self._seen_matches.add(match_info['ID'])
 
         # Check the game mode
