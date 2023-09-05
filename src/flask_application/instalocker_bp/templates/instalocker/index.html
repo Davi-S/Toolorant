@@ -89,11 +89,15 @@
     <!-- Footer is part of the main since it is relater to the content of the page itself -->
     <footer id="l-footer">
         <div class="l-instalocker-footer">
-            <label for="select-delay">Select agent delay</label>
-            <input type="number" id="select-delay" min="0" max="30" value="{{ select_delay }}" form="set-select-delay-form" class="no-spinner" required>
-
-            <label for="lock-delay">Lock agent delay</label>
-            <input type="number" id="lock-delay" min="0" max="30" value="{{ lock_delay }}" form="set-lock-delay-form" class="no-spinner" required>
+            <!-- TODO: style this footer -->
+            <label class="number-input" for="select-delay">
+                Select agent delay: 
+                <input type="number" id="select-delay" min="0" max="30" maxlength="2" value="{{ select_delay }}" form="set-select-delay-form" class="no-spinner" required>
+            </label>
+            <label class="number-input" for="lock-delay">
+                Lock agent delay: 
+                <input type="number" id="lock-delay" min="0" max="30" value="{{ lock_delay }}" form="set-lock-delay-form" class="no-spinner" required>
+            </label>
         </div>
     </footer>
 {% endblock %}

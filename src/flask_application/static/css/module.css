@@ -338,3 +338,16 @@
     margin: 0;
     -webkit-appearance: none;
 }
+
+.number-input {
+    padding: 0 1rem;
+}
+
+input[type="number"] {
+    border-radius: 2px;
+    background-color: var(--primary-color);
+    color: var(--black-shade);
+    width: 2rem;
+    outline: none;
+    text-indent: 0.4rem;
+}
