@@ -182,6 +182,7 @@ selectDelayInput.addEventListener('input', function (event) {
         event.target.value = 0
     }
     let delay = parseInt(event.target.value, 10)
+    event.target.value = delay
     if (delay >= 0 && delay <= 30 && !isNaN(delay)) {
         $.ajax({
             url: APP_ROUTES["instalocker_bp.set_select_delay"],
@@ -208,6 +209,7 @@ lockDelayInput.addEventListener('input', function (event) {
         event.target.value = 0
     }
     let delay = parseInt(event.target.value, 10)
+    event.target.value = delay
     if (delay >= 0 && delay <= 30 && !isNaN(delay)) {
         $.ajax({
             url: APP_ROUTES["instalocker_bp.set_lock_delay"],
