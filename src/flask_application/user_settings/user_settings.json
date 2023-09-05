@@ -1,1 +1,8 @@
-{"DO_NOT_REMOVE": null, "PROFILE": null}
+{
+    "DO_NOT_REMOVE": null,
+    "INSTALOCKER": {
+        "profile": null,
+        "select_delay": 3,
+        "lock_delay": 2
+    }
+}

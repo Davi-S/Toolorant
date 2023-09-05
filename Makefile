@@ -49,6 +49,12 @@ run_desktop:
 	$(ACTIVATE_VENV) python src/desktop.pyw
 
 
+# Run the web file
+.PHONY: run_web
+run_web:
+	$(ACTIVATE_VENV) python src/web.py
+
+
 # Run the project tests 
 .PHONY: run_tests
 run_tests:

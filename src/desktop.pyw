@@ -24,5 +24,5 @@ log.addHandler(create_file_handler(__name__))
 
 # Use pywebview to create desktop application
 server = create_app('desktop')
-webview.create_window('Toolorant', server, width=1200)
+webview.create_window('Toolorant', server, width=1200, height=720)
 webview.start()
