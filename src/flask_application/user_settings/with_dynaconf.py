@@ -1,6 +1,7 @@
+import json
 import logging
 
-from dynaconf import Dynaconf, loaders
+import dynaconf
 
 from logging_configuration import create_file_handler
 
@@ -8,10 +9,12 @@ from logging_configuration import create_file_handler
 log = logging.getLogger(__name__)
 log.addHandler(create_file_handler(__name__))
 
-class CustomDynaconf(Dynaconf):
+class CustomDynaconf(dynaconf.Dynaconf):
     def persist(self):
         # https://www.dynaconf.com/advanced/#exporting
-        loaders.write(self['SETTINGS_FILE_FOR_DYNACONF'][0], self.to_dict())
+        # loaders.write(self['SETTINGS_FILE_FOR_DYNACONF'][0], self.to_dict())
+        with open(self['SETTINGS_FILE_FOR_DYNACONF'][0], 'w') as json_file:
+            json.dump(self.to_dict(), json_file, indent=4)  # Use indent for formatting
 
 
 def init_app(app):
