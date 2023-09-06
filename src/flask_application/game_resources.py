@@ -1,10 +1,11 @@
+# TODO: get the information from this file using the API instead of storing it 
 import enum
 
 
 class GameMode(enum.Enum):
     # check for "QueueID" to find if the "Bomb" game mode is competitive or unrated
     COMPETITIVE = "Bomb" + "Competitive"
-    UNRATED = "Bomb" + "Unrated"
+    UNRATED = "Bomb"
     SWIFTPLAY = "Swiftplay_EndOfRoundCredits"
     REPLICATION = "OneForAll"
     SPIKE_RUSH = "QuickBomb"

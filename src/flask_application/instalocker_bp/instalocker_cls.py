@@ -55,6 +55,7 @@ class Instalocker(Listener):
             return
 
         # Try to instalock the character
+        log.debug('Ready to try to lock')
         try:
             lock_info = self._client.pregame_lock_character(agent.value)
             log.info('Agent locked successfully')
@@ -68,7 +69,7 @@ class Instalocker(Listener):
         # "QueueID" tells if the game is competitive or unrated.
         # Only add the suffix for unrated or competitive game mode 
         queue_id = match_info['QueueID'].title()
-        game_mode = game_mode + (queue_id if queue_id in ['Unrated', 'Competitive'] else '')
+        game_mode = game_mode + (queue_id if queue_id == 'Competitive' else '')
         log.debug(f'Match game mode: {game_mode}')
         return gr.GameMode(game_mode)
 
