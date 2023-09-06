@@ -9,6 +9,8 @@
         The data will be collected with JS and sent to the server with AJAX -->
     <form id="set-profile-form" method="post" autocomplete="off"></form>
     <form id="delete-profile-form" method="post" autocomplete="off"></form>
+    <form id="set-select-delay-form" method="post" autocomplete="off"></form>
+    <form id="set-lock-delay-form" method="post" autocomplete="off"></form>
 
     <section id="l-section-wrapper"> 
         <section id="l-left-section">
@@ -84,4 +86,18 @@
             {% endfor %}
         </section>
     </section>
+    <!-- Footer is part of the main since it is relater to the content of the page itself -->
+    <footer id="l-footer">
+        <div class="l-instalocker-footer">
+            <!-- TODO: style this footer -->
+            <label class="number-input" for="select-delay">
+                Select agent delay: 
+                <input type="number" id="select-delay" min="0" max="30" maxlength="2" value="{{ select_delay }}" form="set-select-delay-form" class="no-spinner" required>
+            </label>
+            <label class="number-input" for="lock-delay">
+                Lock agent delay: 
+                <input type="number" id="lock-delay" min="0" max="30" value="{{ lock_delay }}" form="set-lock-delay-form" class="no-spinner" required>
+            </label>
+        </div>
+    </footer>
 {% endblock %}

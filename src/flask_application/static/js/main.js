@@ -171,3 +171,58 @@ newProfileForm.addEventListener('submit', function (event) {
     // Reload the page to get the new profile from the server
     location.reload()
 });
+
+// Delays
+document.getElementById("set-select-delay-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+});
+const selectDelayInput = document.getElementById('select-delay')
+selectDelayInput.addEventListener('input', function (event) {
+    if (event.target.value === "" || isNaN(event.target.value)) {
+        event.target.value = 0
+    }
+    let delay = parseInt(event.target.value, 10)
+    event.target.value = delay
+    if (delay >= 0 && delay <= 30 && !isNaN(delay)) {
+        $.ajax({
+            url: APP_ROUTES["instalocker_bp.set_select_delay"],
+            type: 'POST',
+            data: { "delay": delay },
+            success: function(data) {
+                // Check if the response contains a new template (non-empty string)
+                // A new template means a error message. (valorant was closed while the application is running)
+                if (typeof data === 'string' && data.trim().length > 0) {
+                    // If the response is a new template, reload the page
+                    window.location.reload();
+                }
+            }
+        })
+    }
+})
+
+document.getElementById("set-lock-delay-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+});
+const lockDelayInput = document.getElementById('lock-delay')
+lockDelayInput.addEventListener('input', function (event) {
+    if (event.target.value === "" || isNaN(event.target.value)) {
+        event.target.value = 0
+    }
+    let delay = parseInt(event.target.value, 10)
+    event.target.value = delay
+    if (delay >= 0 && delay <= 30 && !isNaN(delay)) {
+        $.ajax({
+            url: APP_ROUTES["instalocker_bp.set_lock_delay"],
+            type: 'POST',
+            data: { "delay": delay },
+            success: function(data) {
+                // Check if the response contains a new template (non-empty string)
+                // A new template means a error message. (valorant was closed while the application is running)
+                if (typeof data === 'string' && data.trim().length > 0) {
+                    // If the response is a new template, reload the page
+                    window.location.reload();
+                }
+            }
+        })
+    }
+})

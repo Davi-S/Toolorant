@@ -1,4 +1,5 @@
 import logging
+import time
 
 from logging_configuration import create_file_handler
 
@@ -6,18 +7,19 @@ from .. import game_resources as gr
 from ..abstracts import Listener
 from ..websocket.websocket import Event
 
-
 # Get the file logger and its handler
 log = logging.getLogger(__name__)
 log.addHandler(create_file_handler(__name__))
 
 
 class Instalocker(Listener):
-    def __init__(self, client) -> None:
+    def __init__(self, client, select_delay, lock_delay) -> None:
         super().__init__()
         self._client = client
-        self.profile = None
         self._seen_matches = set()
+        self.select_delay = select_delay
+        self.lock_delay = lock_delay
+        self.profile = None
 
     def on_event(self, event):
         if self.profile and event == Event.PREGAME:
@@ -57,6 +59,11 @@ class Instalocker(Listener):
         # Try to instalock the character
         log.debug('Ready to try to lock')
         try:
+            # Using sleep will only stop the thread. This function is meant to run in a separated thread than the rest of the program
+            time.sleep(self.select_delay)
+            select_info = self._client.pregame_select_character(agent.value)
+            log.debug('Agent selected successfully')
+            time.sleep(self.lock_delay)
             lock_info = self._client.pregame_lock_character(agent.value)
             log.info('Agent locked successfully')
         # TODO: treat errors that can happen when locking the character

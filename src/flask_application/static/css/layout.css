@@ -1,7 +1,7 @@
 #l-main-header {
     position: relative;
     background-color: var(--black-shade);
-    height: 3em;
+    height: 3rem;
     overflow: hidden;
 }
 
@@ -20,6 +20,22 @@
     transform: translate(calc(-20px + -1px + -0.35rem/2), -50%);
 }
 
+#l-footer {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: var(--black-shade);
+    height: 3rem;
+    color: var(--primary-color)
+}
+
+.l-instalocker-footer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem
+}
+
 .l-index {
     border-left: solid 2px var(--text-color);
     margin: 0em 5em;
@@ -27,14 +43,16 @@
 }
 
 .l-instalocker {
-    padding: 0.5em 2.5em;
+    padding: 0 2.5em;
 }
 
 #l-section-wrapper {
     display: flex;
     gap: 0.75rem;
-    /* Header = 3rem; border top and bottom = 1rem */
-    height: calc(100vh - 3rem - 1rem);
+    /* Header/footer = 3rem; border top and bottom = 1rem */
+    height: calc(100vh - 3rem - 1rem - 3rem);
+    /* Footer is part of the main since it is relater to the content of the page itself */
+    padding: 0.5em 0;
 }
 
 #l-left-section {
