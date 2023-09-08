@@ -3,3 +3,5 @@
 • Change the desktop icon
 • Use Pathlib instead of string paths 
 • Give a name to all new threads created
+• Use the API to get match info instead of using the "game_resources" file
+• Make the stream hunter
