@@ -12,10 +12,6 @@
 - [Table of Contents](#table-of-contents)
 - [Features](#features)
 - [Getting Started](#getting-started)
-  - [Python](#python)
-  - [Toolorant](#toolorant-1)
-  - [Setup](#setup)
-  - [Run it](#run-it)
 - [Is This "bannable"?](#is-this-bannable)
 - [Support and community](#support-and-community)
 - [Contributing](#contributing)
@@ -29,7 +25,7 @@
 Be the first to select your agent on the match.
 
 - *Stream Hunter:
-Find the live stream of your opponent and get privileged information.
+Find the Twitch live stream of your opponent and get privileged information.
 
 - *Voice to Text:
 Use your mic to send text messages to the enemy team.
@@ -41,36 +37,12 @@ Save your Valorant settings to load and share them easily.
 
 # Getting Started
 
-Follow these steps to get it up and running.
+1. Find the **latest release** on the [releases page](https://github.com/Davi-S/Toolorant/releases) of the [project repository](https://github.com/Davi-S/Toolorant).
+2. Scroll down to assets and download the `executable.zip` file.
+3. Save it on your computer and extract to a location of your preference.
+4. Find the `tolorant.exe` file and run it.
 
-To use Toolorant you need to have **Python** on your computer.
-
-## Python
-
-Python is the program used to run the Toolorant files.
-To install Python just follow this simple tutorial: <https://realpython.com/installing-python>.
-
-## Toolorant
-
-To get the latest version of Toolorant, follow these steps:
-
-1. Visit the [Releases page](https://github.com/Davi-S/Toolorant/releases) on the [GitHub repository](https://github.com/Davi-S/Toolorant).
-2. Look for the latest release version and click on it to open the release notes.
-3. You'll find download links for the release. Download the zip file, save it on your computer, and extract it anywhere you want.
-
-## Setup
-
-Once you have Python and Toolorant on your computer, open the Toolorant folder and double-click the `setup.bat` file.
-
-It will open a terminal window to perform some tasks to make Toolorant run on your computer. It should take less than one minute. The window will close automatically and you can proceed to the next step.
-
-You only need to do this once.
-
-## Run it
-
-On the Toolorant folder there is a "`src\`" folder; just double-click on "`desktop`" to open Toolorant!
-
-If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-desktop-shortcut-windows-10#:~:text=Create%20Desktop%20Shortcut%20in%20Windows%2010.%201%5D%20The,shortcut%20has%20been%20created%20on%20your%20Windows%20desktop.) for the `desktop.py` on your desktop
+If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-desktop-shortcut-windows-10#:~:text=Create%20Desktop%20Shortcut%20in%20Windows%2010.%201%5D%20The,shortcut%20has%20been%20created%20on%20your%20Windows%20desktop.) for it on your desktop
 
 **If you did not manage to get Toolorant up and running, check the [Support and community](#support-and-community) topic to get support.**
 
@@ -79,7 +51,7 @@ If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-d
 **USE AT YOUR OWN RISK.**
 
 No **bans** have been reported so far from using this program.
-Some players reported receiving a two-week competitive **suspension** for using the instalocker tool excessively
+Some players reported receiving a two-week competitive **suspension** for using the instalocker tool excessively.
 
 This program does not use an auto-clicker, read the game's memory or files; therefore, the anti-cheat should not be triggered.
 
@@ -112,6 +84,7 @@ See the [Support and Community](#support-and-community) topic for more details.
 ## Improving the code
 
 If you know how to code, you can [submit a pull request](https://github.com/Davi-S/Toolorant/pulls) to the project with new features and code improvements. Also, if you found something wrong with Toolorant you can open a new issue on the [issues](https://github.com/Davi-S/Toolorant/issues) tab at the top of the repository.
+Also, join our [Discord Community](#support-and-community) to chat with other developers.
 
 # Outro
 
