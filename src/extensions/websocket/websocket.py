@@ -47,14 +47,14 @@ class WebSocket(Publisher):
                     logger.warning('Websocket connection closed')
                     return
                 except json.decoder.JSONDecodeError:
-                    # Empty response
+                    # Because of empty response
                     continue
 
                 for event in Event:
                     if event.value in response['uri']:
                         logger.info(f'Important response received: {event.name}')
                         # Call the listeners on another thread so the ws thread is always running without interruption
-                        # Important: There will be multiple calls to the same event in a short period of time
+                        # Important: There will be multiple calls to the same event in a short period of time because of how the Valorant API works and how we identify the events/responses
                         threading.Thread(
                             target=self.notify_listeners,
                             name='WSNotifyListeners',

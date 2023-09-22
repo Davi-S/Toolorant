@@ -19,12 +19,10 @@ class Profile:
 
     @classmethod
     def load(cls, profile_name: str):
-        # Load JSON data from file
+        """Create a profile class from a profile file"""
         with open(PROFILES_PATH.joinpath(f'{profile_name}.json'), 'r') as f:
             data = json.load(f)
 
-        # Create instances of dataclasses using JSON data
-        # Use Enum to get enum member
         game_mode = gr.GameMode[data['game_mode'].upper()]
         map_agent = {gr.Map[map.upper()]: (gr.Agent[agent.upper()] if agent is not None else None)
                      for map, agent
