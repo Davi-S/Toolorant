@@ -50,7 +50,9 @@ def index():
     return flask.render_template('index/index.html')
 
 
-@index_bp.route('/no-valorant')
+HTTP_METHODS = ['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'CONNECT', 'OPTIONS', 'TRACE', 'PATCH']
+# Because the no-valorant can be accessed by redirecting from any method, it must accept all methods to not raise an error
+@index_bp.route('/no-valorant', methods=HTTP_METHODS)
 def no_valorant():
     return flask.render_template('index/no-valorant.html')
 

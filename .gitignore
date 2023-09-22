@@ -166,6 +166,6 @@ cython_debug/
 
 Makefile
 
-src/blueprints/instalocker/profiles/*
+src/blueprints/instalocker/profiles/*.*
 
 auto-py-to-exe-config.json
