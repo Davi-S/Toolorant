@@ -1,7 +1,7 @@
 # Toolorant
 
 <div style="text-align: center;">
-    <img src="src\flask_application\static\images\logo.png" alt="Toolorant logo"
+    <img src="assets\logo.png" alt="Toolorant logo"
     width="200px"/>
 </div>
 <p style="text-align: center;">A collection of tools for Valorant designed to provide you with useful utilities.</p>

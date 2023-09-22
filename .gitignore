@@ -162,5 +162,8 @@ cython_debug/
 # VSCode workspace config files
 .vscode/
 
-src/flask_application/instalocker_bp/profiles/*
-src/flask_application/websocket/websocket_test.py
+.logs/
+
+Makefile
+
+auto-py-to-exe-config.json

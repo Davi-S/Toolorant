@@ -1,0 +1,15 @@
+{
+    "game_mode": "SPIKE_RUSH",
+    "map_agent": {
+        "ASCENT": null,
+        "BIND": null,
+        "BREEZE": "CHAMBER",
+        "FRACTURE": null,
+        "HAVEN": "DEADLOCK",
+        "ICEBOX": null,
+        "LOTUS": null,
+        "PEARL": null,
+        "SPLIT": "KAYO",
+        "SUNSET": null
+    }
+}

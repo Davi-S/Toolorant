@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}Instalocker{% endblock %}
+{% block main %}
+    <main class="l-instalocker">
+        <form id="new-profile-form" method="post" autocomplete="off">
+            {{ new_profile_form.hidden_tag() }}
+        </form>
+        <!-- set and delete form are made just to easily get the submit buttons.
+            The data will be collected with JS and sent to the server with AJAX -->
+        <form id="set-profile-form" method="put" autocomplete="off"></form>
+        <form id="delete-profile-form" method="delete" autocomplete="off"></form>
+        <form id="set-select-delay-form" method="put" autocomplete="off"></form>
+        <form id="set-lock-delay-form" method="put" autocomplete="off"></form>
+        <section id="l-section-wrapper">
+            <section id="l-left-section">
+                <!-- Start/Stop checkbox button -->
+                <label for="instalocker-start-stop" class="btn primary-btn curtain-btn checkbox-btn thin-bs-border {{ 'is-checked' if instalocker_active else '' }}">
+                    <input id="instalocker-start-stop" type="checkbox" {{ 'checked' if instalocker_active else '' }}>
+                    <span class="label-content">{{ 'Deactivate' if instalocker_active else 'Activate' }}</span>
+                    <span class="curtain"></span>
+                </label>
+        
+                <!-- Profile items. Has the name and game-mode information. Has the select form submit button and the delete form submit button -->
+                <!-- TODO: add shadow when there is content overflowing -->
+                <div class="small-item-container">
+                    {% for profile in profiles %}
+                        <div class="small-item" data-profile-id="{{ profile.name }}" data-profile-type="item">
+                            <!-- Select profile button. Submits the select form to the server -->
+                            <button class="select-btn btn curtain-btn neutral-curtain thin-bs-border neutral-thin-bs-border {{ 'is-checked' if selected_profile.name == profile.name else '' }}" type="submit" form="set-profile-form">
+                                <div class="name">{{ profile.name }}</div>
+                                <div class="game-mode">{{ profile.game_mode.name.replace('_', ' ') }}</div>
+                                <span class="curtain"></span>
+                            </button>
+                            <!-- Delete button. Submits the delete form to the server -->
+                            <button class="btn shadow-btn" type="submit" form="delete-profile-form" aria-label="delete">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- New profile name/game-mode input field -->
+                <div id="new-profile-basic-input-container" class="small-item is-hidden">
+                    <!-- Name and game-mode input fields -->
+                    {{ new_profile_form.name(class="select-btn thin-bs-border neutral-thin-bs-border", form="new-profile-form", placeholder='New profile name') }}
+                    {{ new_profile_form.game_mode(class="thin-bs-border neutral-thin-bs-border", form="new-profile-form", aria_label="label for the select") }}
+                    <!-- Actual create profile button. Submits the create form to the server -->
+                    <button class="btn shadow-btn neutral-shadow" type="submit" form="new-profile-form">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                </div>
+                <!-- Create profile checkbox button. Toggle the create profile inputs -->
+                <label for="create-profile-checkbox" class="btn secondary-btn curtain-btn neutral-curtain checkbox-btn thin-bs-border neutral-thin-bs-border">
+                    <input id="create-profile-checkbox" type="checkbox">
+                    <span class="label-content">Create new profile</span>
+                    <span class="curtain"></span>
+                </label>
+            </section>
+            <section id="l-right-section">
+                <!-- TODO: Make the select box alphabetic ordered -->
+                <!-- New profile map-agent input fields -->
+                <div id="new-profile-map-agent-input-container" class="map-agent-container is-not-display">
+                    {% for field in new_profile_form if field.name not in ['name', 'game_mode', 'csrf_token'] %}
+                        <div class="map-agent thin-bs-border neutral-thin-bs-border">
+                            <div class="map"><span>{{ field.label }}</span></div>
+                            <span class="line"></span>
+                            <div class="agent"><span>{{ field(form="new-profile-form") }}</span></div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Existent profiles information -->
+                {% for profile in profiles %}
+                    <div class="map-agent-container {{ '' if selected_profile.name == profile.name else 'is-not-display' }}" data-profile-id="{{ profile.name }}" data-profile-type="description">
+                        {% for map, agent in profile.map_agent.items() %}
+                            <div class="map-agent thin-bs-border neutral-thin-bs-border">
+                                <div class="map"><span>{{ map.name.title() }}</span></div>
+                                <span class="line"></span>
+                                <div class="agent"><span>{{ agent.name.title() if agent else '•••' }}</span></div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </section>
+        </section>
+        <!-- Footer is part of the main since it is relater to the content of the page itself -->
+        <footer id="l-footer">
+            <div class="l-instalocker-footer">
+                <!-- TODO: style this footer -->
+                <label class="number-input" for="select-delay">
+                    Select agent delay:
+                    <input type="number" id="select-delay" min="0" max="30" maxlength="2" value="{{ select_delay }}" form="set-select-delay-form" class="no-spinner" required>
+                </label>
+                <label class="number-input" for="lock-delay">
+                    Lock agent delay:
+                    <input type="number" id="lock-delay" min="0" max="30" value="{{ lock_delay }}" form="set-lock-delay-form" class="no-spinner" required>
+                </label>
+            </div>
+        </footer>
+    </main>
+{% endblock %}

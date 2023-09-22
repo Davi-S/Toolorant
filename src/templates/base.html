@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <!-- Meta -->
+        <meta charset="UTF-8"/>
+        <meta name="application-name" content="Toolorant"/>
+        <meta name="author" content="Davi Sampaio">
+        <meta name="description" content="A collection of valorant related tool">
+        <meta name="keywords" content=""> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <!-- Load JS -->
+        <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+        <script defer src="https://kit.fontawesome.com/ca94cc6159.js" crossorigin="anonymous"></script>
+        <script defer src="{{url_for('static', filename='js/main.js')}}" rel="text/javascript"></script>
+        
+        <!-- Load CSS -->
+        <link href="{{url_for('static', filename='css/base.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static', filename='css/layout.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static', filename='css/module.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{url_for('static', filename='css/state.css')}}" rel="stylesheet" type="text/css">
+
+        <title>TL - {% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+<body {% block body_attr %}{% endblock %}>
+    {% block header %}
+        <header id="l-main-header">
+            <div id="main-header-line">
+                <ul id="main-header-menu" class="horizontal-diamond-list rotating-diamond horizontal-drawer-list">
+                    <li><a href="{{ url_for('index.index') }}">Menu</a></li>
+                </ul>
+            </div>
+        </header>
+    {% endblock %}
+    {% block main %}
+    {% endblock %}
+    {% block script %}
+        <script>
+        // Global variable to store routes and use them in JS files
+        // Its not possible to call the flask "url_for" in a JS files, so it must be done on the html template
+        const APP_ROUTES = {
+            'instalocker': {
+                'start': '{{ url_for("instalocker.start") }}',
+                'stop': '{{ url_for("instalocker.stop") }}',
+                'set_profile': '{{ url_for("instalocker.set_profile") }}',
+                'delete_profile': '{{ url_for("instalocker.delete_profile") }}',
+                'create_profile': '{{ url_for("instalocker.create_profile") }}',
+                'set_select_delay': '{{ url_for("instalocker.set_select_delay") }}',
+                'set_lock_delay': '{{ url_for("instalocker.set_lock_delay") }}',
+            }
+        }
+        </script>
+    {% endblock %}
+</body>
+</html>
