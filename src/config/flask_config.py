@@ -10,9 +10,8 @@ class CustomDynaconf(dynaconf.Dynaconf):
     def persist(self):
         # https://www.dynaconf.com/advanced/#exporting
         # loaders.write(self['SETTINGS_FILE_FOR_DYNACONF'][0], self.to_dict())
-        with open(self['SETTINGS_FILE_FOR_DYNACONF'][0], 'w') as json_file:
-            # Use indent for formatting
-            json.dump(self.to_dict(), json_file, indent=4)
+        with open(self['SETTINGS_FILE_FOR_DYNACONF'][0], 'w') as file:
+            json.dump(self.to_dict(), file, indent=4)
 
 
 def load_toml(filename):

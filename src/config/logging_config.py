@@ -9,8 +9,8 @@ from color_logging import ColoramaFormatter
 
 # Constants for quick changes on the dict config
 STREAM_LOGGING_LEVEL: str | None = None
-LOGGERS_LOGGING_LEVEL: str | None = None
 ROOT_LOGGING_LEVEL: str | None = None
+LOGGERS_LOGGING_LEVEL: str | None = None
 
 # Set and create the logs folder
 LOGS_FOLDER = Path().cwd().joinpath('.logs/')
@@ -92,6 +92,14 @@ dict_config = {
             'level': 'INFO'
         },
         'blueprints.instalocker.instalocker': {
+            'handlers': [],
+            'level': 'INFO'
+        },
+        'websockets.client': {
+            'handlers': [],
+            'level': 'INFO'
+        },
+        'urllib3.connectionpool': {
             'handlers': [],
             'level': 'INFO'
         }

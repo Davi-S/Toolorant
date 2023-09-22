@@ -1,7 +1,6 @@
 {
-    "DO_NOT_REMOVE": null,
     "INSTALOCKER": {
-        "profile": "test1",
+        "profile": null,
         "select_delay": 3,
         "lock_delay": 2
     }

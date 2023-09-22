@@ -5,5 +5,5 @@ EXTENSIONS = [
     'blueprints.index:init_app',
     'blueprints.instalocker:init_app'
 ]
-CHECK_CONNECTION = false
+CHECK_CONNECTION = true
 

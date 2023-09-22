@@ -1,6 +1,7 @@
 import asyncio
 import base64
 import enum
+import json
 import logging
 import ssl
 import threading
@@ -40,15 +41,20 @@ class WebSocket(Publisher):
             while True:
                 try:
                     response = await websocket.recv()
+                    response = json.loads(response)[2]
                 except websockets.exceptions.ConnectionClosedError as e:
                     self.is_running = False
+                    logger.warning('Websocket connection closed')
                     return
+                except json.decoder.JSONDecodeError:
+                    # Empty response
+                    continue
 
                 for event in Event:
-                    if event.value in response:
+                    if event.value in response['uri']:
                         logger.info(f'Important response received: {event.name}')
                         # Call the listeners on another thread so the ws thread is always running without interruption
-                        # TODO: Fix notify_listeners can be called multiple times for the same event
+                        # Important: There will be multiple calls to the same event in a short period of time
                         threading.Thread(
                             target=self.notify_listeners,
                             name='WSNotifyListeners',

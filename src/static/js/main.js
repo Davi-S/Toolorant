@@ -183,9 +183,18 @@ selectDelayInput.addEventListener('input', function (event) {
     }
     let delay = parseInt(event.target.value, 10)
     event.target.value = delay
+    if (delay < 0) {
+        event.target.value = 0
+        delay = 0
+    }
+    if (delay > 30) {
+        event.target.value = 30
+        delay = 30
+    }
     if (delay >= 0 && delay <= 30 && !isNaN(delay)) {
+        console.log()
         $.ajax({
-            url: APP_ROUTES.instalocker.select_delay,
+            url: APP_ROUTES.instalocker.set_select_delay,
             type: 'PUT',
             data: { "delay": delay },
             success: function(data) {
@@ -197,7 +206,7 @@ selectDelayInput.addEventListener('input', function (event) {
                 }
             }
         })
-    }
+    } 
 })
 
 document.getElementById("set-lock-delay-form").addEventListener("submit", function(event) {
@@ -210,6 +219,14 @@ lockDelayInput.addEventListener('input', function (event) {
     }
     let delay = parseInt(event.target.value, 10)
     event.target.value = delay
+    if (delay < 0) {
+        event.target.value = 0
+        delay = 0
+    }
+    if (delay > 30) {
+        event.target.value = 30
+        delay = 30
+    }
     if (delay >= 0 && delay <= 30 && !isNaN(delay)) {
         $.ajax({
             url: APP_ROUTES.instalocker.set_lock_delay,
@@ -224,5 +241,5 @@ lockDelayInput.addEventListener('input', function (event) {
                 }
             }
         })
-    }
+    } 
 })

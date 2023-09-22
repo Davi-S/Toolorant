@@ -14,8 +14,9 @@ import webview
 import app
 print('===== Finished imports =====')
 
-
+print('===== Starting main code =====')
 flask_app = app.create_app()
 webview.create_window('Toolorant', flask_app, width=1200, height=720)
 webview.start()
+print('===== Finished main code =====')
 print('===== Exiting "toolorant.py" file =====')

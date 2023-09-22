@@ -36,7 +36,6 @@ class Instalocker(Listener):
 
         # Check if the function is being called multiple times for the same match
         # This is needed because the WS can notify the same event multiple times.
-        # TODO: See the websocket file to fix this
         if match_info['ID'] in self._seen_matches:
             logger.warn('Will not lock because of repeated match ID')
             return False

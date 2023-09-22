@@ -23,10 +23,10 @@ def check_connection():
     if not app.websocket.is_running:
         logger.warn('Websocket and/or Client is not running. Trying to start them')
         try:
-            client = app.client.activate()
+            app.client.activate()
             app.websocket.start(
-                client.lockfile['port'],
-                client.lockfile['password']
+                app.client.lockfile['port'],
+                app.client.lockfile['password']
                 )
             logger.warn('Websocket and Client started successfully')
             return

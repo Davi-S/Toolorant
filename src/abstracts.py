@@ -25,7 +25,7 @@ class Publisher(abc.ABC):
         for listener in self._listeners:
             threading.Thread(
                 target=self._notify_listeners,
-                name=f'PublisherNotifyListener{listener.__name__.title()}',
+                name=f'PublisherNotifyListener{listener.__class__.__name__.title()}',
                 args=(listener, event),
                 daemon=True
             ).start()
