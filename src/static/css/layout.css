@@ -68,7 +68,6 @@
     flex: 1;
 }
 
-/* TODO: remove some margin to prevent scroll bar to appear */
 .l-simple-message {
     align-items: center;
     display: flex;

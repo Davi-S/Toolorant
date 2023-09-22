@@ -1,4 +1,3 @@
-# TODO rewrite readme.md
 print('===== Called "toolorant.py" file =====')
 print('===== Starting logging configuration =====')
 # SETUP LOGGING

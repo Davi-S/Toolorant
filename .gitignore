@@ -163,9 +163,7 @@ cython_debug/
 .vscode/
 
 .logs/
-
 Makefile
-
 src/blueprints/instalocker/profiles/*.*
-
 auto-py-to-exe-config.json
+output/
