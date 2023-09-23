@@ -42,8 +42,9 @@ class Instalocker(Listener):
         self._seen_matches.add(match_info['ID'])
 
         # Check the game mode
-        if self.get_match_game_mode(match_info) != self.profile.game_mode:
+        if (game_mode := self.get_match_game_mode(match_info)) != self.profile.game_mode:
             logger.info('Will not lock because match game mode and profile game mode are different')
+            logger.debug(f'Match game mode: {game_mode}. Profile game mode: {self.profile.game_mode}')
             return
 
         # Get the agent for the map
