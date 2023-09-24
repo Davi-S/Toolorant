@@ -163,6 +163,4 @@ cython_debug/
 .vscode/
 
 .logs/
-Makefile
 src/blueprints/instalocker/profiles/*.*
-TODO.txt
