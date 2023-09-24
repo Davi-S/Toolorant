@@ -30,6 +30,7 @@ class Instalocker(Listener):
     def lock(self):
         try:
             match_info = self._client.pregame_fetch_match()
+            logger.debug(f'Match info: {match_info}')
         except valclient.exceptions.PhaseError as e:
             logger.error(f'Will not lock because the match information could not be fetched due to error: {e}.')
             return False
@@ -58,7 +59,6 @@ class Instalocker(Listener):
         # Try to instalock the character
         logger.debug('Ready to try to lock')
         try:
-            # Use time.sleep will only stop the thread, not the process
             time.sleep(self.select_delay)
             select_info = self._client.pregame_select_character(agent.value)
             logger.debug('Agent selected successfully')

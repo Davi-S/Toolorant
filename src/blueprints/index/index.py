@@ -39,7 +39,7 @@ def check_connection():
 def after_request(response: flask.Response):
     request = flask.request
     if request.endpoint:
-        flask.current_app.logger.info(
+        flask.current_app.logger.debug(
             f'[{request.method:<7}] [{response.status_code:<3}] [{request.path}] - {request.endpoint}'
         )
     return response

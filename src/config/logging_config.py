@@ -102,6 +102,10 @@ dict_config = {
         'urllib3.connectionpool': {
             'handlers': [],
             'level': 'INFO'
+        },
+        'asyncio': {
+            'handlers': [],
+            'level': 'INFO'
         }
     }
 }
