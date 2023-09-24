@@ -61,7 +61,6 @@ class WebSocket(Publisher):
                             args=(event,),
                             daemon=True
                         ).start()
-                        return
 
     def _start(self, port, password):
         asyncio.run(self._web_socket(port, password))
