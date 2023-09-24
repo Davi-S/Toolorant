@@ -46,7 +46,7 @@ class Instalocker(Listener):
         if (game_mode := self.get_match_game_mode(match_info)) != self.profile.game_mode:
             logger.info('Will not lock because match game mode and profile game mode are different')
             logger.debug(f'Match game mode: {game_mode}. Profile game mode: {self.profile.game_mode}')
-            return
+            return False
 
         # Get the agent for the map
         agent = self.profile.map_agent[self.get_match_map(match_info)]
@@ -54,7 +54,7 @@ class Instalocker(Listener):
         # check if the user wants to instalock in this map
         if agent is None:
             logger.info('Will not lock because profile agent is None')
-            return
+            return False
 
         # Try to instalock the character
         logger.debug('Ready to try to lock')
@@ -65,10 +65,11 @@ class Instalocker(Listener):
             time.sleep(self.lock_delay)
             lock_info = self._client.pregame_lock_character(agent.value)
             logger.info('Agent locked successfully')
+            return True
         # TODO: treat errors that can happen when locking the character
         except Exception as e:
             logger.error(f'Could not lock the agent due to error: {e}')
-            return
+            return False
 
     def get_match_game_mode(self, match_info: dict):
         game_mode = match_info['Mode'].split('/')[-2]

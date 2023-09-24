@@ -1,10 +1,14 @@
 import importlib
 import json
+from pathlib import Path
 
 import dynaconf
 import flask
 import toml
 
+
+SETTINGS_PATH = Path(__file__).resolve().parent / 'settings.toml'
+USER_SETTINGS_PATH = Path(__file__).resolve().parent / 'user_settings.json'
 
 class CustomDynaconf(dynaconf.Dynaconf):
     def persist(self):
@@ -29,12 +33,12 @@ def load_extensions(app, extensions_list):
 
 def init_app(app: flask.Flask):
     # Flask settings
-    file_config = load_toml('config/settings.toml')
+    file_config = load_toml(SETTINGS_PATH)
     app.config.update(file_config)
     app.logger.info('Configurations loaded')
     # User settings
     app.user_settings = CustomDynaconf(
-        settings_files=['config/user_settings.json']
+        settings_files=[USER_SETTINGS_PATH]
     )
     app.logger.info('User settings loaded')
     # Extensions
