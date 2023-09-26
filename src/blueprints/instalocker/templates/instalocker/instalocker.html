@@ -11,6 +11,7 @@
         <form id="delete-profile-form" method="delete" autocomplete="off"></form>
         <form id="set-select-delay-form" method="put" autocomplete="off"></form>
         <form id="set-lock-delay-form" method="put" autocomplete="off"></form>
+
         <section id="l-section-wrapper">
             <section id="l-left-section">
                 <!-- Start/Stop checkbox button -->
@@ -28,7 +29,6 @@
                             <!-- Select profile button. Submits the select form to the server -->
                             <button class="select-btn btn curtain-btn neutral-curtain thin-bs-border neutral-thin-bs-border {{ 'is-checked' if selected_profile.name == profile.name else '' }}" type="submit" form="set-profile-form">
                                 <div class="name">{{ profile.name }}</div>
-                                <div class="game-mode">{{ profile.game_mode.name.replace('_', ' ') }}</div>
                                 <span class="curtain"></span>
                             </button>
                             <!-- Delete button. Submits the delete form to the server -->
@@ -38,12 +38,10 @@
                         </div>
                     {% endfor %}
                 </div>
-                <!-- New profile name/game-mode input field -->
+                <!-- New profile -->
                 <div id="new-profile-basic-input-container" class="small-item is-hidden">
-                    <!-- Name and game-mode input fields -->
                     {{ new_profile_form.name(class="select-btn thin-bs-border neutral-thin-bs-border", form="new-profile-form", placeholder='New profile name') }}
-                    {{ new_profile_form.game_mode(class="thin-bs-border neutral-thin-bs-border", form="new-profile-form", aria_label="label for the select") }}
-                    <!-- Actual create profile button. Submits the create form to the server -->
+                    <!-- Create profile button. Submits the create form to the server -->
                     <button class="btn shadow-btn neutral-shadow" type="submit" form="new-profile-form">
                         <i class="fa-solid fa-plus"></i>
                     </button>
@@ -56,10 +54,9 @@
                 </label>
             </section>
             <section id="l-right-section">
-                <!-- TODO: Make the select box alphabetic ordered -->
                 <!-- New profile map-agent input fields -->
                 <div id="new-profile-map-agent-input-container" class="map-agent-container is-not-display">
-                    {% for field in new_profile_form if field.name not in ['name', 'game_mode', 'csrf_token'] %}
+                    {% for field in new_profile_form if field.name not in ['name', 'csrf_token'] %}
                         <div class="map-agent thin-bs-border neutral-thin-bs-border">
                             <div class="map"><span>{{ field.label }}</span></div>
                             <span class="line"></span>

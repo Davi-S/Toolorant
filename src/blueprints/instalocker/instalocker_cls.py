@@ -30,7 +30,6 @@ class Instalocker(Listener):
     def lock(self):
         try:
             match_info = self._client.pregame_fetch_match()
-            logger.debug(f'Match info: {match_info}')
         except valclient.exceptions.PhaseError as e:
             logger.error(f'Will not lock because the match information could not be fetched due to error: {e}.')
             return False
@@ -41,12 +40,6 @@ class Instalocker(Listener):
             logger.warn('Will not lock because of repeated match ID')
             return False
         self._seen_matches.add(match_info['ID'])
-
-        # Check the game mode
-        if (game_mode := self.get_match_game_mode(match_info)) != self.profile.game_mode:
-            logger.info('Will not lock because match game mode and profile game mode are different')
-            logger.debug(f'Match game mode: {game_mode}. Profile game mode: {self.profile.game_mode}')
-            return False
 
         # Get the agent for the map
         agent = self.profile.map_agent[self.get_match_map(match_info)]
@@ -60,10 +53,10 @@ class Instalocker(Listener):
         logger.debug('Ready to try to lock')
         try:
             time.sleep(self.select_delay)
-            select_info = self._client.pregame_select_character(agent.value)
+            self._client.pregame_select_character(agent.value)
             logger.debug('Agent selected successfully')
             time.sleep(self.lock_delay)
-            lock_info = self._client.pregame_lock_character(agent.value)
+            self._client.pregame_lock_character(agent.value)
             logger.info('Agent locked successfully')
             return True
         # TODO: treat errors that can happen when locking the character

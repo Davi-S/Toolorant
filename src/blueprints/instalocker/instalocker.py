@@ -2,9 +2,9 @@ import logging
 
 import flask
 
-import forms
 import game_resources as gr
 
+from . import forms
 from .profile import Profile, get_all_profiles
 
 
@@ -68,8 +68,6 @@ def create_profile():
         form = forms.NewProfileInfo()
         profile_info = {
             'name': form.name.data,
-            # Replacing space for underline because of Spike Rush
-            'game_mode': gr.GameMode[form.game_mode.data.upper().replace(' ', '_')],
             # Dictionary comprehension to dynamically build the map-agent based on the game resources classes and field names.
             'map_agent': {
                 gr.Map[field_name.upper()]: (gr.Agent[field.data.upper()] if field.data.upper() != 'NONE' else None)
@@ -80,7 +78,6 @@ def create_profile():
         
         Profile(
             profile_info['name'],
-            profile_info['game_mode'],
             profile_info['map_agent']
         ).add()
         logger.info(f'Profile "{profile_info["name"]}" created successfully')
