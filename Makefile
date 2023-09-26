@@ -8,8 +8,8 @@ run:
 run_flask:
 	$(ACTIVATE_VENV) cd src/ && flask run
 
-.PHONY: exe
-exe:
+.PHONY: exe_dir
+exe_dir:
 	$(ACTIVATE_VENV) pyinstaller --noconfirm --clean --noconsole \
 	--icon "assets\logo2.ico" \
 	--paths .venv\Lib\site-packages \

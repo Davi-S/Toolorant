@@ -22,7 +22,7 @@
 # Features
 
 - Instalocker:
-Be the first to select your agent on the match.
+Be the first to select your agent for the match.
 
 - *Stream Hunter:
 Find the Twitch live stream of your opponent and get privileged information.
@@ -39,19 +39,19 @@ Save your Valorant settings to load and share them easily.
 
 1. Find the **latest release** on the [releases page](https://github.com/Davi-S/Toolorant/releases) of the [project repository](https://github.com/Davi-S/Toolorant).
 
-2. Scroll down to assets and download the one of the executable versions.
-   - All versions of the executable are essentially the same. If one don't work for you, just try another.
+2. Scroll down to assets and download one of the executable versions.
+   - All versions of the executable are essentially the same. If one doesn't work for you, you can try another.
    - You may get a virus warning, but this is a false positive and you can safely download it.
   If you don't trust the exe file, you can download the source code, (read it to confirm that there is no virus) and compile it yourself. If you need help on this process, ask for it on our [Discord Community](#support-and-community)
 
-3. Save it on your computer and extract to a location of your preference.
+3. Save it on your computer and extract it to a location of your preference.
 
 4. Find the `tolorant.exe` file and run it.
-   - If you get a error message it's probably because Toolorant is missing "controlled folder access" permission on windows. Follow [this tutorial](https://support.microsoft.com/en-us/windows/allow-an-app-to-access-controlled-folders-b5b6627a-b008-2ca2-7931-7e51e912b034) to learn how to add this permission to an app, or ask for support on our [Discord Community](#support-and-community)
+   - If you get an error message it's probably because Toolorant is missing "controlled folder access" permission on Windows. Follow [this tutorial](https://support.microsoft.com/en-us/windows/allow-an-app-to-access-controlled-folders-b5b6627a-b008-2ca2-7931-7e51e912b034) to learn how to add this permission to an app, or ask for support on our [Discord Community](#support-and-community)
 
 If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-desktop-shortcut-windows-10#:~:text=Create%20Desktop%20Shortcut%20in%20Windows%2010.%201%5D%20The,shortcut%20has%20been%20created%20on%20your%20Windows%20desktop.) for it on your desktop
 
-**If you did not manage to get Toolorant up and running, check the [Support and community](#support-and-community) topic to get support.**
+**If you did not get Toolorant up and running, check the [Support and community](#support-and-community) topic to get support.**
 
 # Is This "bannable"?
 
@@ -60,7 +60,7 @@ If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-d
 No **bans** have been reported so far from using this program.
 Some players reported receiving a two-week competitive **suspension** for using the instalocker tool excessively.
 
-This program does not use an auto-clicker, read the game's memory or files; therefore, the anti-cheat should not be triggered.
+This program does not use an auto-clicker, or read the game's memory/files; therefore, the anti-cheat should not be triggered.
 
 However, using the VALORANT API in this manner is against Riot's Terms of Service, since you are getting an advantage over other players. So there is always a risk.
 
@@ -90,7 +90,7 @@ See the [Support and Community](#support-and-community) topic for more details.
 
 ## Improving the code
 
-If you know how to code, you can [submit a pull request](https://github.com/Davi-S/Toolorant/pulls) to the project with new features and code improvements. Also, if you found something wrong with Toolorant you can open a new issue on the [issues](https://github.com/Davi-S/Toolorant/issues) tab at the top of the repository.
+If you know how to code, you can [submit a pull request](https://github.com/Davi-S/Toolorant/pulls) to the project with new features and code improvements. Also, if you find something wrong with Toolorant you can open a new issue on the [issues](https://github.com/Davi-S/Toolorant/issues) tab at the top of the repository.
 Also, join our [Discord Community](#support-and-community) to chat with other developers.
 
 # Outro
