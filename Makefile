@@ -19,7 +19,6 @@ exe:
 	--add-data "src/static;static" \
 	--add-data "src/templates;templates" \
 	--add-data "src/abstracts.py:." \
-	--add-data "src/forms.py:." \
 	--add-data "src/game_resources.py:." \
 	--hidden-import valclient \
 	--hidden-import websockets \
@@ -38,7 +37,6 @@ exe_file:
 	--add-data "src/static;static" \
 	--add-data "src/templates;templates" \
 	--add-data "src/abstracts.py:." \
-	--add-data "src/forms.py:." \
 	--add-data "src/game_resources.py:." \
 	--hidden-import valclient \
 	--hidden-import websockets \
