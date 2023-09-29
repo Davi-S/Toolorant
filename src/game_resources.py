@@ -2,7 +2,7 @@ import enum
 
 
 class GameMode(enum.Enum):
-    # check for "QueueID" to find if the "Bomb" game mode is competitive or unrated
+    # check for "QueueID" on the match info to find if the "Bomb" game mode is competitive or unrated
     COMPETITIVE = "Bomb" + "Competitive"
     REPLICATION = "OneForAll"
     SPIKE_RUSH = "QuickBomb"

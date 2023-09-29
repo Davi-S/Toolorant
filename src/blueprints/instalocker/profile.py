@@ -14,39 +14,30 @@ if not PROFILES_PATH.exists():
 @dataclasses.dataclass
 class Profile:
     name: str
-    game_mode: gr.GameMode
     map_agent: dict[gr.Map, gr.Agent | None]
 
     @classmethod
     def load(cls, profile_name: str):
-        """Create a profile class from a profile file"""
         with open(PROFILES_PATH.joinpath(f'{profile_name}.json'), 'r') as f:
             data = json.load(f)
-
-        game_mode = gr.GameMode[data['game_mode'].upper()]
         map_agent = {gr.Map[map.upper()]: (gr.Agent[agent.upper()] if agent is not None else None)
                      for map, agent
-                     in data['map_agent'].items()}
-        return cls(profile_name, game_mode, map_agent)
+                     in data.items()}
+        return cls(profile_name, map_agent)
 
     @classmethod
     def delete(cls, profile_name: str) -> None:
-        """Deletes the profile file with the given name"""
         os.remove(PROFILES_PATH.joinpath(f'{profile_name}.json'))
-        
+
     def delete(self) -> None:
-        """Deletes the profile file relative to the class"""
         os.remove(PROFILES_PATH.joinpath(f'{self.name}.json'))
 
     def add(self) -> None:
-        """Creates a profile file with the class information"""
-        game_data_dict = {
-            'game_mode': self.game_mode.name,
-            'map_agent': {map.name: (agent.name if agent is not None else None)
-                          for map, agent in self.map_agent.items()}
-        }
+        data = {map.name: (agent.name if agent is not None else None)
+                for map, agent in self.map_agent.items()}
+
         with open(PROFILES_PATH.joinpath(f'{self.name}.json'), 'w') as f:
-            json.dump(game_data_dict, f, indent=4)
+            json.dump(data, f, indent=4)
 
 
 def get_all_profiles():

@@ -116,7 +116,7 @@ createProfileCheckbox.addEventListener('change', function () {
     if (this.checked) {
         label.classList.add("is-checked")
         changeCheckboxLabel(this, 'Cancel')
-        // New profile name/game-mode input field
+        // New profile field
         newProfileBasicInputContainer.classList.remove('is-hidden')
         // Disable profile buttons and hide descriptions
         smallItemContainer.querySelectorAll('button').forEach(button => {
@@ -132,7 +132,7 @@ createProfileCheckbox.addEventListener('change', function () {
     } else {
         label.classList.remove("is-checked")
         changeCheckboxLabel(this, 'Create new profile')
-        // New profile name/game-mode input field
+        // New profile field
         newProfileBasicInputContainer.classList.add('is-hidden')
         // Enable profile buttons and show the selected profile description
         smallItemContainer.querySelectorAll('button').forEach(button => {

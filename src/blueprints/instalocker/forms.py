@@ -23,8 +23,4 @@ class M_MapAgentField(type(fwtf.FlaskForm), type):
 class NewProfileInfo(fwtf.FlaskForm, metaclass=M_MapAgentField):
     # Attention to the MapAgentField metaclass; it adds more fields to the form class
     name = wtf.StringField('Name: ', validators=[wtf.validators.DataRequired()])
-    game_mode = wtf.SelectField('Game Mode',
-                                choices=[mode.name.replace('_', ' ').title()
-                                         for mode in gr.GameMode],
-                                validators=[wtf.validators.DataRequired()])
 ######################################
