@@ -60,7 +60,7 @@ If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-d
 No **bans** have been reported so far from using this program.
 Some players reported receiving a two-week competitive **suspension** for using the instalocker tool excessively.
 
-This program does not use an auto-clicker, or read the game's memory/files; therefore, the anti-cheat should not be triggered.
+This program does not use an auto-clicker, or read the game's memory; therefore, the anti-cheat should not be triggered.
 
 However, using the VALORANT API in this manner is against Riot's Terms of Service, since you are getting an advantage over other players. So there is always a risk.
 
