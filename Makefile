@@ -6,7 +6,7 @@ run:
 
 .PHONY: run_flask
 run_flask:
-	$(ACTIVATE_VENV) cd src/ && flask run
+	$(ACTIVATE_VENV) cd src/ && flask $(args) run
 
 .PHONY: exe_dir
 exe_dir:
