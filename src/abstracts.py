@@ -29,3 +29,9 @@ class Publisher(abc.ABC):
                 args=(listener, event),
                 daemon=True
             ).start()
+
+
+class LivePlatform(abc.ABC):
+    @abc.abstractclassmethod
+    def live(self, channel):
+        raise NotImplementedError
