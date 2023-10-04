@@ -59,7 +59,6 @@ class Instalocker(Listener):
             self._client.pregame_lock_character(agent.value)
             logger.info('Agent locked successfully')
             return True
-        # TODO: treat errors that can happen when locking the character
         except Exception as e:
             logger.error(f'Could not lock the agent due to error: {e}')
             return False
