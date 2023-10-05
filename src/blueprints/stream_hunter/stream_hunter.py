@@ -20,5 +20,5 @@ def index():
 
 @stream_hunter_bp.route('/streams')
 def streams():
-    streams = stream_hunter_bp.stream_hunter.hunt()
-    return flask.jsonify(streams)
+    streams_data = stream_hunter_bp.stream_hunter.hunt()
+    return flask.jsonify(streams_data)
