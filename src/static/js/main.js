@@ -4,6 +4,18 @@ function changeCheckboxLabel(checkBox, newLabelContent) {
     content.textContent = newLabelContent
 }
 
+const copyableElements = document.querySelectorAll('.copyable')
+copyableElements.forEach(function (element) {
+    element.addEventListener('click', function () {
+        const contentToCopy = element.innerText;
+        navigator.clipboard.writeText(contentToCopy);
+    });
+});
+
+// ===================================================================== //
+// ============================ INSTALOCKER ============================ //
+// ===================================================================== //
+try {
 // Instalocker on/off
 const instalockerCheckBox = document.getElementById('instalocker-start-stop')
 instalockerCheckBox.addEventListener('change', function () {
@@ -243,3 +255,58 @@ lockDelayInput.addEventListener('input', function (event) {
         })
     } 
 })
+} catch (error) {
+}
+// ===================================================================== //
+// ============================ END INSTALOCKER ======================== //
+// ===================================================================== //
+
+
+// ===================================================================== //
+// ============================= STREAM HUNTER ========================= //
+// ===================================================================== //
+try {
+const huntButton = document.getElementById('hunt');
+huntButton.addEventListener('click', function () {
+    $.ajax({
+        url: APP_ROUTES.stream_hunter.streams,
+        type: 'GET',
+        data: {},
+        success: function(data) {
+            console.log(data)
+            // Construct the streams container with the data
+            const container = document.getElementById('streams-container');
+            container.innerHTML = '';
+            for (const name in data) {
+                console.log(name)
+                const playerDiv = document.createElement('div');
+                playerDiv.classList.add('player');
+
+                const nameDiv = document.createElement('div');
+                nameDiv.classList.add('name');
+                nameDiv.innerHTML = `<strong>${name}</strong>`;
+                playerDiv.appendChild(nameDiv);
+
+                const streamsUl = document.createElement('ul');
+                streamsUl.classList.add('streams');
+
+                if (data[name].length === 0) {
+                    const noStreamsLi = document.createElement('li');
+                    noStreamsLi.textContent = 'No streams found';
+                    streamsUl.appendChild(noStreamsLi);
+                } else {
+                    for (const stream of data[name]) {
+                        const streamLi = document.createElement('li');
+                        streamLi.classList.add('copyable');
+                        streamLi.textContent = stream;
+                        streamsUl.appendChild(streamLi);
+                    }
+                }
+                playerDiv.appendChild(streamsUl);
+                container.appendChild(playerDiv);
+            }
+        }
+    })
+});
+} catch (error) {
+}
