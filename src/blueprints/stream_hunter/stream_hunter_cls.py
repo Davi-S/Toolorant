@@ -30,7 +30,7 @@ class StreamHunter:
                 ally_team = player['TeamID']
                 break
 
-        return [Player(self.get_player_full_name(player['Subject'], gr.Agent[player['CharacterID']]))
+        return [Player(self.get_player_full_name(player['Subject']), gr.Agent(player['CharacterID']))
                 for player in match_info['Players']
                 if player['TeamID'] != ally_team]
 
@@ -65,7 +65,7 @@ class StreamHunter:
             for future in concurrent.futures.as_completed(future_to_player):
                 player = future_to_player[future]
                 result = future.result()
-                streams[(player.full_name, player.agent)] = result
+                streams[(player.full_name, player.agent.name)] = result
 
         self._seen_matches[match_info['MatchID']] = streams
         return streams
