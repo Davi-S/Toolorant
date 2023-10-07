@@ -373,7 +373,6 @@ input[type="number"] {
     margin: 1rem 0;
 }
 
-/* TODO: add this class to stream links */
 .copyable {
     cursor: pointer;
     color: var(--accent-color)

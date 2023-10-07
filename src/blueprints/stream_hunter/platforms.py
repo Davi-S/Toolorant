@@ -2,7 +2,7 @@ import requests
 
 from abstracts import LivePlatform
 
-
+# TODO: make methods that can accept API keys and use them if provided
 class Twitch(LivePlatform):
     BASE_URL = 'https://www.twitch.tv'
 

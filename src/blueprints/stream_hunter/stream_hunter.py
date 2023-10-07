@@ -1,4 +1,4 @@
-# python src\blueprints\stream_hunter\stream_hunter.py
+# TODO ask user if he has a API key (on settings page or footer)
 import logging
 
 import flask
