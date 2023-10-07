@@ -1,9 +1,12 @@
 import dataclasses
 
+import game_resources as gr
+
 
 @dataclasses.dataclass
 class Player:
     full_name: str
+    agent: gr.Agent
     name: str = dataclasses.field(init=False)
     tag: str = dataclasses.field(init=False)
     name_variations: set[str] = dataclasses.field(init=False)

@@ -273,20 +273,18 @@ huntButton.addEventListener('click', function () {
         type: 'GET',
         data: {},
         success: function(data) {
-            console.log(data)
             // Construct the streams container with the data
             if (data.length != 0) {
                 const container = document.getElementById('streams-container');
                 container.innerHTML = '';
                 
                 for (const name in data) {
-                    console.log(name)
                     const playerDiv = document.createElement('div');
                     playerDiv.classList.add('player');
     
                     const nameDiv = document.createElement('div');
                     nameDiv.classList.add('name');
-                    nameDiv.innerHTML = `<strong>${name}</strong>`;
+                    nameDiv.innerHTML = `<strong>${name.split('-')[0]}</strong> <span>(${name.split('-')[1]})</span>`;
                     playerDiv.appendChild(nameDiv);
     
                     const streamsUl = document.createElement('ul');

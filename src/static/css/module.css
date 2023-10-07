@@ -367,6 +367,10 @@ input[type="number"] {
     margin: 1rem 0 0 0;
 }
 
+.l-streams-container .player .name span {
+    font-size: 0.9rem;
+}
+
 .l-streams-container .player .streams {
     list-style: none;
     padding: 0;

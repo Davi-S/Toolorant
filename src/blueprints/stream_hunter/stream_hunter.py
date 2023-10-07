@@ -21,4 +21,9 @@ def index():
 @stream_hunter_bp.route('/streams')
 def streams():
     streams_data = stream_hunter_bp.stream_hunter.hunt()
-    return flask.jsonify(streams_data)
+    # Flask does not accept dicts with tuples as keys, so we make each key become a string and them we can split it on the JS
+    modified = {
+        '-'.join([key[0], key[1]]): value
+        for key, value in streams_data.items()
+    }
+    return flask.jsonify(modified)

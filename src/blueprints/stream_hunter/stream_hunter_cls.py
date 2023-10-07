@@ -1,6 +1,8 @@
 import concurrent.futures
 import logging
 
+import game_resources as gr
+
 from . import platforms
 from .player import Player
 
@@ -28,7 +30,7 @@ class StreamHunter:
                 ally_team = player['TeamID']
                 break
 
-        return [Player(self.get_player_full_name(player['Subject']))
+        return [Player(self.get_player_full_name(player['Subject'], gr.Agent[player['CharacterID']]))
                 for player in match_info['Players']
                 if player['TeamID'] != ally_team]
 
@@ -51,8 +53,6 @@ class StreamHunter:
         if match_info['MatchID'] in self._seen_matches:
             logger.warn('Repeated match ID')
             return self._seen_matches[match_info['MatchID']]
-        
-        self._seen_matches[match_info['MatchID']] = {}
 
         enemies = self.get_enemies(match_info)
 
@@ -65,7 +65,7 @@ class StreamHunter:
             for future in concurrent.futures.as_completed(future_to_player):
                 player = future_to_player[future]
                 result = future.result()
-                streams[player.full_name] = result
+                streams[(player.full_name, player.agent)] = result
 
         self._seen_matches[match_info['MatchID']] = streams
         return streams
