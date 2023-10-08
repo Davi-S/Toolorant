@@ -268,11 +268,13 @@ lockDelayInput.addEventListener('input', function (event) {
 try {
 const huntButton = document.getElementById('hunt');
 huntButton.addEventListener('click', function () {
+    huntButton.disabled = true;
     $.ajax({
         url: APP_ROUTES.stream_hunter.streams,
         type: 'GET',
         data: {},
         success: function(data) {
+            huntButton.disabled = false;
             // Construct the streams container with the data
             if (data.length != 0) {
                 const container = document.getElementById('streams-container');
