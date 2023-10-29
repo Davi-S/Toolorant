@@ -1,2 +1,3 @@
-# Used to ignore the dependencies check on the application
+# Used to ignore the dependencies on the application
+# Useful when testing the UI
 check_dependencies = true

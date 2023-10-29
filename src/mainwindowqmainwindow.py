@@ -14,7 +14,6 @@ from settings import app_settings, user_settings
 from view.main_ui import Ui_MainWindow
 from websocket import WebSocket
 
-
 logger = logging.getLogger(__name__)
 
 def load_style_sheet(name):
@@ -24,25 +23,39 @@ def load_style_sheet(name):
 
 
 class MainWindowQMainWindow(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         logger.info('Initializing MainWindow')
         super().__init__()
         self.setup_ui()
-        self.setup_dependencies()
-        self.setup_pages()
-        
-        # If the dependencies are not connect successfully the "no_valorant_pg" page will be displayed.
-        # Its only possible to leave the "no_valorant_pg" page if the dependencies are connected.
-        if not self.connect_dependencies():
-            self.page_manager.switch_to_page(
-                page_name='no_valorant_pg',
-                callback=lambda: self.page_manager.switch_to_page('main_menu_pg'))
         
         # Connect signals
         self.ui.close_btn.clicked.connect(self.close)
         self.ui.minimize_btn.clicked.connect(self.showMinimized)
         
+        # Setup dependencies and pages
+        # The pages need to be setup after the dependencies
+        self.page_manager = page_manager.PageManager(self.ui.stackedWidget)
+        self.page_manager.add_page(no_valorant_pg.NoValorantPageQWidget, 'no_valorant_pg')
+        if app_settings.check_dependencies:
+            # Setup and validate the dependencies
+            if self.setup_dependencies() and self.connect_dependencies():
+                self.setup_pages()
+                self.page_manager.switch_to_page('main_menu_pg')
+            else:
+                # If the dependencies are not connect successfully the "no_valorant_pg" page will be displayed.
+                # Its only possible to leave the "no_valorant_pg" page when the dependencies are connected.
+                self.page_manager.switch_to_page(
+                    page_name='no_valorant_pg',
+                    callback=lambda: self.page_manager.switch_to_page('main_menu_pg')
+                )
+        else:
+            # Setup dependencies without any validation and do not connect them
+            self.setup_dependencies()
+            self.setup_pages()
+            self.page_manager.switch_to_page('main_menu_pg')
+
     def setup_ui(self) -> None:
+        """Create ui and apply global stylesheets"""
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowFlags(
@@ -50,40 +63,19 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
             QtCore.Qt.FramelessWindowHint
         )
         self.setStyleSheet(load_style_sheet(Path(__file__).resolve().parent / 'view/main.qss'))
-
-    def setup_pages(self) -> None:
-        self.page_manager = page_manager.PageManager(self.ui.stackedWidget)
-        self.page_manager.add_page(main_menu_pg.MainMenuPageQWidget, 'main_menu_pg')
-        self.page_manager.add_page(instalocker_pg.InstalockerPageQWidget, 'instalocker_pg')
-        self.page_manager.add_page(no_valorant_pg.NoValorantPageQWidget, 'no_valorant_pg')
         
-    def setup_dependencies(self):
-        # callback_on_stop will call the "no_valorant_pg" page every time the websocket stops.
-        self.websocket = WebSocket(
-            callback_on_stop=lambda: self.page_manager.switch_to_page(
-                page_name='no_valorant_pg',
-                # This callback will return to the page that was set before the websocket stops
-                callback=lambda: self.page_manager.switch_to_page(self.page_manager.previous_page[1]))
-        )
-        self.client = CustomClient(user_settings.region)
+    def setup_dependencies(self) -> bool:
+        """
+        Create the dependencies (client and websocket) and return True is they are good of False if they are bad.
+        All websockets are good.
+        A good client is a client created with the region found on valorant files.
+        
+        Note that this function will always create the dependencies. The return value indicates if the crated dependencies are good or not
+        """
+        return self.setup_websocket() and self.setup_client()   
     
-    def connect_dependencies(self) -> bool:
-        # Only try to connect if the dependencies do not pass the check
-        if self._check_dependencies():
-            return True
-        
-        # Create another instance of the client if it was created using default region (usually "na").
-        # Then check if this new instance was also created with the default region.
-        # Will only try to connect when the client instance is not created with default region.
-        # There will be no errors if a client created with the default region is activate, but the client will not work as intended.
-        # The client is usually only created with default region on the first run.
-        # After the program find the region on valorant files, the region is saved on the user settings file and load on every startup.
-        # If a new region (different from the one in the user settings) is find on the valorant file, it is saved on the user settings files.
-        if self.client.using_default_region:
-            self.client = CustomClient()
-        if self.client.using_default_region:
-            return False
-        
+    def connect_dependencies(self) -> bool:          
+        """Activate the client and start the websocket"""      
         try:
             self.client.activate()
             self.websocket.start(
@@ -91,7 +83,7 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
                 self.client.lockfile['password']
             )
             logger.warn('Websocket and Client started successfully')
-            # Save the new region
+            # Save the region
             if self.client.region != user_settings.region:
                 user_settings.region = self.client.region
                 user_settings.persist()
@@ -99,20 +91,39 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
         except Exception as e:
             logger.error(f'Could not start the Websocket and/or Client due to error: {e}')
             return False
-        
-    def _check_dependencies(self):
-        # Only check for the dependencies if the settings is set to do so.
-        # This is useful to test the application when the dependencies are not essential
-        if app_settings.check_dependencies:
-            return self.websocket.is_running and self.client.is_active
+    
+    def setup_websocket(self) -> bool:
+        """Set a WebSocket object on the self.websocket attribute"""
+        self.websocket = WebSocket(
+            callback_on_stop=lambda: self.page_manager.switch_to_page(
+                page_name='no_valorant_pg',
+                # This callback will return to the page that was set before the websocket stops
+                callback=lambda: self.page_manager.switch_to_page(self.page_manager.previous_page[1]))
+        )
         return True
     
+    def setup_client(self) -> bool:
+        """
+        Set a Client object on the self.client attribute.
+        Return True if the client was created with a good region (not the default "na")
+        """
+        self.client = CustomClient(user_settings.region)
+        return self.client.is_good_region   
     
+    def setup_pages(self) -> None:
+        """Add the main pages to the main window"""
+        self.page_manager.add_page(main_menu_pg.MainMenuPageQWidget, 'main_menu_pg')
+        self.page_manager.add_page(instalocker_pg.InstalockerPageQWidget, 'instalocker_pg')
+    
+
 def get_main_window() -> MainWindowQMainWindow | None:
-    # sourcery skip: use-next
-    # Global function to find the MainWindowQMainWindow in application
+    """Returns the MainWindowQMainWindow in the application (if any)"""
     app = QtWidgets.QApplication.instance()
-    for widget in app.topLevelWidgets():
-        if isinstance(widget, MainWindowQMainWindow):
-            return widget
-    return None
+    return next(
+        (
+            widget
+            for widget in app.topLevelWidgets()
+            if isinstance(widget, MainWindowQMainWindow)
+        ),
+        None,
+    )

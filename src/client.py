@@ -22,16 +22,16 @@ class CustomClient(valclient.Client):
         self.is_active = False
         if file_region := self.get_region():
             logger.debug(f'Starting valclient.Client with ShooterGame.log region: {file_region}')
-            self.using_default_region = False
+            self.is_good_region = True
             super().__init__(file_region, auth)
             return
         if region:
             logger.debug(f'Starting valclient.Client with region argument: {region}')
-            self.using_default_region = False
+            self.is_good_region = True
             super().__init__(region, auth)
             return
         logger.warn('No region found. Starting client with default region "na"')
-        self.using_default_region = True
+        self.is_good_region = False
         super().__init__(region='na', auth=auth)
 
     def activate(self) -> None:

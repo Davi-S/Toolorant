@@ -17,15 +17,15 @@ from .mapagentqframe import MapAgentQFrame
 from .profileitemqframe import ProfileItemQFrame
 from .view.instalocker_pg_ui import Ui_instalocker_pg
 
-
 logger = logging.getLogger(__name__)
+
 
 class InstalockerPageQWidget(page_manager.BasePageQWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setup_ui()
         self.setup_animations()
-        
+
         # Setup instalocker
         self.instalocker = Instalocker(
             client=mainwindowqmainwindow.get_main_window().client,
@@ -33,7 +33,7 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
             select_delay=user_settings.instalocker.select_delay,
             lock_delay=user_settings.instalocker.lock_delay
         )
-        
+
         # Create and show initial profiles
         for profile in prof.get_all_profiles():
             self.add_profile_item(profile)
@@ -50,7 +50,7 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
                 if isinstance(widget, ProfileItemQFrame) and widget.name == self.set_profile.name:
                     widget.set_profile_btn_enter_event()
                     widget.set_profile_btn_clicked()
-                    
+
         # Connect signals
         self.ui.menu_btn.clicked.connect(lambda: self.page_manager.switch_to_page('main_menu_pg'))
         self.ui.create_profile_btn.clicked.connect(self.create_profile_btn_clicked)
@@ -59,14 +59,14 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
         self.ui.select_spin.valueChanged.connect(self.select_spin_value_changed)
         self.ui.lock_spin.valueChanged.connect(self.lock_spin_value_changed)
         # Make spin boxes do not respond to mouse wheel
+        # TODO: make spin boxes wheel work like the profile info list widget wheel
         self.ui.select_spin.wheelEvent = lambda event: None
         self.ui.lock_spin.wheelEvent = lambda event: None
-
 
     @property
     def set_profile(self):
         return self._set_profile
-    
+
     @set_profile.setter
     def set_profile(self, profile: prof.Profile | None):
         # Set the profile in all places where it must be
@@ -74,29 +74,29 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
         self.instalocker.profile = profile
         user_settings.instalocker.profile = profile.name if profile else None
         user_settings.persist()
-        
+
     @property
     def select_delay(self):
         return self._select_delay
-    
+
     @select_delay.setter
     def select_delay(self, value):
         self._select_delay = value
         self.instalocker.select_delay = value
         user_settings.instalocker.select_delay = value
         user_settings.persist()
-        
+
     @property
     def lock_delay(self):
         return self._lock_delay
-    
+
     @lock_delay.setter
     def lock_delay(self, value):
         self._lock_delay = value
         self.instalocker.lock_delay = value
         user_settings.instalocker.lock_delay = value
         user_settings.persist()
-    
+
     def setup_ui(self):
         self.ui = Ui_instalocker_pg()
         self.ui.setupUi(self)
@@ -114,14 +114,7 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
         self.ui.add_profile_btn.enterEvent = lambda event: self.add_profile_btn_icon_animation.start_animation()
         self.ui.add_profile_btn.leaveEvent = lambda event: self.add_profile_btn_icon_animation.start_animation(reversed=True)
 
-    def on_page_enter(self):
-        super().on_page_enter()
-        # Change the client of the instalocker if its region is different from the actual main window client region
-        # This is usually only needed on the first run of the application
-        if self.instalocker.client.region != mainwindowqmainwindow.get_main_window().client.region:
-            self.instalocker.client = mainwindowqmainwindow.get_main_window().client
-    
-    def add_profile_item(self, profile: prof.Profile, last_item: bool=False):
+    def add_profile_item(self, profile: prof.Profile, last_item: bool = False):
         logger.debug(f'Adding profile item "{profile.name}"')
         # Create the profile item
         profile_item = ProfileItemQFrame(profile.name)
@@ -135,7 +128,7 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
         list_item = QtWidgets.QListWidgetItem(self.ui.profile_list_lw)
         list_item.setSizeHint(profile_item.sizeHint())
         self.ui.profile_list_lw.setItemWidget(list_item, profile_item)
-    
+
     def remove_profile_item(self, profile: ProfileItemQFrame | prof.Profile):
         logger.debug(f'Removing profile item "{profile.name}"')
         removed = False
@@ -146,7 +139,7 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
                 self.ui.profile_list_lw.takeItem(idx)
                 removed = True
         return removed
-    
+
     def profile_item_delete_button_clicked(self, profile: prof.Profile):
         logger.info(f'Delete button clicked for profile "{profile.name}"')
         self.remove_profile_item(profile)
@@ -227,7 +220,7 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
                 agent = gr.Agent[widget.ui.agent_form_cb.currentText()] if widget.ui.agent_form_cb.currentText() != "NONE" else None
                 profile_map_agent[map] = agent
         logger.debug(f'{profile_map_agent=}')
-        
+
         # Create and show the new profile
         profile = prof.Profile(profile_name, profile_map_agent)
         profile.save()
@@ -235,14 +228,14 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
         # If the new profile does not has the same name it will not be deleted (because it does not exist)
         self.remove_profile_item(profile)
         self.add_profile_item(profile)
-        
+
         # Simulate a click on the create profile button to close profile creation
         # Need to change the "is_checked" manually because it is toggled on mouse release and the "click" event does not trigger it
         self.ui.create_profile_btn.is_checked = False
         self.ui.create_profile_btn.click()
         self.ui.create_profile_btn.leaveEvent(None)
         logger.info(f'Profile "{profile.name}" created successfully')
-        
+
     def start_stop_btn_clicked(self):
         if self.ui.start_stop_btn.is_checked:
             mainwindowqmainwindow.get_main_window().websocket.add_listener(self.instalocker)
@@ -250,12 +243,11 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
         else:
             mainwindowqmainwindow.get_main_window().websocket.remove_listener(self.instalocker)
             logger.info('Instalocker stopped successfully')
-    
+
     def select_spin_value_changed(self, value):
         logger.info(f'Select delay changed to {value}')
         self.select_delay = value
-        
+
     def lock_spin_value_changed(self, value):
         logger.info(f'Lock delay changed to {value}')
         self.lock_delay = value
-        
