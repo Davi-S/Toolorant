@@ -8,7 +8,7 @@ main:
 designer:
 	$(ACTIVATE_VENV) pyside6-designer
 
-.PHONY: exe_dir
+.PHONY: exe_pyinstaller
 exe_dir:
 	$(ACTIVATE_VENV) pyinstaller --noconfirm --clean --noconsole \
 	--distpath dist/dir \
@@ -19,18 +19,6 @@ exe_dir:
 	--add-data "src/pages;pages/" \
 	--add-data "src/view;view/" \
 	src/Toolorant.py \
-
-.PHONY: exe_file
-exe_file:
-	$(ACTIVATE_VENV) pyinstaller --noconfirm --clean --noconsole --onefile \
-	--distpath dist/file \
-	--icon "src/resources/favicon.ico" \
-	--paths .venv\Lib\site-packages \
-	--add-data "src/.logs;.logs/" \
-	--add-data "src/settings;settings/" \
-	--add-data "src/pages;pages/" \
-	--add-data "src/view;view/" \
-	src\Toolorant.py
 
 .PHONY: exe_nuitka
 exe_nuitka:

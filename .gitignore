@@ -155,7 +155,7 @@ cython_debug/
 design_concept/
 src/pages/instalocker/profiles/*
 *.zip
-src/.logs/
+src/.logs/*
 
 # Nuitka
 *.build/

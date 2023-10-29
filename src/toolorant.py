@@ -1,5 +1,6 @@
 def main():
     print(f'===== Called "{__file__}" file =====')
+    print('===== Starting slash screen =====')
     # SPLASH SCREEN
     import sys
     import PySide6.QtWidgets as QtWidgets
