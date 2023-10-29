@@ -24,7 +24,7 @@
 - Instalocker:
 Be the first to select your agent for the match.
 
-- *Stream Hunter:
+- Stream Hunter:
 Find the Twitch live stream of your opponent and get privileged information.
 
 - *Voice to Text:
