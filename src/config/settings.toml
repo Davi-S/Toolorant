@@ -3,7 +3,8 @@ EXTENSIONS = [
     'extensions.client:init_app',
     'extensions.websocket:init_app',
     'blueprints.index:init_app',
-    'blueprints.instalocker:init_app'
+    'blueprints.instalocker:init_app',
+    'blueprints.stream_hunter:init_app'
 ]
 CHECK_CONNECTION = true
 

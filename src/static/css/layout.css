@@ -82,3 +82,27 @@
     height: 3rem;
     font-weight: bold;
 }
+
+.l-main-wrapper {
+    padding: 0.5rem calc(100vw/5);
+    height: 100vh;
+}
+
+.l-flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.l-center-wrap {
+    display: flex;
+    height: calc(100vh - 3rem - 1rem - 3rem);
+    align-items: center;
+}
+
+.l-streams-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem 3rem;
+}
