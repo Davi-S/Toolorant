@@ -1,44 +1,44 @@
 ACTIVATE_VENV = cd .venv/Scripts & activate.bat & cd ../.. &
 
-.PHONY: run
-run:
-	$(ACTIVATE_VENV) cd src/ && python toolorant.py
+.PHONY: main
+main:
+	$(ACTIVATE_VENV) cd src/ & python Toolorant.py
 
-.PHONY: run_flask
-run_flask:
-	$(ACTIVATE_VENV) cd src/ && flask $(args) run
+.PHONY: designer
+designer:
+	$(ACTIVATE_VENV) pyside6-designer
 
 .PHONY: exe_dir
 exe_dir:
 	$(ACTIVATE_VENV) pyinstaller --noconfirm --clean --noconsole \
-	--icon "assets\logo2.ico" \
-	--paths .venv\Lib\site-packages \
-	--add-data "src/config;config" \
-	--add-data "src/blueprints;blueprints" \
-	--add-data "src/extensions;extensions" \
-	--add-data "src/static;static" \
-	--add-data "src/templates;templates" \
-	--add-data "src/abstracts.py:." \
-	--add-data "src/game_resources.py:." \
-	--hidden-import valclient \
-	--hidden-import websockets \
-	--hidden-import flask_wtf \
-	src\toolorant.py
+	--distpath dist/dir \
+	--icon "src/resources/favicon.ico" \
+	--paths .venv/Lib/site-packages \
+	--add-data "src/.logs;.logs/" \
+	--add-data "src/settings;settings/" \
+	--add-data "src/pages;pages/" \
+	--add-data "src/view;view/" \
+	src/Toolorant.py \
 
 .PHONY: exe_file
 exe_file:
 	$(ACTIVATE_VENV) pyinstaller --noconfirm --clean --noconsole --onefile \
 	--distpath dist/file \
-	--icon "assets\logo2.ico" \
+	--icon "src/resources/favicon.ico" \
 	--paths .venv\Lib\site-packages \
-	--add-data "src/config;config" \
-	--add-data "src/blueprints;blueprints" \
-	--add-data "src/extensions;extensions" \
-	--add-data "src/static;static" \
-	--add-data "src/templates;templates" \
-	--add-data "src/abstracts.py:." \
-	--add-data "src/game_resources.py:." \
-	--hidden-import valclient \
-	--hidden-import websockets \
-	--hidden-import flask_wtf \
-	src\toolorant.py
+	--add-data "src/.logs;.logs/" \
+	--add-data "src/settings;settings/" \
+	--add-data "src/pages;pages/" \
+	--add-data "src/view;view/" \
+	src\Toolorant.py
+
+.PHONY: exe_nuitka
+exe_nuitka:
+	$(ACTIVATE_VENV) nuitka --standalone --remove-output --disable-console \
+	--windows-icon-from-ico="src/resources/favicon.ico" \
+	--plugin-enable=pyside6 \
+	--include-module=websockets \
+	--include-data-files=src/view/*.qss=view/ \
+	--include-data-files=src/settings/*.toml=settings/ \
+	--include-data-files=src/settings/*.json=settings/ \
+	src/Toolorant.py

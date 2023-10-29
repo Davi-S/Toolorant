@@ -1,0 +1,2 @@
+# Used to ignore the dependencies check on the application
+check_dependencies = false

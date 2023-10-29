@@ -21,9 +21,9 @@ class Map(enum.Enum):
     PEARL = "Pitt"
     SPLIT = "Bonsai"
     SUNSET = "Juliett"
-    # DISTRICT = "HURM_Alley"
-    # KASBAH = "HURM_Bowl"
-    # PIAZZA = "HURM_Yard"
+    DISTRICT = "HURM_Alley"
+    KASBAH = "HURM_Bowl"
+    PIAZZA = "HURM_Yard"
 
 class Agent(enum.Enum):
     ASTRA = "41fb69c1-4189-7b37-f117-bcaf1e96f1bf"

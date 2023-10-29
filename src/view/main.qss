@@ -1,0 +1,98 @@
+/* red: #FF4655 */
+/* red: rgb(255, 70, 85) */
+/* blue: #0F1B23 */
+/* blue: rgb(15, 27, 35) */
+
+* {
+    font: 12pt "Roboto";
+    background-color: transparent;
+    color: white;
+}
+
+QWidget#centralwidget {
+    background-color: #0F1B23;
+}
+
+*[line='true'] {
+    background-color: white;
+}
+
+QAbstractButton {
+    padding: 0;
+}
+
+BigOptionQPushButton {
+    font: 700 24pt "Roboto";
+    letter-spacing: 1px;
+}
+
+QLabel#reload_lbl {
+    font: 700 18pt "Roboto";
+    letter-spacing: 1px;
+} 
+
+QAbstractButton#start_stop_btn {
+    font: 700 15pt "Roboto";
+    letter-spacing: 1px;
+    border: 2px solid #FF4655;
+    color: rgb(255, 70, 85);
+}
+
+QListWidget::item:hover {
+    background-color: transparent;
+}
+
+QListWidget::item {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+QListWidget:focus {
+    outline: none;
+}
+
+QFrame#profile_list_lw,
+QFrame#profile_info_lw {
+    border: none
+}
+
+QAbstractButton#create_profile_btn,
+QAbstractButton#add_profile_btn,
+QFrame#add_profile_frm,
+QFrame#map_agent_inner_frm,
+QFrame#map_agent_form_inner_frm,
+QAbstractButton#reload_btn {
+    border: 2px solid white;
+}
+
+QAbstractButton#add_profile_btn {
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+}
+
+QAbstractButton#set_profile_btn {
+    text-align: left;
+    border: 2px solid white;
+    padding-left: 15px;
+}
+
+QAbstractButton#delete_profile_btn {
+    border: 2px solid #FF4655;
+    border-left: none;
+}
+
+QComboBox#agent_form_cb {
+    background-color: #0F1B23;
+}
+
+QComboBox::drop-down {
+    border: 0px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/icons/arrow-down.png);
+    width: 12px;
+    height: 12px;
+}

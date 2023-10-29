@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/arrow-down.png</file>
+    <file>icons/plus.png</file>
+    <file>icons/trash_bin.png</file>
+    <file>icons/times.png</file>
+    <file>icons/info.png</file>
+    <file>icons/losangle.png</file>
+    <file>icons/minus.png</file>
+  </qresource>
+  <qresource prefix="images">
+    <file>images/welcome.png</file>
+  </qresource>
+  <qresource prefix="favicon">
+    <file>favicon.ico</file>
+  </qresource>
+</RCC>

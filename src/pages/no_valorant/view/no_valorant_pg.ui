@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>main_menu_pg</class>
+ <widget class="QWidget" name="main_menu_pg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1080</width>
+    <height>610</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QFrame" name="no_valorant_main_frm">
+   <property name="geometry">
+    <rect>
+     <x>61</x>
+     <y>61</y>
+     <width>958</width>
+     <height>488</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="reload_lbl">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>167</y>
+      <width>958</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Please open valorant and reload Toolorant</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="SecondaryQPushButton" name="reload_btn">
+    <property name="geometry">
+     <rect>
+      <x>358</x>
+      <y>280</y>
+      <width>241</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>45</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>Reload</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SecondaryQPushButton</class>
+   <extends>QPushButton</extends>
+   <header>custom/secondaryqpushbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../resources/images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

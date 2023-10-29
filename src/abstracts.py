@@ -8,7 +8,7 @@ class Listener(abc.ABC):
         raise NotImplementedError
 
 
-class Publisher(abc.ABC):
+class Publisher:
     def __init__(self):
         self._listeners: set[Listener] = set()
 
@@ -22,6 +22,7 @@ class Publisher(abc.ABC):
         listener.on_event(event)
 
     def notify_listeners(self, event):
+        # Notify listener on separated thread so the all listeners will be notified quickly even if one listener takes too long to return.
         for listener in self._listeners:
             threading.Thread(
                 target=self._notify_listeners,
