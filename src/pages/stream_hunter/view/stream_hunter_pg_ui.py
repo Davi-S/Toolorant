@@ -17,6 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QSizePolicy, QWidget)
 
+from custom.primaryqpushbutton import PrimaryQPushButton
 from custom.topoptionqtoolbutton import TopOptionQToolButton
 import resources.images_rc
 
@@ -31,6 +32,10 @@ class Ui_stream_hunter_pg(object):
         self.stream_hunter_main_frm.setStyleSheet(u"")
         self.stream_hunter_main_frm.setFrameShape(QFrame.StyledPanel)
         self.stream_hunter_main_frm.setFrameShadow(QFrame.Raised)
+        self.hunt_btn = PrimaryQPushButton(self.stream_hunter_main_frm)
+        self.hunt_btn.setObjectName(u"hunt_btn")
+        self.hunt_btn.setGeometry(QRect(319, 0, 320, 45))
+        self.hunt_btn.setMinimumSize(QSize(0, 45))
         self.menu_btn = TopOptionQToolButton(stream_hunter_pg)
         self.menu_btn.setObjectName(u"menu_btn")
         self.menu_btn.setGeometry(QRect(57, 6, 53, 37))
@@ -59,6 +64,7 @@ class Ui_stream_hunter_pg(object):
 
     def retranslateUi(self, stream_hunter_pg):
         stream_hunter_pg.setWindowTitle(QCoreApplication.translate("stream_hunter_pg", u"Form", None))
+        self.hunt_btn.setText(QCoreApplication.translate("stream_hunter_pg", u"HUNT STREAMS", None))
         self.menu_btn.setText(QCoreApplication.translate("stream_hunter_pg", u"MENU", None))
     # retranslateUi
 

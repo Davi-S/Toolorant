@@ -31,7 +31,8 @@ QLabel#reload_lbl {
     letter-spacing: 1px;
 } 
 
-QAbstractButton#start_stop_btn {
+QAbstractButton#start_stop_btn,
+QAbstractButton#hunt_btn{
     font: 700 15pt "Roboto";
     letter-spacing: 1px;
     border: 2px solid #FF4655;

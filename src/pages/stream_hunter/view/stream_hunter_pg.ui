@@ -31,6 +31,25 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
+   <widget class="PrimaryQPushButton" name="hunt_btn">
+    <property name="geometry">
+     <rect>
+      <x>319</x>
+      <y>0</y>
+      <width>320</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>45</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>HUNT STREAMS</string>
+    </property>
+   </widget>
   </widget>
   <widget class="TopOptionQToolButton" name="menu_btn">
    <property name="geometry">
@@ -102,6 +121,11 @@
    <class>TopOptionQToolButton</class>
    <extends>QToolButton</extends>
    <header>custom/topoptionqtoolbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PrimaryQPushButton</class>
+   <extends>QPushButton</extends>
+   <header>custom/primaryqpushbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources>
