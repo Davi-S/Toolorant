@@ -9,6 +9,7 @@ import page_manager
 import pages.instalocker.instalockerpageqwidget as instalocker_pg
 import pages.main_menu.mainmenupageqwidget as main_menu_pg
 import pages.no_valorant.novalorantpageqwidget as no_valorant_pg
+import pages.stream_hunter.streamhunterpageqwidget as stream_hunter_pg
 from client import CustomClient
 from settings import app_settings, user_settings
 from view.main_ui import Ui_MainWindow
@@ -114,6 +115,7 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
         """Add the main pages to the main window"""
         self.page_manager.add_page(main_menu_pg.MainMenuPageQWidget, 'main_menu_pg')
         self.page_manager.add_page(instalocker_pg.InstalockerPageQWidget, 'instalocker_pg')
+        self.page_manager.add_page(stream_hunter_pg.StreamHunterPageQWidget, 'stream_hunter_pg')
     
 
 def get_main_window() -> MainWindowQMainWindow | None:

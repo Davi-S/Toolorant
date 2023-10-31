@@ -13,6 +13,7 @@ class MainMenuPageQWidget(page_manager.BasePageQWidget):
         self.setup_ui()
 
         self.ui.instalocker_btn.clicked.connect(lambda: self.page_manager.switch_to_page('instalocker_pg'))
+        self.ui.stream_hunter_btn.clicked.connect(lambda: self.page_manager.switch_to_page('stream_hunter_pg'))
 
     def setup_ui(self):
         self.ui = Ui_main_menu_pg()
