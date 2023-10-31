@@ -63,7 +63,7 @@
      </size>
     </property>
     <property name="text">
-     <string>Reload</string>
+     <string>RELOAD</string>
     </property>
    </widget>
   </widget>
