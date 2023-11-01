@@ -21,6 +21,12 @@ QAbstractButton {
     padding: 0;
 }
 
+QToolTip {
+    background-color: white; 
+    color: #0F1B23;
+    font: 9pt "Roboto";
+}
+
 BigOptionQPushButton {
     font: 700 24pt "Roboto";
     letter-spacing: 1px;

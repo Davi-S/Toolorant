@@ -41,6 +41,7 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         row_column = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
         for idx, (player, streams) in enumerate(players_streams.items()):
             frame = PlayerStreamsQFrame(player[0], player[1], streams)
+            # Make the last row align on center
             if row_column[idx][0] == 1:
                 self.ui.player_streams_layout.addWidget(frame, row_column[idx][0], row_column[idx][1], 2, 2)
             else:
