@@ -109,3 +109,12 @@ QComboBox::down-arrow {
     width: 12px;
     height: 12px;
 }
+
+QLabel#stream_link,
+QLabel#player_agent {
+    color: #FF4655;
+}
+
+QLabel#player_name {
+    font: 18pt "Roboto";
+}

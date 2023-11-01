@@ -45,20 +45,22 @@ class Ui_player_streams_frm(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 12)
 
+        self.horizontalSpacer = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+        
         self.player_name = QtWidgets.QLabel(self.player_frm)
         self.player_name.setObjectName(u"player_name")
-        self.player_name.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.player_name.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter
-        )
         self.player_name.setText(player_name)
         self.horizontalLayout.addWidget(self.player_name)
 
         self.player_agent = QtWidgets.QLabel(self.player_frm)
         self.player_agent.setObjectName(u"player_agent")
-        self.player_agent.setText(player_agent)
+        self.player_agent.setText(f'({player_agent})')
         self.horizontalLayout.addWidget(self.player_agent)
 
+        self.horizontalSpacer_2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(self.horizontalSpacer_2)
+        
         self.verticalLayout_2.addWidget(self.player_frm)
 
         self.streams_frm = QtWidgets.QFrame(player_streams_frm)
@@ -83,7 +85,7 @@ class Ui_player_streams_frm(object):
         else:
             for idx, link in enumerate(streams_links):
                 stream = QtWidgets.QLabel(self.streams_frm)
-                stream.setObjectName(f'stream_{idx}')
+                stream.setObjectName(u'stream_link')
                 stream.setAlignment(QtCore.Qt.AlignCenter)
                 stream.setMinimumSize(QtCore.QSize(0, 36))
                 stream.setMaximumSize(QtCore.QSize(500, 36))
