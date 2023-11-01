@@ -17,7 +17,11 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         self.setup_ui()
         
         self.ui.menu_btn.clicked.connect(lambda: self.page_manager.switch_to_page('main_menu_pg'))
+        self.ui.hunt_btn.clicked.connect(self.hunt_btn_clicked)
         
     def setup_ui(self):
         self.ui = Ui_stream_hunter_pg()
         self.ui.setupUi(self)
+        
+    def hunt_btn_clicked(self):
+        pass

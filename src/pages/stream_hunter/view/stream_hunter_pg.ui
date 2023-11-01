@@ -50,6 +50,40 @@
      <string>HUNT STREAMS</string>
     </property>
    </widget>
+   <widget class="QFrame" name="player_streams_frm">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>57</y>
+      <width>570</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>570</width>
+      <height>431</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>570</width>
+      <height>431</height>
+     </size>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="TopOptionQToolButton" name="menu_btn">
    <property name="geometry">
