@@ -89,6 +89,7 @@ class Ui_player_streams_frm(object):
                 stream.setMaximumSize(QtCore.QSize(500, 36))
                 stream.setText(link)
                 stream.setToolTip('Click to copy to clipboard')
+                stream.mousePressEvent = lambda event, stream=stream: QtWidgets.QApplication.clipboard().setText(stream.text())
                 self.__setattr__(
                     f'stream_{idx}', QtWidgets.QLabel(self.streams_frm)
                 )

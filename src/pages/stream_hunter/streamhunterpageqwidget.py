@@ -7,9 +7,9 @@ import PySide6.QtWidgets as QtWidgets
 import mainwindowqmainwindow
 import page_manager
 
+from .playerstreamsqframe import PlayerStreamsQFrame
 from .stream_hunter import StreamHunter
 from .view.stream_hunter_pg_ui import Ui_stream_hunter_pg
-from .playerstreamsqframe import PlayerStreamsQFrame
 
 logger = logging.getLogger(__name__)
 
