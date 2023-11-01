@@ -109,15 +109,11 @@ QComboBox#agent_form_cb {
     background-color: #0F1B23;
 }
 
-QLabel#stream_link,
-QLabel#player_agent {
+QLabel#stream_link_lbl,
+QLabel#player_agent_lbl {
     color: #FF4655;
 }
 
-QLabel#player_name {
+QLabel#player_name_lbl {
     font: 18pt "Roboto";
-}
-
-QLabel#stream_link {
-    background-color: red
 }
