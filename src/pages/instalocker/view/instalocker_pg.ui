@@ -162,7 +162,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QFrame" name="instalocker_frm">
+  <widget class="QFrame" name="main_frm">
    <property name="geometry">
     <rect>
      <x>61</x>

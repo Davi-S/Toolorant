@@ -32,7 +32,7 @@ QLabel#reload_lbl {
 } 
 
 QAbstractButton#start_stop_btn,
-QAbstractButton#hunt_btn{
+QAbstractButton#hunt_btn {
     font: 700 15pt "Roboto";
     letter-spacing: 1px;
     border: 2px solid #FF4655;
@@ -65,6 +65,12 @@ QFrame#map_agent_inner_frm,
 QFrame#map_agent_form_inner_frm,
 QAbstractButton#reload_btn {
     border: 2px solid white;
+}
+
+
+QAbstractButton#reload_btn {
+    font: 700 15pt "Roboto";
+    letter-spacing: 1px;
 }
 
 QAbstractButton#add_profile_btn {

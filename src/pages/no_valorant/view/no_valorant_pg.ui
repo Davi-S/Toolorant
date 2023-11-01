@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QFrame" name="no_valorant_main_frm">
+  <widget class="QFrame" name="main_frm">
    <property name="geometry">
     <rect>
      <x>61</x>

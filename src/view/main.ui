@@ -117,7 +117,7 @@
      </property>
     </widget>
    </widget>
-   <widget class="DraggableQFrame" name="draggable_area">
+   <widget class="DraggableQFrame" name="draggable_area_frm">
     <property name="geometry">
      <rect>
       <x>0</x>
