@@ -54,9 +54,9 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>57</y>
+      <y>81</y>
       <width>658</width>
-      <height>431</height>
+      <height>407</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -68,13 +68,13 @@
     <property name="minimumSize">
      <size>
       <width>658</width>
-      <height>431</height>
+      <height>407</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
       <width>658</width>
-      <height>431</height>
+      <height>407</height>
      </size>
     </property>
     <property name="frameShape">
