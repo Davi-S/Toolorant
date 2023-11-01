@@ -15,7 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QSizePolicy, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QSizePolicy,
+    QWidget)
 
 from custom.primaryqpushbutton import PrimaryQPushButton
 from custom.topoptionqtoolbutton import TopOptionQToolButton
@@ -38,16 +39,20 @@ class Ui_stream_hunter_pg(object):
         self.hunt_btn.setMinimumSize(QSize(0, 45))
         self.player_streams_frm = QFrame(self.main_frm)
         self.player_streams_frm.setObjectName(u"player_streams_frm")
-        self.player_streams_frm.setGeometry(QRect(190, 57, 570, 431))
+        self.player_streams_frm.setGeometry(QRect(150, 57, 658, 431))
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.player_streams_frm.sizePolicy().hasHeightForWidth())
         self.player_streams_frm.setSizePolicy(sizePolicy)
-        self.player_streams_frm.setMinimumSize(QSize(570, 431))
-        self.player_streams_frm.setMaximumSize(QSize(570, 431))
+        self.player_streams_frm.setMinimumSize(QSize(658, 431))
+        self.player_streams_frm.setMaximumSize(QSize(658, 431))
         self.player_streams_frm.setFrameShape(QFrame.StyledPanel)
         self.player_streams_frm.setFrameShadow(QFrame.Raised)
+        self.player_streams_layout = QGridLayout(self.player_streams_frm)
+        self.player_streams_layout.setSpacing(24)
+        self.player_streams_layout.setObjectName(u"player_streams_layout")
+        self.player_streams_layout.setContentsMargins(0, 0, 0, 0)
         self.menu_btn = TopOptionQToolButton(stream_hunter_pg)
         self.menu_btn.setObjectName(u"menu_btn")
         self.menu_btn.setGeometry(QRect(57, 6, 53, 37))

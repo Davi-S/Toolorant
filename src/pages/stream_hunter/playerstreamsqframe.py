@@ -43,7 +43,7 @@ class Ui_player_streams_frm(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.player_frm)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 12)
 
         self.player_name = QtWidgets.QLabel(self.player_frm)
         self.player_name.setObjectName(u"player_name")
@@ -71,17 +71,33 @@ class Ui_player_streams_frm(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
 
-        # Dynamically add the stream links
-        for idx, link in enumerate(streams_links):
-            stream = QtWidgets.QLabel(self.streams_frm)
-            stream.setObjectName(f'stream_{idx}')
-            stream.setAlignment(QtCore.Qt.AlignCenter)
-            stream.setText(link)
-            self.__setattr__(
-                f'stream_{idx}', QtWidgets.QLabel(self.streams_frm)
-            )
+        if not streams_links:
+            self.no_stream = QtWidgets.QLabel(self.streams_frm)
+            self.no_stream.setObjectName(u"no_stream")
+            self.no_stream.setAlignment(QtCore.Qt.AlignCenter)
+            self.no_stream.setMinimumSize(QtCore.QSize(0, 36))
+            self.no_stream.setMaximumSize(QtCore.QSize(500, 36))
+            self.no_stream.setText('No potential streams found')
+            self.verticalLayout.addWidget(self.no_stream)
 
-            self.verticalLayout.addWidget(stream)
-            self.verticalLayout.setStretch(idx, 1)
-
+        else:
+            for idx, link in enumerate(streams_links):
+                stream = QtWidgets.QLabel(self.streams_frm)
+                stream.setObjectName(f'stream_{idx}')
+                stream.setAlignment(QtCore.Qt.AlignCenter)
+                stream.setMinimumSize(QtCore.QSize(0, 36))
+                stream.setMaximumSize(QtCore.QSize(500, 36))
+                stream.setText(link)
+                self.__setattr__(
+                    f'stream_{idx}', QtWidgets.QLabel(self.streams_frm)
+                )
+                self.verticalLayout.addWidget(stream)
+        self.verticalSpacer = QtWidgets.QSpacerItem(
+            20,
+            40,
+            QtWidgets.QSizePolicy.Minimum,
+            QtWidgets.QSizePolicy.Expanding
+        )
+        self.verticalLayout.addItem(self.verticalSpacer)
+        
         self.verticalLayout_2.addWidget(self.streams_frm)

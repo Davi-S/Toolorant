@@ -53,9 +53,9 @@
    <widget class="QFrame" name="player_streams_frm">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>150</x>
       <y>57</y>
-      <width>570</width>
+      <width>658</width>
       <height>431</height>
      </rect>
     </property>
@@ -67,13 +67,13 @@
     </property>
     <property name="minimumSize">
      <size>
-      <width>570</width>
+      <width>658</width>
       <height>431</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>570</width>
+      <width>658</width>
       <height>431</height>
      </size>
     </property>
@@ -83,6 +83,23 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
+    <layout class="QGridLayout" name="player_streams_layout">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>24</number>
+     </property>
+    </layout>
    </widget>
   </widget>
   <widget class="TopOptionQToolButton" name="menu_btn">

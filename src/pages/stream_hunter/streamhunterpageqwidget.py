@@ -9,6 +9,7 @@ import page_manager
 
 from .stream_hunter import StreamHunter
 from .view.stream_hunter_pg_ui import Ui_stream_hunter_pg
+from .playerstreamsqframe import PlayerStreamsQFrame
 
 logger = logging.getLogger(__name__)
 
@@ -29,4 +30,18 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         self.ui.setupUi(self)
         
     def hunt_btn_clicked(self):
-        pass
+        # players_streams = self.stream_hunter.hunt()
+        players_streams = {
+            ('player1', 'tag1'): [],
+            ('player2', 'tag2'): ['www.stream1dontexists.com'],
+            ('player3', 'tag3'): ['https://example.com/', 'example.com'],
+            ('player4', 'tag4'): ['https://www.twitch.tv/', 'www.twitch.tv', 'twitch.tv/'],
+            ('player5', 'tag5'): ['twitch.tv', 'www.example.com', 'www.example.com', 'www.example.com'],
+        }
+        row_column = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
+        for idx, (player, streams) in enumerate(players_streams.items()):
+            frame = PlayerStreamsQFrame(player[0], player[1], streams)
+            if row_column[idx][0] == 1:
+                self.ui.player_streams_layout.addWidget(frame, row_column[idx][0], row_column[idx][1], 2, 2)
+            else:
+                self.ui.player_streams_layout.addWidget(frame, row_column[idx][0], row_column[idx][1])
