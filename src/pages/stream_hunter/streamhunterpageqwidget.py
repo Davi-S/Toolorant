@@ -39,10 +39,7 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
             ('player5', 'tag5'): ['twitch.tv', 'www.example.com', 'www.example.com', 'www.example.com'],
         }
         row_column = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
-        for idx, (player, streams) in enumerate(players_streams.items()):
+        for (row, col), (player, streams) in zip(row_column, players_streams.items()):
+            span = (2, 2) if row == 1 else (1, 1)
             frame = PlayerStreamsQFrame(player[0], player[1], streams)
-            # Make the last row align on center
-            if row_column[idx][0] == 1:
-                self.ui.player_streams_layout.addWidget(frame, row_column[idx][0], row_column[idx][1], 2, 2)
-            else:
-                self.ui.player_streams_layout.addWidget(frame, row_column[idx][0], row_column[idx][1])
+            self.ui.player_streams_layout.addWidget(frame, row, col, *span)
