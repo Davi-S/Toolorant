@@ -1,9 +1,8 @@
 import concurrent.futures
 import logging
 
-import valclient
-
 import game_resources as gr
+from client import CustomClient
 
 from . import platforms
 from .player import Player
@@ -12,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 class StreamHunter:
-    def __init__(self, client: valclient.Client) -> None:
+    def __init__(self, client: CustomClient) -> None:
         super().__init__()
         self.client = client
         self.platforms = [platforms.twitch, platforms.youtube]
