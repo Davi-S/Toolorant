@@ -21,6 +21,7 @@ QAbstractButton {
     padding: 0;
 }
 
+/* TODO: QToolTip style not working */
 QToolTip {
     background-color: white; 
     color: #0F1B23;
