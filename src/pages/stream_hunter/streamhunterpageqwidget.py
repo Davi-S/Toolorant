@@ -30,7 +30,15 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         self.ui.setupUi(self)
 
     def hunt_btn_clicked(self):
-        players_streams = self.stream_hunter.hunt()
+        # players_streams = self.stream_hunter.hunt()
+        players_streams = {
+            ('player1', 'tag1'): [],
+            ('player2', 'tag2'): ['www.stream1dontexists.com'],
+            ('player3', 'tag3'): ['https://example.com/', 'example.com'],
+            ('player4', 'tag4'): ['https://www.twitch.tv/', 'www.twitch.tv', 'twitch.tv/'],
+            ('player5', 'tag5'): ['twitch.tv', 'www.example.com', 'www.example.com', 'www.example.com'],
+        }
+        
         row_column = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
         for (row, col), (player, streams) in zip(row_column, players_streams.items()):
             # make the last (second) row expand
