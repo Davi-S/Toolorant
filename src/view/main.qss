@@ -114,7 +114,3 @@ QLabel#stream_link_lbl,
 QLabel#player_agent_lbl {
     color: #FF4655;
 }
-
-QLabel#player_name_lbl {
-    font: 18pt "Roboto";
-}
