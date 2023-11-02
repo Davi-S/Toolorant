@@ -1,7 +1,7 @@
 {
-    "REGION": null,
+    "REGION": "br",
     "INSTALOCKER": {
-        "profile": null,
+        "profile": "iso",
         "select_delay": 3,
         "lock_delay": 2
     }

@@ -1,5 +1,7 @@
-import concurrent.futures
+import asyncio
 import logging
+import time
+import aiohttp
 
 import game_resources as gr
 from client import CustomClient
@@ -14,10 +16,10 @@ class StreamHunter:
     def __init__(self, client: CustomClient) -> None:
         super().__init__()
         self.client = client
-        self.platforms = [platforms.twitch, platforms.youtube]
+        self.platforms = [platforms.Twitch()]
         self._seen_matches = {}
 
-    def get_enemies(self, match_info):
+    def get_enemies(self, match_info: dict):
         for player in match_info['Players']:
             if player['Subject'] == self.client.puuid:
                 ally_team = player['TeamID']
@@ -27,38 +29,48 @@ class StreamHunter:
                 for player in match_info['Players']
                 if player['TeamID'] != ally_team]
 
-    def get_player_streams(self, player):
-        logger.debug(f'Getting streams for player: {player}')
-        streams = []
-        for name in player.name_variations:
+    async def get_players_streams(self, players: list[Player]):
+        streams_dict = {}
+        async with aiohttp.ClientSession() as session:
             for platform in self.platforms:
-                if live := platform.live(name):
-                    streams.append(live)
-        return streams
+                tasks = []
+                for player in players:
+                    tasks = [platform.get_task(session, name) for name in player.name_variations]
+                    responses = await asyncio.gather(*tasks)
+                    streams_list = []
+                    for response in responses:
+                        if live := platform.is_live(await response.text()):
+                            streams_list.append(live)
+                    streams_dict[(player.full_name, player.agent)] = streams_list                  
 
-    def hunt(self):
-        try:
-            match_info = self.client.coregame_fetch_match()
-        except Exception as e:
-            logger.error(f'Match information could not be fetched due to error: {e}')
-            return {}
+        return streams_dict
 
-        if match_info['MatchID'] in self._seen_matches:
-            logger.warn('Repeated match ID')
-            return self._seen_matches[match_info['MatchID']]
+    def hunt(self) -> dict[tuple[str, gr.Agent], list[str]]:
+        # try:
+        #     match_info = self.client.coregame_fetch_match()
+        # except Exception as e:
+        #     logger.error(f'Match information could not be fetched due to error: {e}')
+        #     return {}
 
-        enemies = self.get_enemies(match_info)
+        # if match_info['MatchID'] in self._seen_matches:
+        #     logger.warn('Repeated match ID')
+        #     return self._seen_matches[match_info['MatchID']]
 
-        streams = {}
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            future_to_player = {
-                executor.submit(self.get_player_streams, player): player
-                for player in enemies
-            }
-            for future in concurrent.futures.as_completed(future_to_player):
-                player = future_to_player[future]
-                result = future.result()
-                streams[(player.full_name, player.agent.name)] = result
-
-        self._seen_matches[match_info['MatchID']] = streams
+        # enemies = self.get_enemies(match_info)
+        
+        # Create Player objects with random values
+        full_names = ["Gaules#123", "marcofrisoninjm#456", "Mike Johnson#789", "Sarah Davis#012", "Chris Wilson#345"]
+        agents = [gr.Agent['ASTRA'] for _ in range(5)]
+        enemies = []
+        for full_name, agent in zip(full_names, agents):
+            player = Player(full_name=full_name, agent=agent)
+            enemies.append(player)
+        
+        start = time.time()
+        
+        
+        streams = asyncio.run(self.get_players_streams(enemies))
+        
+        
+        print(time.time() - start)  # 15
         return streams
