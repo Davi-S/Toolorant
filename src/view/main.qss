@@ -71,7 +71,7 @@ QAbstractButton#hunt_btn {
 
 QFrame#profile_list_lw,
 QFrame#profile_info_lw {
-    border: none
+    border: none;
 }
 
 QAbstractButton#create_profile_btn,
