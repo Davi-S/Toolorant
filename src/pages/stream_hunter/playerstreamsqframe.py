@@ -107,9 +107,9 @@ class Ui_player_streams_frm(object):
                 stream_link_lbl.setAlignment(QtCore.Qt.AlignCenter)
                 stream_link_lbl.setText(link)
                 stream_link_lbl.mousePressEvent = lambda event, stream=stream_link_lbl: QtWidgets.QApplication.clipboard().setText(stream.text())
+                stream_link_lbl.mouseReleaseEvent = lambda event: QtWidgets.QToolTip.showText(event.screenPos().toPoint(), 'Copied to clipboard', msecShowTime=2000)
                 # TODO: make the tooltip follow the mouse
-                stream_link_lbl.setMouseTracking(True)
-                stream_link_lbl.mouseMoveEvent = lambda event: QtWidgets.QToolTip.showText(event.screenPos().toPoint(), 'Click to copy to clipboard', msecShowTime=2000)
+                stream_link_lbl.enterEvent = lambda event: QtWidgets.QToolTip.showText(event.screenPos().toPoint(), 'Click to copy to clipboard', msecShowTime=2000)
                 stream_frm_horizontal_layout.addWidget(stream_link_lbl)
 
                 stream_right_spc = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
