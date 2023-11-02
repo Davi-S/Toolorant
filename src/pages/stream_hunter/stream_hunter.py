@@ -1,6 +1,8 @@
 import concurrent.futures
 import logging
 
+import valclient
+
 import game_resources as gr
 
 from . import platforms
@@ -10,26 +12,19 @@ logger = logging.getLogger(__name__)
 
 
 class StreamHunter:
-    def __init__(self, client) -> None:
+    def __init__(self, client: valclient.Client) -> None:
         super().__init__()
-        self._client = client
+        self.client = client
+        self.platforms = [platforms.twitch, platforms.youtube]
         self._seen_matches = {}
-        self._platforms = [platforms.twitch]
-
-    def get_player_full_name(self, puuid):
-        playerData = self._client.put(
-            endpoint="/name-service/v2/players",
-            json_data=[puuid]
-        )[0]
-        return f"{playerData['GameName']}#{playerData['TagLine']}"
 
     def get_enemies(self, match_info):
         for player in match_info['Players']:
-            if player['Subject'] == self._client.puuid:
+            if player['Subject'] == self.client.puuid:
                 ally_team = player['TeamID']
                 break
 
-        return [Player(self.get_player_full_name(player['Subject']), gr.Agent(player['CharacterID']))
+        return [Player(self.client.get_player_full_name(player['Subject']), gr.Agent(player['CharacterID']))
                 for player in match_info['Players']
                 if player['TeamID'] != ally_team]
 
@@ -37,17 +32,16 @@ class StreamHunter:
         logger.debug(f'Getting streams for player: {player}')
         streams = []
         for name in player.name_variations:
-            for platform in self._platforms:
+            for platform in self.platforms:
                 if live := platform.live(name):
                     streams.append(live)
         return streams
 
     def hunt(self):
         try:
-            match_info = self._client.coregame_fetch_match()
+            match_info = self.client.coregame_fetch_match()
         except Exception as e:
-            logger.error(
-                f'Match information could not be fetched due to error: {e}')
+            logger.error(f'Match information could not be fetched due to error: {e}')
             return {}
 
         if match_info['MatchID'] in self._seen_matches:

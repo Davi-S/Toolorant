@@ -51,3 +51,10 @@ class CustomClient(valclient.Client):
         except Exception:
             logger.debug('No region on "ShooterGame.log" file found')
             return ''
+
+    def get_player_full_name(self, puuid):
+        playerData = self.put(
+            endpoint="/name-service/v2/players",
+            json_data=[puuid]
+        )[0]
+        return f"{playerData['GameName']}#{playerData['TagLine']}"
