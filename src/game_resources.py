@@ -35,6 +35,7 @@ class Agent(enum.Enum):
     FADE = "dade69b4-4f5a-8528-247b-219e5a1facd6"
     GEKKO = "e370fa57-4757-3604-3648-499e1f642d3f"
     HARBOR = "95b78ed7-4637-86d9-7e41-71ba8c293152"
+    ISO = "0e38b510-41a8-5780-5e8f-568b2a4f2d6c"
     JETT = "add6443a-41bd-e414-f6ad-e58d267f4e95"
     KAYO = "601dbbe7-43ce-be57-2a40-4abd24953621"
     KILLJOY = "1e58de9c-4950-5125-93e9-a0aee9f98746"
