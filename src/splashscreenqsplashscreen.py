@@ -1,9 +1,10 @@
 import PySide6.QtWidgets as QtWidgets
-
+import PySide6.QtGui as QtGui
+import resources.images_rc
 
 class SplashScreenQSplashScreen(QtWidgets.QSplashScreen):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(QtGui.QPixmap(':/images/images/welcome.png'), *args, **kwargs)
 
         # Center the splash screen counting the task bar
         screen = QtWidgets.QApplication.instance().primaryScreen()
