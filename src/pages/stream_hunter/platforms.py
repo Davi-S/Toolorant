@@ -1,11 +1,11 @@
 import aiohttp
-import requests
+
 
 class Twitch:
     BASE_URL = 'https://www.twitch.tv'
 
-    def get_task(self, session: aiohttp.ClientSession, channel: str):  
-        return session.get(f'{self.BASE_URL}/{channel}')
+    def get_task(self, session: aiohttp.ClientSession, channel: str, **kwargs):
+        return session.get(f'{self.BASE_URL}/{channel}', **kwargs)
 
     def is_live(self, response: str):
         start = response.find('href="https://www.twitch.tv/')

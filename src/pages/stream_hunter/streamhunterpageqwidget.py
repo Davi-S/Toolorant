@@ -43,5 +43,5 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         for (row, col), (player, streams) in zip(row_column, players_streams.items()):
             # make the last (second) row expand
             span = (2, 2) if row == 1 else (1, 1)
-            frame = PlayerStreamsQFrame(player[0], player[1].name, streams)
+            frame = PlayerStreamsQFrame(player[0], player[1], streams)
             self.ui.player_streams_layout.addWidget(frame, row, col, *span)
