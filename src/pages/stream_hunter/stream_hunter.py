@@ -29,7 +29,7 @@ class StreamHunter:
         self.platforms = [platforms.Twitch()]
         self._seen_matches = {}
 
-    def get_enemies(self, match_info: dict):
+    def get_enemies(self, match_info: dict) -> list[Player]:
         for player in match_info['Players']:
             if player['Subject'] == self.client.puuid:
                 ally_team = player['TeamID']
