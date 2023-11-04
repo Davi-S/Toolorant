@@ -1,9 +1,5 @@
 import logging
 
-import PySide6.QtCore as QtCore
-import PySide6.QtGui as QtGui
-import PySide6.QtWidgets as QtWidgets
-
 import mainwindowqmainwindow
 import page_manager
 
@@ -31,17 +27,10 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
 
     def hunt_btn_clicked(self):
         players_streams = self.stream_hunter.hunt()
-        # players_streams = {
-        #     ('player1', 'agent1'): [],
-        #     ('player2', 'agent2'): ['www.stream1dontexists.com'],
-        #     ('player3', 'agent3'): ['https://example.com/', 'example.com'],
-        #     ('player4', 'agent4'): ['https://www.twitch.tv/', 'www.twitch.tv', 'twitch.tv/'],
-        #     ('player5', 'agent5'): ['twitch.tv', 'www.example.com', 'www.example.com', 'www.example.com'],
-        # }
-        
+
         row_column = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
-        for (row, col), (player, streams) in zip(row_column, players_streams.items()):
+        for (row, col), ((player, agent), streams) in zip(row_column, players_streams.items()):
             # make the last (second) row expand
             span = (2, 2) if row == 1 else (1, 1)
-            frame = PlayerStreamsQFrame(player[0], player[1], streams)
+            frame = PlayerStreamsQFrame(player, agent, streams)
             self.ui.player_streams_layout.addWidget(frame, row, col, *span)
