@@ -59,7 +59,7 @@ class StreamHunter:
         # enemies = self.get_enemies(match_info)
         
         # Create Player objects with random values
-        full_names = ["Gaules#123", "marcofrisoninjm#456", "Mike Johnson#789", "Sarah Davis#012", "Chris Wilson#345"]
+        full_names = ["Gaules#123", "alanzoka#456", "Mike Johnson#789", "Sarah Davis#012", "Chris Wilson#345"]
         agents = [gr.Agent['ASTRA'] for _ in range(5)]
         enemies = []
         for full_name, agent in zip(full_names, agents):
@@ -72,5 +72,5 @@ class StreamHunter:
         streams = asyncio.run(self.get_players_streams(enemies))
         
         
-        print(time.time() - start)  # 15
+        print(time.time() - start)  # 1.5
         return streams
