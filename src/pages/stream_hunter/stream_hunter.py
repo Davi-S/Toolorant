@@ -52,19 +52,22 @@ class StreamHunter:
         return streams
 
     def hunt(self) -> dict[tuple[str, str], list[str]]:
+        # TODO optimize this function. Actual average time to run is 6 seconds
         try:
             match_info = self.client.coregame_fetch_match()
         except Exception as e:
             logger.error(f'Match information could not be fetched due to error: {e}')
             return {}
+        # 1.5 seconds to execute from start to here
 
         if match_info['MatchID'] in self._seen_matches:
             logger.warn('Repeated match ID')
             return self._seen_matches[match_info['MatchID']]
-
         enemies = self.get_enemies(match_info)
+        # 3.8 seconds to execute from last timed to here
 
         return {
             (player.full_name, player.agent.name): asyncio.run(self.get_player_streams(player))
             for player in enemies
         }
+        # 0.8 seconds to execute from last timed to here
