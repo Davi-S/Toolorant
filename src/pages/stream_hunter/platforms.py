@@ -2,6 +2,7 @@ import aiohttp
 
 
 class Twitch:
+    # TODO: Add twitch api key and user id supports
     BASE_URL = 'https://www.twitch.tv'
 
     async def get_page(self, session: aiohttp.ClientSession, channel: str) -> str:
@@ -13,3 +14,5 @@ class Twitch:
         end = response.find('"', start + 6)
         channel = response[start + 18:end]
         return channel if 'isLiveBroadcast' in response else ''
+
+# TODO: Add Youtube support
