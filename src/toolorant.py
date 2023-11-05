@@ -4,11 +4,9 @@ def main():
     # SPLASH SCREEN
     import sys
     import PySide6.QtWidgets as QtWidgets
-    import PySide6.QtGui as QtGui
-    import resources.images_rc
     from splashscreenqsplashscreen import SplashScreenQSplashScreen
     app = QtWidgets.QApplication(sys.argv)
-    splash = SplashScreenQSplashScreen(QtGui.QPixmap(':/images/images/welcome.png'))
+    splash = SplashScreenQSplashScreen()
     splash.show()
 
     print('===== Starting logging configuration =====')

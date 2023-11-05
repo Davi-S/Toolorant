@@ -1,20 +1,19 @@
 import logging
 import time
 
-import valclient
 import valclient.exceptions
 
 import game_resources as gr
 import websocket
 from abstracts import Listener
+from client import CustomClient
 
 from . import profile as prof
-
 
 logger = logging.getLogger(__name__)
 
 class Instalocker(Listener):
-    def __init__(self, client: valclient.Client, profile: prof.Profile | None, select_delay: int, lock_delay: int) -> None:
+    def __init__(self, client: CustomClient, profile: prof.Profile | None, select_delay: int, lock_delay: int) -> None:
         super().__init__()
         self.client = client
         self.profile = profile

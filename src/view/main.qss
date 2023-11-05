@@ -9,33 +9,28 @@
     color: white;
 }
 
-QWidget#centralwidget {
-    background-color: #0F1B23;
-}
-
 *[line='true'] {
     background-color: white;
+}
+
+QWidget#centralwidget {
+    background-color: #0F1B23;
 }
 
 QAbstractButton {
     padding: 0;
 }
 
+/* TODO: QToolTip style not working */
+QToolTip {
+    background-color: white; 
+    color: #0F1B23;
+    font: 9pt "Roboto";
+}
+
 BigOptionQPushButton {
     font: 700 24pt "Roboto";
     letter-spacing: 1px;
-}
-
-QLabel#reload_lbl {
-    font: 700 18pt "Roboto";
-    letter-spacing: 1px;
-} 
-
-QAbstractButton#start_stop_btn {
-    font: 700 15pt "Roboto";
-    letter-spacing: 1px;
-    border: 2px solid #FF4655;
-    color: rgb(255, 70, 85);
 }
 
 QListWidget::item:hover {
@@ -52,9 +47,32 @@ QListWidget:focus {
     outline: none;
 }
 
+QComboBox::drop-down {
+    border: 0px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/icons/arrow-down.png);
+    width: 12px;
+    height: 12px;
+}
+
+QLabel#reload_lbl {
+    font: 700 18pt "Roboto";
+    letter-spacing: 1px;
+} 
+
+QAbstractButton#start_stop_btn,
+QAbstractButton#hunt_btn {
+    font: 700 15pt "Roboto";
+    letter-spacing: 1px;
+    border: 2px solid #FF4655;
+    color: rgb(255, 70, 85);
+}
+
 QFrame#profile_list_lw,
 QFrame#profile_info_lw {
-    border: none
+    border: none;
 }
 
 QAbstractButton#create_profile_btn,
@@ -64,6 +82,11 @@ QFrame#map_agent_inner_frm,
 QFrame#map_agent_form_inner_frm,
 QAbstractButton#reload_btn {
     border: 2px solid white;
+}
+
+QAbstractButton#reload_btn {
+    font: 700 15pt "Roboto";
+    letter-spacing: 1px;
 }
 
 QAbstractButton#add_profile_btn {
@@ -87,12 +110,7 @@ QComboBox#agent_form_cb {
     background-color: #0F1B23;
 }
 
-QComboBox::drop-down {
-    border: 0px;
-}
-
-QComboBox::down-arrow {
-    image: url(:/icons/icons/arrow-down.png);
-    width: 12px;
-    height: 12px;
+QLabel#stream_link_lbl,
+QLabel#player_agent_lbl {
+    color: #FF4655;
 }

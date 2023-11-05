@@ -49,6 +49,6 @@ class Ui_main_menu_pg(object):
     def retranslateUi(self, main_menu_pg):
         main_menu_pg.setWindowTitle(QCoreApplication.translate("main_menu_pg", u"Form", None))
         self.reload_lbl.setText(QCoreApplication.translate("main_menu_pg", u"Please open valorant and reload Toolorant", None))
-        self.reload_btn.setText(QCoreApplication.translate("main_menu_pg", u"Reload", None))
+        self.reload_btn.setText(QCoreApplication.translate("main_menu_pg", u"RELOAD", None))
     # retranslateUi
 
