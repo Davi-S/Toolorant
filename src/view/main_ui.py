@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.3
+## Created by: Qt User Interface Compiler version 6.6.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -65,11 +65,11 @@ class Ui_MainWindow(object):
         icon2.addFile(u":/icons/icons/times.png", QSize(), QIcon.Normal, QIcon.Off)
         self.close_btn.setIcon(icon2)
         self.close_btn.setIconSize(QSize(16, 16))
-        self.draggable_area = DraggableQFrame(self.centralwidget)
-        self.draggable_area.setObjectName(u"draggable_area")
-        self.draggable_area.setGeometry(QRect(0, 0, 1080, 12))
-        self.draggable_area.setCursor(QCursor(Qt.SizeAllCursor))
-        self.draggable_area.setStyleSheet(u"")
+        self.draggable_area_frm = DraggableQFrame(self.centralwidget)
+        self.draggable_area_frm.setObjectName(u"draggable_area_frm")
+        self.draggable_area_frm.setGeometry(QRect(0, 0, 1080, 12))
+        self.draggable_area_frm.setCursor(QCursor(Qt.SizeAllCursor))
+        self.draggable_area_frm.setStyleSheet(u"")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)

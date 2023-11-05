@@ -85,12 +85,12 @@ class Ui_instalocker_pg(object):
 
         self.horizontalLayout_3.addWidget(self.select_spin)
 
-        self.instalocker_frm = QFrame(instalocker_pg)
-        self.instalocker_frm.setObjectName(u"instalocker_frm")
-        self.instalocker_frm.setGeometry(QRect(61, 61, 958, 488))
-        self.instalocker_frm.setFrameShape(QFrame.StyledPanel)
-        self.instalocker_frm.setFrameShadow(QFrame.Raised)
-        self.left_frm = QFrame(self.instalocker_frm)
+        self.main_frm = QFrame(instalocker_pg)
+        self.main_frm.setObjectName(u"main_frm")
+        self.main_frm.setGeometry(QRect(61, 61, 958, 488))
+        self.main_frm.setFrameShape(QFrame.StyledPanel)
+        self.main_frm.setFrameShadow(QFrame.Raised)
+        self.left_frm = QFrame(self.main_frm)
         self.left_frm.setObjectName(u"left_frm")
         self.left_frm.setGeometry(QRect(0, 0, 320, 488))
         self.left_frm.setMinimumSize(QSize(320, 488))
@@ -155,7 +155,7 @@ class Ui_instalocker_pg(object):
 
         self.verticalLayout_3.addWidget(self.create_profile_btn)
 
-        self.right_frm = QFrame(self.instalocker_frm)
+        self.right_frm = QFrame(self.main_frm)
         self.right_frm.setObjectName(u"right_frm")
         self.right_frm.setGeometry(QRect(320, 0, 638, 488))
         self.right_frm.setMinimumSize(QSize(638, 488))
