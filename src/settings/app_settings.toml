@@ -1,4 +1,4 @@
 # Used to ignore the dependencies on the application
 # Useful when testing the UI
 check_dependencies = true
-version = "2.0.0"
+version = "2.0.1"
