@@ -73,13 +73,13 @@ However, using the VALORANT API in this manner is against Riot's Terms of Servic
 
 ## [Support and community](https://discord.gg/gbaGu3ermT)
 
-Be welcome to the [Toolorant community](https://discord.gg/gbaGu3ermT)! We believe that collaboration and interaction are essential for the growth of any project and community. Whether you're a developer or a user, you're invited to join our [Discord server](https://discord.gg/gbaGu3ermT) for:
+Be welcome to the [Toolorant community](https://discord.gg/gbaGu3ermT)! We believe that collaboration and interaction are essential for the growth of any project and community. Whether you're a developer or a user, you're invited to join our [Discord server](https://discord.gg/gbaGu3ermT) to:
 
-- Getting Help
-- Requesting Features
-- Connecting with gamers and coders
-- Reporting Bugs
-- Accessing more Valorant content
+- Get Help
+- Request Features
+- Connect with gamers and coders
+- Report Bugs
+- Access more Valorant content
 
 **JOIN LINK**: <https://discord.gg/gbaGu3ermT>
 
