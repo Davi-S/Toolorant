@@ -11,7 +11,6 @@ import websockets.exceptions
 
 from abstracts import Publisher
 
-
 logger = logging.getLogger(__name__)
 
 

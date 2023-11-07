@@ -30,6 +30,7 @@ class StreamHunter:
         self._seen_matches = {}
 
     def get_enemies(self, match_info: dict) -> list[Player]:
+        # TODO: Implement asyncio for this function
         for player in match_info['Players']:
             if player['Subject'] == self.client.puuid:
                 ally_team = player['TeamID']
