@@ -3,6 +3,7 @@ import PySide6.QtGui as QtGui
 import PySide6.QtWidgets as QtWidgets
 
 import page_manager
+from settings import app_settings
 
 from .view.main_menu_pg_ui import Ui_main_menu_pg
 
@@ -18,3 +19,4 @@ class MainMenuPageQWidget(page_manager.BasePageQWidget):
     def setup_ui(self):
         self.ui = Ui_main_menu_pg()
         self.ui.setupUi(self)
+        self.ui.version_lbl.setText(app_settings.version)

@@ -26,16 +26,8 @@ def main():
     main_window = MainWindowQMainWindow()
     main_window.show()
     splash.finish(main_window)
-    # import logging_tree
-    # logging_tree.printout()
     sys.exit(app.exec())
 
 
 if __name__ == '__main__':
     main()
-    # Catch errors when running compiled version with terminal
-    # try:
-    #     main()
-    # except Exception as e:
-    #     print(e)
-    #     input('press enter to exit')

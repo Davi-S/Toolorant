@@ -143,6 +143,22 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="version_lbl">
+   <property name="geometry">
+    <rect>
+     <x>1005</x>
+     <y>580</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>

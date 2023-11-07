@@ -57,6 +57,11 @@ QComboBox::down-arrow {
     height: 12px;
 }
 
+QLabel#version_lbl {
+    font: 9pt "Roboto";
+    color: rgba(255, 255, 255, 0.5)
+}
+
 QLabel#reload_lbl {
     font: 700 18pt "Roboto";
     letter-spacing: 1px;

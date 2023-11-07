@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QLayout, QSizePolicy,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QLabel, QLayout,
+    QSizePolicy, QVBoxLayout, QWidget)
 
 from custom.bigoptionqpushbutton import BigOptionQPushButton
 from custom.simpleqpushbutton import SimpleQPushButton
@@ -71,6 +71,10 @@ class Ui_main_menu_pg(object):
         self.vertical_line.setGeometry(QRect(66, 0, 3, 610))
         self.vertical_line.setStyleSheet(u"")
         self.vertical_line.setProperty("line", True)
+        self.version_lbl = QLabel(main_menu_pg)
+        self.version_lbl.setObjectName(u"version_lbl")
+        self.version_lbl.setGeometry(QRect(1005, 580, 60, 20))
+        self.version_lbl.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
         self.retranslateUi(main_menu_pg)
 
@@ -82,5 +86,6 @@ class Ui_main_menu_pg(object):
         self.instalocker_btn.setText(QCoreApplication.translate("main_menu_pg", u"   INSTALOCKER", None))
         self.stream_hunter_btn.setText(QCoreApplication.translate("main_menu_pg", u"   STREAM HUNTER", None))
         self.settings_btn.setText(QCoreApplication.translate("main_menu_pg", u"SETTINGS", None))
+        self.version_lbl.setText("")
     # retranslateUi
 
