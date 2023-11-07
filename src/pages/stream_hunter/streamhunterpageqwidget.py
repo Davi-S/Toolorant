@@ -35,14 +35,11 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         # Start the hunt operation in a separate thread to not block the UI
         self.hunt_thread.start()
 
-    def update_ui_with_results(self, players_streams):
+    def update_ui_with_results(self, players_streams: dict):
         self.ui.hunt_btn.setText('HUNT STREAMS')
-        row_column = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
-        for (row, col), ((player, agent), streams) in zip(row_column, players_streams.items()):
-            # make the last (second) row expand
-            span = (2, 2) if row == 1 else (1, 1)
+        for idx, ((player, agent), streams) in enumerate(players_streams.items()):
             frame = PlayerStreamsQFrame(player, agent, streams)
-            self.ui.player_streams_layout.addWidget(frame, row, col, *span)
+            self.ui.player_streams_layout.addWidget(frame, 1, idx)
         self.ui.hunt_btn.setEnabled(True)
 
 
