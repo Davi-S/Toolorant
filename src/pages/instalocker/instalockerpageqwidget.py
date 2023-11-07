@@ -59,7 +59,6 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
         self.ui.select_spin.valueChanged.connect(self.select_spin_value_changed)
         self.ui.lock_spin.valueChanged.connect(self.lock_spin_value_changed)
         # Make spin boxes do not respond to mouse wheel
-        # TODO: make spin boxes wheel work like the profile info list widget wheel
         self.ui.select_spin.wheelEvent = lambda event: None
         self.ui.lock_spin.wheelEvent = lambda event: None
 
@@ -193,6 +192,8 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
         map_agent_form_items = []
         for map in gr.Map:
             map_agent = MapAgentFormQFrame(map.name)
+            # When using the mouse wheel on the combobox, the list widget will scroll. With out this, nothing happen when using the wheel over the combobox 
+            map_agent.ui.agent_form_cb.wheelEvent = self.ui.profile_info_lw.wheelEvent
             map_agent_form_items.append(map_agent)
         # Remove the bottom margin from the last item
         map_agent.ui.map_agent_form_outer_horizontal_layout.setContentsMargins(0, 0, 0, 0)
