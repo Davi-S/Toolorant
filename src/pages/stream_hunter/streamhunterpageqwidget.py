@@ -37,6 +37,9 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
 
     def update_ui_with_results(self, players_streams: dict):
         self.ui.hunt_btn.setText('HUNT STREAMS')
+        # Clean the layout from previous items
+        for i in reversed(range(self.ui.player_streams_layout.count())): 
+            self.ui.player_streams_layout.itemAt(i).widget().deleteLater()
         for idx, ((player, agent), streams) in enumerate(players_streams.items()):
             frame = PlayerStreamsQFrame(player, agent, streams)
             self.ui.player_streams_layout.addWidget(frame, 1, idx)
