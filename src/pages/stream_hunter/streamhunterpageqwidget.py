@@ -37,6 +37,9 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
 
     def update_ui_with_results(self, players_streams):
         self.ui.hunt_btn.setText('HUNT STREAMS')
+        # Clear the layout from previous items
+        for i in reversed(range(self.ui.player_streams_layout.count())): 
+            self.ui.player_streams_layout.itemAt(i).widget().deleteLater()
         row_column = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1)]
         for (row, col), ((player, agent), streams) in zip(row_column, players_streams.items()):
             # make the last (second) row expand
