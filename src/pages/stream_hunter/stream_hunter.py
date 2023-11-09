@@ -29,16 +29,21 @@ class StreamHunter:
         self.platforms = [platforms.Twitch()]
         self._seen_matches = {}
 
-    def get_enemies(self, match_info: dict) -> list[Player]:
-        # TODO: Implement asyncio for this function
+    async def get_enemies(self, match_info: dict) -> list[Player]:
         for player in match_info['Players']:
             if player['Subject'] == self.client.puuid:
                 ally_team = player['TeamID']
                 break
-
-        return [Player(self.client.get_player_full_name(player['Subject']), gr.Agent(player['CharacterID']))
-                for player in match_info['Players']
-                if player['TeamID'] != ally_team]
+        enemies = [player for player in match_info['Players'] if player['TeamID'] != ally_team]
+        
+        async with aiohttp.ClientSession() as session:
+            tasks = [
+                asyncio.create_task(self.client.a_get_player_full_name(session, enemy['Subject']))
+                for enemy in enemies
+            ]
+            results = await asyncio.gather(*tasks)
+        
+        return  [Player(full_name, gr.Agent(enemy['CharacterID'])) for full_name, enemy in zip(results, enemies)]
 
     async def get_player_streams(self, player: Player) -> list[str]:
         streams = []
@@ -53,23 +58,19 @@ class StreamHunter:
         return streams
 
     def hunt(self) -> dict[tuple[str, str], list[str]]:
-        # TODO optimize this function. Actual average time to run is 6 seconds
         try:
             match_info = self.client.coregame_fetch_match()
         except Exception as e:
             logger.error(f'Match information could not be fetched due to error: {e}')
             return {}
-        # 1.5 seconds to execute from start to here
 
         if match_info['MatchID'] in self._seen_matches:
             logger.warn('Repeated match ID')
             return self._seen_matches[match_info['MatchID']]
-        enemies = self.get_enemies(match_info)
-        # 3.8 seconds to execute from last timed to here
+        enemies = asyncio.run(self.get_enemies(match_info))
 
         logger.info('Getting players streams')
         return {
             (player.name, player.agent.name): asyncio.run(self.get_player_streams(player))
             for player in enemies
         }
-        # 0.8 seconds to execute from last timed to here
