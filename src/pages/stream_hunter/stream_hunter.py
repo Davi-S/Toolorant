@@ -30,6 +30,7 @@ class StreamHunter:
         self._seen_matches = {}
 
     def get_enemies(self, match_info: dict) -> list[Player]:
+        # TODO: Implement asyncio for this function
         for player in match_info['Players']:
             if player['Subject'] == self.client.puuid:
                 ally_team = player['TeamID']
@@ -66,8 +67,9 @@ class StreamHunter:
         enemies = self.get_enemies(match_info)
         # 3.8 seconds to execute from last timed to here
 
+        logger.info('Getting players streams')
         return {
-            (player.full_name, player.agent.name): asyncio.run(self.get_player_streams(player))
+            (player.name, player.agent.name): asyncio.run(self.get_player_streams(player))
             for player in enemies
         }
         # 0.8 seconds to execute from last timed to here

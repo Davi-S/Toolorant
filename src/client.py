@@ -21,12 +21,12 @@ class CustomClient(valclient.Client):
     def __init__(self, region=None, auth=None):
         self.is_active = False
         if file_region := self.get_region():
-            logger.debug(f'Starting valclient.Client with ShooterGame.log region: {file_region}')
+            logger.info(f'Starting valclient.Client with ShooterGame.log region: {file_region}')
             self.is_good_region = True
             super().__init__(file_region, auth)
             return
         if region:
-            logger.debug(f'Starting valclient.Client with region argument: {region}')
+            logger.info(f'Starting valclient.Client with region argument: {region}')
             self.is_good_region = True
             super().__init__(region, auth)
             return

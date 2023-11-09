@@ -3,7 +3,6 @@ from pathlib import Path
 
 import dynaconf
 
-
 APP_SETTINGS_PATH = Path(__file__).resolve().parent / 'app_settings.toml'
 USER_SETTINGS_PATH = Path(__file__).resolve().parent / 'user_settings.json'
 SECRETS_PATH = Path(__file__).resolve().parent / '.secrets.toml'
