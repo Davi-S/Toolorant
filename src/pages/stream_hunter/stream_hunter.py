@@ -68,7 +68,7 @@ class StreamHunter:
         # 3.8 seconds to execute from last timed to here
 
         return {
-            (player.full_name, player.agent.name): asyncio.run(self.get_player_streams(player))
+            (player.name, player.agent.name): asyncio.run(self.get_player_streams(player))
             for player in enemies
         }
         # 0.8 seconds to execute from last timed to here
