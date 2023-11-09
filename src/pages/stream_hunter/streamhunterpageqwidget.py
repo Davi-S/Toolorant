@@ -30,12 +30,14 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         self.ui.setupUi(self)
 
     def hunt_btn_clicked(self):
+        logger.info('Hunt button clicked')
         self.ui.hunt_btn.setEnabled(False)
         self.ui.hunt_btn.setText('HUNTING STREAMS...')
         # Start the hunt operation in a separate thread to not block the UI
         self.hunt_thread.start()
 
     def update_ui_with_results(self, players_streams: dict):
+        logger.info('Updating UI')
         self.ui.hunt_btn.setText('HUNT STREAMS')
         # Clean the layout from previous items
         for i in reversed(range(self.ui.player_streams_layout.count())): 

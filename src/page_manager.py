@@ -74,6 +74,7 @@ class PageManager:
         widget = self.stacked_widget.widget(idx)
         self.stacked_widget.removeWidget(widget)
         widget.deleteLater()
+        logger.info(f'Page "{_page}" deleted')
     
     def clear(self):
         for _ in range(self.stacked_widget.count()):

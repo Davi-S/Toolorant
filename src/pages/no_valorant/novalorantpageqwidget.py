@@ -1,8 +1,11 @@
+import logging
+
 import mainwindowqmainwindow
 import page_manager
 
 from .view.no_valorant_pg_ui import Ui_main_menu_pg
 
+logger = logging.getLogger(__name__)
 
 class NoValorantPageQWidget(page_manager.BasePageQWidget):
     def __init__(self, *args, **kwargs):
@@ -24,10 +27,12 @@ class NoValorantPageQWidget(page_manager.BasePageQWidget):
             self.callback = kwargs['callback']
 
     def reload_btn_clicked(self):
+        logger.debug('Reload button clicked')
         self.ui.reload_btn.setEnabled(False)
         # Try to connect the dependencies and setup the pages
         main_window = mainwindowqmainwindow.get_main_window()
         if main_window.setup_dependencies() and main_window.connect_dependencies():
+            logger.debug('Dependencies are good')
             main_window.setup_pages()
             # Exit page
             if self.callback:

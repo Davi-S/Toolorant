@@ -67,6 +67,7 @@ class StreamHunter:
         enemies = self.get_enemies(match_info)
         # 3.8 seconds to execute from last timed to here
 
+        logger.info('Getting players streams')
         return {
             (player.name, player.agent.name): asyncio.run(self.get_player_streams(player))
             for player in enemies
