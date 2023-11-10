@@ -4,5 +4,12 @@
         "profile": null,
         "select_delay": 3,
         "lock_delay": 2
+    },
+    "STREAM_HUNTER": {
+        "twitch": {
+            "client_id": null,
+            "client_secret": null,
+            "access_token": null
+        }
     }
 }

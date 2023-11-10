@@ -6,6 +6,7 @@ import requests
 
 import game_resources as gr
 from client import CustomClient
+from settings import user_settings
 
 from . import platforms
 from .player import Player
@@ -49,12 +50,17 @@ class StreamHunter:
         streams = []
         async with aiohttp.ClientSession() as session:
             for platform in self.platforms:
-                tasks = [asyncio.create_task(platform.get_page(session, name))
-                         for name in player.name_variations]
+                tasks = [
+                    asyncio.create_task(platform.get_page(session, name, **user_settings.stream_hunter.twitch))
+                    for name in player.name_variations
+                ]
                 responses = await asyncio.gather(*tasks)
                 for response in responses:
-                    if live := platform.is_live(response):
-                        streams.append(live)
+                    if live := platform.get_live(response):
+                        if type(live) == list:
+                            streams.extend(live)
+                        else:
+                            streams.append(live)
         return streams
 
     def hunt(self) -> dict[tuple[str, str], list[str]]:
