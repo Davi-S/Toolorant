@@ -1,7 +1,10 @@
+import logging
+
 import aiohttp
 
 from settings import user_settings
 
+logger = logging.getLogger(__name__)
 
 class Twitch:
     base_url = 'https://www.twitch.tv'
@@ -18,11 +21,13 @@ class Twitch:
     async def initialize(self):
         # Does not has any of the auth methods. Will use the web scrap method.
         if (not self.client_id) and (not self.client_secret) and (not self.access_token):
+            logger.debug('Twitch initialized with none auth')
             return
         
         # Valid access token and client id. Will use the API method.
         if self.access_token and self.client_id and await self.validate_access_token(self.access_token, self.client_id):
             self.use_api = True
+            logger.debug('Twitch initialized with valid access token and valid client id')
             return
 
         # Not a valid access token, but has the client id and client secret, so try to get the access token
@@ -34,6 +39,8 @@ class Twitch:
                 user_settings.stream_hunter.twitch.access_token = self.access_token
                 user_settings.persist()
                 self.use_api = True
+                logger.debug('Twitch initialized with valid client id and valid client secret. Access token got with API')
+                return
 
     async def validate_access_token(self, access_token: str, client_id: str) -> bool:
         headers = {
@@ -44,6 +51,7 @@ class Twitch:
             return response.status == 200
 
     async def get_access_token(self, client_id: str, client_secret: str) -> str:
+        logger.debug(f'Getting access token with {client_id=} and {client_secret=}')
         async with self.session.post(f'https://id.twitch.tv/oauth2/token?client_id={client_id}&client_secret={client_secret}&grant_type=client_credentials') as response:
             if response.status != 200:
                 return ''
@@ -82,11 +90,11 @@ class Twitch:
             return self._get_live_without_api(response)
 
     def _get_live_with_api(self, response: list) -> list:
-        streams = []
-        for channel in response:
-            if channel['game_id'] == self.valorant_game_id:
-                streams.append(f'twitch.tv/{channel["broadcaster_login"]}')
-        return streams
+        return [
+            f'twitch.tv/{channel["broadcaster_login"]}'
+            for channel in response
+            if channel['game_id'] == self.valorant_game_id
+        ]
 
     def _get_live_without_api(self, response: str) -> list:
         start = response.find('href="https://www.twitch.tv/')
