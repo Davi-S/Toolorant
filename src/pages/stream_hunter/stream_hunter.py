@@ -27,7 +27,7 @@ class StreamHunter:
     def __init__(self, client: CustomClient) -> None:
         super().__init__()
         self.client = client
-        self.platforms = [platforms.Twitch()]
+        self.platforms = {'twitch': platforms.Twitch}
         self._seen_matches = {}
 
     async def get_enemies(self, match_info: dict) -> list[Player]:
@@ -47,21 +47,21 @@ class StreamHunter:
         return  [Player(full_name, gr.Agent(enemy['CharacterID'])) for full_name, enemy in zip(results, enemies)]
 
     async def get_player_streams(self, player: Player) -> list[str]:
+        logger.debug(f'Getting streams of player {player.full_name}')
         streams = []
         async with aiohttp.ClientSession() as session:
-            for platform in self.platforms:
+            for platform_name, platform_cls in self.platforms.items():
+                platform = platform_cls(session, **user_settings.stream_hunter[platform_name])
+                await platform.initialize()
                 tasks = [
-                    asyncio.create_task(platform.get_page(session, name, **user_settings.stream_hunter.twitch))
+                    asyncio.create_task(platform.get_response(name))
                     for name in player.name_variations
                 ]
                 responses = await asyncio.gather(*tasks)
                 for response in responses:
                     if live := platform.get_live(response):
-                        if type(live) == list:
-                            streams.extend(live)
-                        else:
-                            streams.append(live)
-        return streams
+                        streams.extend(live)
+        return set(streams)
 
     def hunt(self) -> dict[tuple[str, str], list[str]]:
         try:
