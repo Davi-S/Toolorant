@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QSizePolicy,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QHBoxLayout,
+    QLabel, QLineEdit, QSizePolicy, QWidget)
 
 from custom.primaryqpushbutton import PrimaryQPushButton
 from custom.topoptionqtoolbutton import TopOptionQToolButton
@@ -74,6 +74,47 @@ class Ui_stream_hunter_pg(object):
         self.horizontal_line_bottom.setGeometry(QRect(0, 595, 1080, 3))
         self.horizontal_line_bottom.setStyleSheet(u"")
         self.horizontal_line_bottom.setProperty("line", True)
+        self.client_id_frm = QFrame(stream_hunter_pg)
+        self.client_id_frm.setObjectName(u"client_id_frm")
+        self.client_id_frm.setGeometry(QRect(61, 567, 299, 24))
+        self.client_id_frm.setFrameShape(QFrame.StyledPanel)
+        self.client_id_frm.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout = QHBoxLayout(self.client_id_frm)
+        self.horizontalLayout.setSpacing(6)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.client_id_lbl = QLabel(self.client_id_frm)
+        self.client_id_lbl.setObjectName(u"client_id_lbl")
+
+        self.horizontalLayout.addWidget(self.client_id_lbl)
+
+        self.client_id_ledt = QLineEdit(self.client_id_frm)
+        self.client_id_ledt.setObjectName(u"client_id_ledt")
+        self.client_id_ledt.setFrame(False)
+
+        self.horizontalLayout.addWidget(self.client_id_ledt)
+
+        self.client_secret_frm = QFrame(stream_hunter_pg)
+        self.client_secret_frm.setObjectName(u"client_secret_frm")
+        self.client_secret_frm.setGeometry(QRect(384, 567, 320, 24))
+        self.client_secret_frm.setFrameShape(QFrame.StyledPanel)
+        self.client_secret_frm.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.client_secret_frm)
+        self.horizontalLayout_2.setSpacing(6)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.client_secret_lbl = QLabel(self.client_secret_frm)
+        self.client_secret_lbl.setObjectName(u"client_secret_lbl")
+
+        self.horizontalLayout_2.addWidget(self.client_secret_lbl)
+
+        self.client_secret_ledt = QLineEdit(self.client_secret_frm)
+        self.client_secret_ledt.setObjectName(u"client_secret_ledt")
+        self.client_secret_ledt.setFrame(False)
+        self.client_secret_ledt.setEchoMode(QLineEdit.Password)
+
+        self.horizontalLayout_2.addWidget(self.client_secret_ledt)
+
 
         self.retranslateUi(stream_hunter_pg)
 
@@ -84,5 +125,7 @@ class Ui_stream_hunter_pg(object):
         stream_hunter_pg.setWindowTitle(QCoreApplication.translate("stream_hunter_pg", u"Form", None))
         self.hunt_btn.setText(QCoreApplication.translate("stream_hunter_pg", u"HUNT STREAMS", None))
         self.menu_btn.setText(QCoreApplication.translate("stream_hunter_pg", u"MENU", None))
+        self.client_id_lbl.setText(QCoreApplication.translate("stream_hunter_pg", u"Twitch Client ID:", None))
+        self.client_secret_lbl.setText(QCoreApplication.translate("stream_hunter_pg", u"Twitch Client Secret:", None))
     # retranslateUi
 

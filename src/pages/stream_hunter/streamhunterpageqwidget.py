@@ -4,6 +4,7 @@ import PySide6.QtCore as QtCore
 
 import mainwindowqmainwindow
 import page_manager
+from settings import user_settings
 
 from .playerstreamsqframe import PlayerStreamsQFrame
 from .stream_hunter import StreamHunter
@@ -23,11 +24,17 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         )
         self.ui.menu_btn.clicked.connect(lambda: self.page_manager.switch_to_page('main_menu_pg'))
         self.ui.hunt_btn.clicked.connect(self.hunt_btn_clicked)
+        self.ui.client_id_ledt.editingFinished.connect(self.client_id_ledt_editing_finished)
+        self.ui.client_secret_ledt.editingFinished.connect(self.client_secret_ledt_editing_finished)
+
         self.hunt_thread.hunt_result.connect(self.update_ui_with_results)
 
     def setup_ui(self):
         self.ui = Ui_stream_hunter_pg()
         self.ui.setupUi(self)
+        self.ui.client_id_ledt.setText(user_settings.stream_hunter.twitch.client_id or '')
+        self.ui.client_secret_ledt.setText(user_settings.stream_hunter.twitch.client_secret or '')
+        
 
     def hunt_btn_clicked(self):
         logger.info('Hunt button clicked')
@@ -46,6 +53,14 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
             frame = PlayerStreamsQFrame(player, agent, streams)
             self.ui.player_streams_layout.addWidget(frame, 1, idx)
         self.ui.hunt_btn.setEnabled(True)
+
+    def client_id_ledt_editing_finished(self):
+        user_settings.stream_hunter.twitch.client_id = self.ui.client_id_ledt.text() or None
+        user_settings.persist()
+
+    def client_secret_ledt_editing_finished(self):
+        user_settings.stream_hunter.twitch.client_secret = self.ui.client_secret_ledt.text() or None
+        user_settings.persist()
 
 
 class HuntQThread(QtCore.QThread):
