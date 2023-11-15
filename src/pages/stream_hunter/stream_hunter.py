@@ -6,6 +6,7 @@ import requests
 
 import game_resources as gr
 from client import CustomClient
+from settings import user_settings
 
 from . import platforms
 from .player import Player
@@ -26,48 +27,56 @@ class StreamHunter:
     def __init__(self, client: CustomClient) -> None:
         super().__init__()
         self.client = client
-        self.platforms = [platforms.Twitch()]
+        self.platforms = {'twitch': platforms.Twitch}
         self._seen_matches = {}
 
-    def get_enemies(self, match_info: dict) -> list[Player]:
+    async def get_enemies(self, match_info: dict) -> list[Player]:
         for player in match_info['Players']:
             if player['Subject'] == self.client.puuid:
                 ally_team = player['TeamID']
                 break
-
-        return [Player(self.client.get_player_full_name(player['Subject']), gr.Agent(player['CharacterID']))
-                for player in match_info['Players']
-                if player['TeamID'] != ally_team]
+        enemies = [player for player in match_info['Players'] if player['TeamID'] != ally_team]
+        
+        async with aiohttp.ClientSession() as session:
+            tasks = [
+                asyncio.create_task(self.client.a_get_player_full_name(session, enemy['Subject']))
+                for enemy in enemies
+            ]
+            results = await asyncio.gather(*tasks)
+        
+        return  [Player(full_name, gr.Agent(enemy['CharacterID'])) for full_name, enemy in zip(results, enemies)]
 
     async def get_player_streams(self, player: Player) -> list[str]:
+        logger.debug(f'Getting streams of player {player.full_name}')
         streams = []
         async with aiohttp.ClientSession() as session:
-            for platform in self.platforms:
-                tasks = [asyncio.create_task(platform.get_page(session, name))
-                         for name in player.name_variations]
+            for platform_name, platform_cls in self.platforms.items():
+                platform = platform_cls(session, **user_settings.stream_hunter[platform_name])
+                await platform.initialize()
+                tasks = [
+                    asyncio.create_task(platform.get_response(name))
+                    for name in player.name_variations
+                ]
                 responses = await asyncio.gather(*tasks)
                 for response in responses:
-                    if live := platform.is_live(response):
-                        streams.append(live)
-        return streams
+                    if live := platform.get_live(response):
+                        streams.extend(live)
+        return set(streams)
 
     def hunt(self) -> dict[tuple[str, str], list[str]]:
-        # TODO optimize this function. Actual average time to run is 6 seconds
         try:
             match_info = self.client.coregame_fetch_match()
         except Exception as e:
             logger.error(f'Match information could not be fetched due to error: {e}')
             return {}
-        # 1.5 seconds to execute from start to here
 
         if match_info['MatchID'] in self._seen_matches:
             logger.warn('Repeated match ID')
             return self._seen_matches[match_info['MatchID']]
-        enemies = self.get_enemies(match_info)
-        # 3.8 seconds to execute from last timed to here
+        enemies = asyncio.run(self.get_enemies(match_info))
 
+        logger.info('Getting players streams')
         return {
-            (player.full_name, player.agent.name): asyncio.run(self.get_player_streams(player))
+            (player.name, player.agent.name): asyncio.run(self.get_player_streams(player))
             for player in enemies
         }
-        # 0.8 seconds to execute from last timed to here

@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 
 import PySide6.QtCore as QtCore
-import PySide6.QtGui as QtGui
 import PySide6.QtWidgets as QtWidgets
 
 logger = logging.getLogger(__name__)
@@ -64,6 +63,30 @@ class PageManager:
         self.pages.append((index, page_name))
         logger.info(f'Added page "{page_name}" ({page_widget.__name__})')
         return True
+    
+    def remove_page(self, _page: str | int):
+        if type(_page) == str:
+            for page in self.pages:
+                if page[1] == _page:
+                    idx = page[0]
+        else:
+            idx = _page
+        widget = self.stacked_widget.widget(idx)
+        self.stacked_widget.removeWidget(widget)
+        widget.deleteLater()
+        logger.info(f'Page "{_page}" deleted')
+    
+    def clear(self):
+        count = 0
+        for _ in range(self.stacked_widget.count()):
+            widget = self.stacked_widget.widget(0)
+            self.stacked_widget.removeWidget(widget)
+            widget.deleteLater()
+            count += 1
+        if count > 0:
+            logger.info(f'All pages deleted. Total of {count} pages')
+        else:
+            logger.info('No pages were deleted')
 
     def switch_to_page(self, page_name: str, *args, **kwargs):
         for page in self.pages:

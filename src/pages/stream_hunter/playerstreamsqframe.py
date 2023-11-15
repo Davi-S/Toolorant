@@ -1,5 +1,4 @@
 import PySide6.QtCore as QtCore
-import PySide6.QtGui as QtGui
 import PySide6.QtWidgets as QtWidgets
 
 
@@ -75,7 +74,7 @@ class Ui_player_streams_frm(object):
             self.no_stream.setAlignment(QtCore.Qt.AlignCenter)
             self.no_stream.setMinimumSize(QtCore.QSize(0, 36))
             self.no_stream.setMaximumSize(QtCore.QSize(16777215, 36))
-            self.no_stream.setText('No potential streams found')
+            self.no_stream.setText('No streams found')
             self.streams_frm_vertical_layout.addWidget(self.no_stream)
 
         else:

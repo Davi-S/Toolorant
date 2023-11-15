@@ -31,7 +31,7 @@ Toolorant is a collection of tools for Valorant designed to enhance your gamepla
   Be the first to select your agent for the match.
 
 - **Stream Hunter**:
-  Find the Twitch live stream of your opponent and get privileged information.
+  Find the Twitch live stream of your opponents and get privileged information.
 
 - **Voice to Text** ([In development](#outro)):
   Use your mic to send text messages to the enemy team.
@@ -50,7 +50,7 @@ Toolorant is a collection of tools for Valorant designed to enhance your gamepla
 1. Find the **latest release** on the [releases page](https://github.com/Davi-S/Toolorant/releases) of the [project repository](https://github.com/Davi-S/Toolorant).
 
 2. Download the executable version from the assets section.
-   - If you encounter a false positive warning, you can safely proceed.
+   - If you encounter a false positive virus warning, you can safely proceed.
   If you don't trust the exe file, you can download the source code, (read it to confirm that there is no virus) and compile it yourself or run with the python interpreter. If you need help on this process, ask for it on our [Discord Community](#support-and-community)
 
 3. Save it on your computer and run the `Toolorant.exe` file
@@ -65,7 +65,7 @@ If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-d
 **USE AT YOUR OWN RISK.**
 
 No **bans** have been reported so far from using this program.
-Some players reported receiving a two-week competitive **suspension** for using the Instalocker tool excessively.
+Some players reported receiving a two-week competitive **suspension** for using the Instalocker tool excessively with zero delay. (This can be avoided by using 3+ seconds of delay)
 
 This program does not use an auto-clicker, or read the game's memory; therefore, the anti-cheat should not be triggered.
 

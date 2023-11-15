@@ -53,9 +53,9 @@
    <widget class="QFrame" name="player_streams_frm">
     <property name="geometry">
      <rect>
-      <x>150</x>
+      <x>0</x>
       <y>81</y>
-      <width>658</width>
+      <width>958</width>
       <height>407</height>
      </rect>
     </property>
@@ -67,13 +67,13 @@
     </property>
     <property name="minimumSize">
      <size>
-      <width>658</width>
+      <width>958</width>
       <height>407</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>658</width>
+      <width>958</width>
       <height>407</height>
      </size>
     </property>
@@ -96,8 +96,11 @@
      <property name="bottomMargin">
       <number>0</number>
      </property>
-     <property name="spacing">
-      <number>24</number>
+     <property name="horizontalSpacing">
+      <number>12</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>0</number>
      </property>
     </layout>
    </widget>
@@ -165,6 +168,103 @@
    <property name="line" stdset="0">
     <bool>true</bool>
    </property>
+  </widget>
+  <widget class="QFrame" name="client_id_frm">
+   <property name="geometry">
+    <rect>
+     <x>61</x>
+     <y>567</y>
+     <width>299</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>6</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="client_id_lbl">
+      <property name="text">
+       <string>Twitch Client ID:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="client_id_ledt">
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QFrame" name="client_secret_frm">
+   <property name="geometry">
+    <rect>
+     <x>384</x>
+     <y>567</y>
+     <width>320</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <property name="spacing">
+     <number>6</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="client_secret_lbl">
+      <property name="text">
+       <string>Twitch Client Secret:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="client_secret_ledt">
+      <property name="frame">
+       <bool>false</bool>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <customwidgets>

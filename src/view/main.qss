@@ -119,3 +119,8 @@ QLabel#stream_link_lbl,
 QLabel#player_agent_lbl {
     color: #FF4655;
 }
+
+QLineEdit#client_id_ledt, 
+QLineEdit#client_secret_ledt {
+    border: 2px solid white;
+}

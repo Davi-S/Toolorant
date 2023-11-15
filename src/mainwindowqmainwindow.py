@@ -113,6 +113,7 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
     
     def setup_pages(self) -> None:
         """Add the main pages to the main window"""
+        self.page_manager.clear()
         self.page_manager.add_page(main_menu_pg.MainMenuPageQWidget, 'main_menu_pg')
         self.page_manager.add_page(instalocker_pg.InstalockerPageQWidget, 'instalocker_pg')
         self.page_manager.add_page(stream_hunter_pg.StreamHunterPageQWidget, 'stream_hunter_pg')

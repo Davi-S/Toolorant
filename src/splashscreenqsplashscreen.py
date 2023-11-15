@@ -1,6 +1,8 @@
-import PySide6.QtWidgets as QtWidgets
 import PySide6.QtGui as QtGui
+import PySide6.QtWidgets as QtWidgets
+
 import resources.images_rc
+
 
 class SplashScreenQSplashScreen(QtWidgets.QSplashScreen):
     def __init__(self, *args, **kwargs):
