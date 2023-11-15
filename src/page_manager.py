@@ -77,11 +77,16 @@ class PageManager:
         logger.info(f'Page "{_page}" deleted')
     
     def clear(self):
+        count = 0
         for _ in range(self.stacked_widget.count()):
             widget = self.stacked_widget.widget(0)
             self.stacked_widget.removeWidget(widget)
             widget.deleteLater()
-        logger.info('All pages deleted')
+            count += 1
+        if count > 0:
+            logger.info(f'All pages deleted. Total of {count} pages')
+        else:
+            logger.info('No pages were deleted')
 
     def switch_to_page(self, page_name: str, *args, **kwargs):
         for page in self.pages:
