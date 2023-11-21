@@ -1,6 +1,6 @@
 certifi==2023.7.22
 charset-normalizer==3.3.1
-color-logging @ file:///C:/Users/davia/Documents/MyPrograms/color-logging
+git+https://github.com/Davi-S/color-logging.git
 colorama==0.4.6
 dynaconf==3.2.3
 idna==3.4
