@@ -154,6 +154,8 @@ cython_debug/
 .vscode/
 design_concept/
 src/pages/instalocker/profiles/*
+src/pages/settings_manager/s_profiles/*
+
 *.zip
 src/.logs/*
 

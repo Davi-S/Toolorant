@@ -76,13 +76,18 @@ QAbstractButton#hunt_btn {
 }
 
 QFrame#profile_list_lw,
-QFrame#profile_info_lw {
+QFrame#profile_info_lw,
+QFrame#s_profile_list_lw,
+QFrame#s_profile_info_lw {
     border: none;
 }
 
 QAbstractButton#create_profile_btn,
 QAbstractButton#add_profile_btn,
+QAbstractButton#create_s_profile_btn,
+QAbstractButton#add_s_profile_btn,
 QFrame#add_profile_frm,
+QFrame#add_s_profile_frm,
 QFrame#map_agent_inner_frm,
 QFrame#map_agent_form_inner_frm,
 QAbstractButton#reload_btn {
@@ -94,19 +99,27 @@ QAbstractButton#reload_btn {
     letter-spacing: 1px;
 }
 
-QAbstractButton#add_profile_btn {
+QAbstractButton#add_profile_btn,
+QAbstractButton#add_s_profile_btn {
     border-top: none;
     border-bottom: none;
     border-right: none;
 }
 
-QAbstractButton#set_profile_btn {
+QAbstractButton#set_profile_btn,
+QLabel#s_profile_name_lbl {
     text-align: left;
     border: 2px solid white;
     padding-left: 15px;
 }
 
-QAbstractButton#delete_profile_btn {
+QAbstractButton#send_to_game_btn {
+    border: 2px solid white;
+    border-left: none;
+}
+
+QAbstractButton#delete_profile_btn,
+QAbstractButton#delete_s_profile_btn {
     border: 2px solid #FF4655;
     border-left: none;
 }
