@@ -35,9 +35,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>199</y>
+      <y>176</y>
       <width>308</width>
-      <height>90</height>
+      <height>135</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -49,7 +49,7 @@
     <property name="lineWidth">
      <number>1</number>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0">
+    <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,0">
      <property name="spacing">
       <number>8</number>
      </property>
@@ -95,6 +95,23 @@
       <widget class="BigOptionQPushButton" name="stream_hunter_btn">
        <property name="text">
         <string>   STREAM HUNTER</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../resources/images.qrc">
+         <normaloff>:/icons/icons/losangle.png</normaloff>:/icons/icons/losangle.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>9</width>
+         <height>9</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="BigOptionQPushButton" name="settings_manager_btn">
+       <property name="text">
+        <string>   SETTINGS MANAGER</string>
        </property>
        <property name="icon">
         <iconset resource="../../../resources/images.qrc">
