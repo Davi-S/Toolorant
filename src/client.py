@@ -4,8 +4,8 @@ import os
 
 import aiohttp
 import valclient
-import valclient.resources
 import valclient.exceptions
+import valclient.resources
 
 # Get the file logger and its handler
 logger = logging.getLogger(__name__)
@@ -55,13 +55,22 @@ class CustomClient(valclient.Client):
             logger.debug('No region on "ShooterGame.log" file found')
             return ''
 
-    async def a_put(self, session:  aiohttp.ClientSession, endpoint="/", endpoint_type="pd", json_data={}, exceptions={}) -> dict:
-        # sourcery skip: default-mutable-arg
+    async def a_put(self, session:  aiohttp.ClientSession, endpoint="/", endpoint_type="pd", json_data=None, exceptions=None) -> dict:
+        if json_data is None:
+            json_data = {}
+        if exceptions is None:
+            exceptions = {}
         async with session.put(f'{self.base_url_glz if endpoint_type == "glz" else self.base_url}{endpoint}', headers=self.headers, json=json_data) as response:
             data = await response.text()
             return json.loads(data)[0]
-    
+
     async def a_get_player_full_name(self, session: aiohttp.ClientSession, puuid: str):
         response = await self.a_put(session, endpoint="/name-service/v2/players", json_data=[puuid])
         playerData = response
         return f"{playerData['GameName']}#{playerData['TagLine']}"
+
+    def fetch_player_settings(self) -> dict:
+        return self.fetch('/player-preferences/v1/data-json/Ares.PlayerSettings', 'local')
+
+    def put_player_settings(self, settings_data) -> dict:
+        return self.put('/player-preferences/v1/data-json/Ares.PlayerSettings', 'local', settings_data)
