@@ -107,7 +107,7 @@ class SettingsManagerPageQWidget(page_manager.BasePageQWidget):
             return
         logger.debug(f'{s_profile_name=}')
         
-        game_settings = mainwindowqmainwindow.get_main_window().client.fetch_player_settings()
+        game_settings = mainwindowqmainwindow.get_main_window().client.rnet_fetch_settings()
         
         # Save the new profile
         s_prof.save(s_profile_name, game_settings)

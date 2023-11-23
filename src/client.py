@@ -69,8 +69,5 @@ class CustomClient(valclient.Client):
         playerData = response
         return f"{playerData['GameName']}#{playerData['TagLine']}"
 
-    def fetch_player_settings(self) -> dict:
-        return self.fetch('/player-preferences/v1/data-json/Ares.PlayerSettings', 'local')
-
     def put_player_settings(self, settings_data) -> dict:
         return self.put('/player-preferences/v1/data-json/Ares.PlayerSettings', 'local', settings_data)
