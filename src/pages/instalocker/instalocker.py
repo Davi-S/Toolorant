@@ -47,8 +47,13 @@ class Instalocker(Listener):
         agent = self.profile.map_agent[self.get_match_map(match_info)]
 
         # check if the user wants to instalock in this map
-        if agent is None:
+        if agent == 'NONE':
             logger.info('Will not lock because profile agent is None')
+            return False
+        
+        if agent == 'DODGE':
+            logger.info('Will dodge queue')
+            self.client.pregame_quit_match()
             return False
 
         # Try to lock the character

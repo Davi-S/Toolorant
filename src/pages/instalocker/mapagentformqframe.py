@@ -5,7 +5,7 @@ import PySide6.QtWidgets as QtWidgets
 import animations
 import game_resources as gr
 
-AGENT_OPTIONS = ['NONE'] + [agent.name for agent in gr.Agent]
+AGENT_OPTIONS = ['NONE', 'DODGE'] + [agent.name for agent in gr.Agent]
 
 class MapAgentFormQFrame(QtWidgets.QFrame):
     color_animation_duration = 200
