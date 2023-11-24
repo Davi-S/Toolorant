@@ -155,7 +155,9 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
 
     def show_profile_info(self, profile: prof.Profile):
         for map, agent in profile.map_agent.items():
-            map_agent = MapAgentQFrame(map.name, agent.name if agent is not None else 'NONE')
+            map_agent = MapAgentQFrame(map.name, agent.name
+                                       if agent is not None and agent != "DODGE"
+                                       else 'NONE' if agent is None else "DODGE")
             list_item = QtWidgets.QListWidgetItem(self.ui.profile_info_lw)
             list_item.setSizeHint(map_agent.sizeHint())
             self.ui.profile_info_lw.setItemWidget(list_item, map_agent)
@@ -218,7 +220,11 @@ class InstalockerPageQWidget(page_manager.BasePageQWidget):
             widget = self.ui.profile_info_lw.itemWidget(item)
             if isinstance(widget, MapAgentFormQFrame):
                 map = gr.Map[widget.ui.mab_form_lbl.text()]
-                agent = gr.Agent[widget.ui.agent_form_cb.currentText()] if widget.ui.agent_form_cb.currentText() != "NONE" else None
+                agent = (
+                    gr.Agent[widget.ui.agent_form_cb.currentText()]
+                    if widget.ui.agent_form_cb.currentText() not in ["NONE", "DODGE"]
+                    else None if widget.ui.agent_form_cb.currentText() == "NONE" else "DODGE"
+                )
                 profile_map_agent[map] = agent
         logger.debug(f'{profile_map_agent=}')
 

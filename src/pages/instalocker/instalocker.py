@@ -50,6 +50,11 @@ class Instalocker(Listener):
         if agent is None:
             logger.info('Will not lock because profile agent is None')
             return False
+        
+        if agent == 'DODGE':
+            logger.info('Will dodge queue')
+            self.client.pregame_quit_match()
+            return False
 
         # Try to lock the character
         logger.debug('Ready to try to lock')
