@@ -50,6 +50,7 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
                     callback=lambda: self.page_manager.switch_to_page('main_menu_pg')
                 )
         else:
+            logger.warning('Not checking dependencies')
             # Setup dependencies without any validation and do not connect them
             self.setup_dependencies()
             self.setup_pages()
