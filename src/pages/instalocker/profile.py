@@ -14,7 +14,7 @@ if not PROFILES_PATH.exists():
 @dataclasses.dataclass
 class Profile:
     name: str
-    map_agent: dict[gr.Map, gr.Agent | None | str]
+    map_agent: dict[gr.Map, gr.Agent | str]
 
     @classmethod
     def load(cls, profile_name: str):
@@ -22,10 +22,10 @@ class Profile:
         if profile_name is None:
             return None
         with open(PROFILES_PATH.joinpath(f'{profile_name}.json'), 'r') as f:
-            data = json.load(f)
+            data: dict = json.load(f)
         map_agent = {gr.Map[map.upper()]: (gr.Agent[agent.upper()] 
-                                           if agent is not None and agent != "DODGE"
-                                           else None if agent is None else "DODGE")
+                                           if agent not in ['NONE', 'DODGE']
+                                           else agent)
                      for map, agent
                      in data.items()}
         return cls(profile_name, map_agent)
@@ -35,8 +35,8 @@ class Profile:
 
     def save(self) -> None:
         data = {map.name: (agent.name
-                           if agent is not None and agent != "DODGE"
-                           else None if agent is None else "DODGE")
+                           if agent not in ['NONE', 'DODGE']
+                           else agent)
                 for map, agent in self.map_agent.items()}
 
         with open(PROFILES_PATH.joinpath(f'{self.name}.json'), 'w') as f:
