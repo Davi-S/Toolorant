@@ -30,8 +30,8 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
     def __init__(self) -> None:
         logger.info('Initializing MainWindow')
         super().__init__()
-        self.setup_ui()
         self.check_updates()
+        self.setup_ui()
         
         # Connect signals
         self.ui.close_btn.clicked.connect(self.close)
