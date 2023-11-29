@@ -4,6 +4,8 @@ from pathlib import Path
 import PySide6.QtCore as QtCore
 import PySide6.QtGui as QtGui
 import PySide6.QtWidgets as QtWidgets
+import requests
+from packaging import version
 
 import page_manager
 import pages.instalocker.instalockerpageqwidget as instalocker_pg
@@ -12,6 +14,7 @@ import pages.no_valorant.novalorantpageqwidget as no_valorant_pg
 import pages.stream_hunter.streamhunterpageqwidget as stream_hunter_pg
 from client import CustomClient
 from settings import app_settings, user_settings
+from updatenotifierqdialog import UpdateNotifierQDialog
 from view.main_ui import Ui_MainWindow
 from websocket import WebSocket
 
@@ -27,6 +30,7 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
     def __init__(self) -> None:
         logger.info('Initializing MainWindow')
         super().__init__()
+        self.check_updates()
         self.setup_ui()
         
         # Connect signals
@@ -65,6 +69,20 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
             QtCore.Qt.FramelessWindowHint
         )
         self.setStyleSheet(load_style_sheet(Path(__file__).resolve().parent / 'view/main.qss'))
+        
+    def check_updates(self) -> None:
+        response = requests.get("https://api.github.com/repos/Davi-S/Toolorant/releases/latest")
+        latest_version = response.json()["tag_name"]
+        latest_version = version.parse(latest_version)
+
+        current_version = app_settings.version
+        current_version = version.parse(current_version)
+        
+        if latest_version > current_version:
+            dialog = UpdateNotifierQDialog(latest_version)
+            reply = dialog.exec_()
+            if reply == QtWidgets.QDialog.Accepted:
+                QtGui.QDesktopServices.openUrl(QtCore.QUrl('https://github.com/Davi-S/Toolorant/releases/latest'))
         
     def setup_dependencies(self) -> bool:
         """

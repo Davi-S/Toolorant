@@ -163,3 +163,5 @@ src/.logs/*
 *.dist/
 *.dist/*
 nuitka-crash-report.xml
+
+todo.txt

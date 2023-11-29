@@ -2,10 +2,9 @@ def main():
     print(f'===== Called "{__file__}" file =====')
     print('===== Starting slash screen =====')
     # SPLASH SCREEN
-    import sys
     import PySide6.QtWidgets as QtWidgets
     from splashscreenqsplashscreen import SplashScreenQSplashScreen
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication()
     splash = SplashScreenQSplashScreen()
     splash.show()
 
@@ -19,6 +18,7 @@ def main():
 
     print('===== Starting imports =====')
     # IMPORTS
+    import sys
     from mainwindowqmainwindow import MainWindowQMainWindow
     print('===== Finished imports =====')
 
