@@ -1,19 +1,19 @@
 ACTIVATE_VENV = cd .venv/Scripts & activate.bat & cd ../.. &
 
-.venv: requirements.txt
+.venv/: requirements.txt
 	python -m venv .venv --upgrade-deps & \
 	$(ACTIVATE_VENV) pip install -r requirements.txt
 
 .PHONY: main
-main: .venv
+main: .venv/
 	$(ACTIVATE_VENV) cd src/ & python Toolorant.py
 
 .PHONY: designer
-designer: .venv
+designer: .venv/
 	$(ACTIVATE_VENV) pyside6-designer
 
 .PHONY: exe
-exe: .venv
+exe: .venv/
 	$(ACTIVATE_VENV) nuitka --standalone --remove-output --disable-console \
 	--windows-icon-from-ico="src/resources/favicon.ico" \
 	--plugin-enable=pyside6 \
