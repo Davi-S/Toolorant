@@ -64,6 +64,9 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
         """Create ui and apply global stylesheets"""
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        # Move the window to previous position
+        if position := user_settings.window_position:
+            self.move(QtCore.QPoint(*position))
         self.setWindowFlags(
             self.windowFlags() |
             QtCore.Qt.FramelessWindowHint

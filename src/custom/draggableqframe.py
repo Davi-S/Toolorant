@@ -1,8 +1,8 @@
 import PySide6.QtCore as QtCore
-import PySide6.QtGui as QtGui
 import PySide6.QtWidgets as QtWidgets
 
 import mainwindowqmainwindow
+from settings import user_settings
 
 
 class DraggableQFrame(QtWidgets.QFrame): 
@@ -15,5 +15,7 @@ class DraggableQFrame(QtWidgets.QFrame):
         delta = QtCore.QPoint(event.globalPos() - self.old_pos)
         new_pos = main_window.pos() + delta
         main_window.move(new_pos)
+        user_settings.window_position = new_pos.x(), new_pos.y()
+        user_settings.persist()
         self.old_pos = event.globalPos()
 
