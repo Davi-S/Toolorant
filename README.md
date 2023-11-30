@@ -30,20 +30,21 @@ Toolorant is a collection of tools for Valorant designed to enhance your gamepla
 - **Instalocker**:
   Be the first to select your agent for the match.
 
+- **Dodge Map**:
+  Skip the maps you don't like.
+
 - **Stream Hunter**:
   Find the Twitch live stream of your opponents and get privileged information.
 
-- **Voice to Text** ([In development](#outro)):
-  Use your mic to send text messages to the enemy team.
-
-- **Settings manager** ([In development](#outro)):
-  Save your Valorant settings to load and share them easily.
+- **Ranker** ([In development](#outro)):
+  See the rank, KD, and other information about everyone in the match
 
 ## Features
 
 - Clean and beautiful dark UI
 - All Valorant tools and related features are in one place
 - Lightweight and efficient
+- Auto update checker
   
 ## Getting Started
 
