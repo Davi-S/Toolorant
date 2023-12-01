@@ -49,3 +49,34 @@ class Agent(enum.Enum):
     SOVA = "320b2a48-4d9b-a075-30f1-1f93a9b638fa"
     VIPER = "707eab51-4836-f488-046a-cda6bf494859"
     YORU = "7f94d92c-4234-0a36-9646-3a87eb8b5c89"
+
+
+class Rank(enum.Enum):
+    UNRANKED_1 = 0
+    UNRANKED_2 = enum.auto()
+    UNRANKED_3 = enum.auto()
+    IRON_1 = enum.auto()
+    IRON_2 = enum.auto()
+    IRON_3 = enum.auto()
+    BRONZE_1 = enum.auto()
+    BRONZE_2 = enum.auto()
+    BRONZE_3 = enum.auto()
+    SILVER_1 = enum.auto()
+    SILVER_2 = enum.auto()
+    SILVER_3 = enum.auto()
+    GOLD_1 = enum.auto()
+    GOLD_2 = enum.auto()
+    GOLD_3 = enum.auto()
+    PLATINUM_1 = enum.auto()
+    PLATINUM_2 = enum.auto()
+    PLATINUM_3 = enum.auto()
+    DIAMOND_1 = enum.auto()
+    DIAMOND_2 = enum.auto()
+    DIAMOND_3 = enum.auto()
+    ASCENDANT_1 = enum.auto()
+    ASCENDANT_2 = enum.auto()
+    ASCENDANT_3 = enum.auto()
+    IMMORTAL_1 = enum.auto()
+    IMMORTAL_2 = enum.auto()
+    IMMORTAL_3 = enum.auto()
+    RADIANT = enum.auto()
