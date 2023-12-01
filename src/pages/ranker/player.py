@@ -58,10 +58,10 @@ class Player:
 
     async def set_tag(self):
         self.tag = self.full_name.split('#')[1]
-    # TODO replace "get" with "[]"
+
     async def set_agent(self):
-        if player := next((player for player in self._current_game_match.get('Players', []) if player['Subject'] == self.puuid), None):
-            self.agent = gr.Agent(player.get('CharacterID', 0))
+        if player := next((player for player in self._current_game_match['Players'] if player['Subject'] == self.puuid), None):
+            self.agent = gr.Agent(player['CharacterID'])
         else:
             self.agent = gr.Agent(0)
 
@@ -69,27 +69,26 @@ class Player:
         try:
             data = await self.get_player_mmr()
             latest_season_id = await self._client.a_get_latest_season_id(self._session)
-            latest_season_info = data.get('QueueSkills', {}).get('competitive', {}).get('SeasonalInfoBySeasonID', {}).get(latest_season_id, {})
-            self.current_rank = gr.Rank(latest_season_info.get('Rank', 0))
+            latest_season_info = data['QueueSkills']['competitive']['SeasonalInfoBySeasonID'][latest_season_id]
+            self.current_rank = gr.Rank(latest_season_info['CompetitiveTier'])
         except (KeyError, TypeError):
             self.current_rank = gr.Rank(0)
-        print()
 
     async def set_rank_rating(self):
         try:
             data = await self.get_player_mmr()
             latest_season_id = await self._client.a_get_latest_season_id(self._session)
-            last_season_comp = data.get('QueueSkills', {}).get('competitive', {}).get('SeasonalInfoBySeasonID', {}).get(latest_season_id, {})
-            self.rank_rating = last_season_comp.get('RankedRating', 0)
+            last_season_comp = data['QueueSkills']['competitive']['SeasonalInfoBySeasonID'][latest_season_id]
+            self.rank_rating = last_season_comp['RankedRating']
         except (KeyError, TypeError):
             self.rank_rating = 0
 
     async def set_peak_rank(self):
         try:
             data = await self.get_player_mmr()
-            comp = data.get('QueueSkills', {}).get('competitive', {}).get('SeasonalInfoBySeasonID', {})
+            comp = data['QueueSkills']['competitive']['SeasonalInfoBySeasonID']
             peak = max(
-                (season_info.get('Rank', 0) for season_info in comp.values()),
+                (season_info['Rank'] for season_info in comp.values()),
                 default=0
             )
             self.peak_rank = gr.Rank(peak)
@@ -113,7 +112,7 @@ class Player:
         kills, deaths = 0, 0
         for match in comp_updates:
             match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
-            if player := next((player for player in match_detail.get('players', []) if player['subject'] == self.puuid), None):
+            if player := next((player for player in match_detail['players'] if player['subject'] == self.puuid), None):
                 kills += player['stats']['kills']
                 deaths += player['stats']['deaths']
         self.kills_per_deaths = round(kills / deaths, 2) if deaths else kills
@@ -123,7 +122,7 @@ class Player:
         total_shots, head_shots = 0, 0
         for match in comp_updates:
             match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
-            for game_round in match_detail.get('roundResults', []):
+            for game_round in match_detail['roundResults']:
                 player_stats = next(
                     (player['damage']
                      for player in game_round['playerStats']
@@ -136,5 +135,5 @@ class Player:
         self.head_shot = round(head_shots / total_shots * 100, 2) if total_shots else 0
 
     async def set_account_level(self):
-        if player := next((player for player in self._current_game_match.get('Players', []) if player['Subject'] == self.puuid), None):
+        if player := next((player for player in self._current_game_match['Players'] if player['Subject'] == self.puuid), None):
             self.account_level = player['PlayerIdentity']['AccountLevel']
