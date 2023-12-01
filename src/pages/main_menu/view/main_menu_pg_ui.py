@@ -35,7 +35,7 @@ class Ui_main_menu_pg(object):
         self.main_frm.setFrameShadow(QFrame.Raised)
         self.options_frm = QFrame(self.main_frm)
         self.options_frm.setObjectName(u"options_frm")
-        self.options_frm.setGeometry(QRect(0, 199, 308, 90))
+        self.options_frm.setGeometry(QRect(0, 176, 308, 135))
         self.options_frm.setFrameShape(QFrame.StyledPanel)
         self.options_frm.setFrameShadow(QFrame.Raised)
         self.options_frm.setLineWidth(1)
@@ -62,6 +62,13 @@ class Ui_main_menu_pg(object):
 
         self.verticalLayout_2.addWidget(self.stream_hunter_btn, 0, Qt.AlignLeft)
 
+        self.ranker_btn = BigOptionQPushButton(self.options_frm)
+        self.ranker_btn.setObjectName(u"ranker_btn")
+        self.ranker_btn.setIcon(icon)
+        self.ranker_btn.setIconSize(QSize(9, 9))
+
+        self.verticalLayout_2.addWidget(self.ranker_btn, 0, Qt.AlignLeft)
+
         self.settings_btn = SimpleQPushButton(self.main_frm)
         self.settings_btn.setObjectName(u"settings_btn")
         self.settings_btn.setGeometry(QRect(881, 467, 77, 21))
@@ -85,6 +92,7 @@ class Ui_main_menu_pg(object):
         main_menu_pg.setWindowTitle(QCoreApplication.translate("main_menu_pg", u"Form", None))
         self.instalocker_btn.setText(QCoreApplication.translate("main_menu_pg", u"   INSTALOCKER", None))
         self.stream_hunter_btn.setText(QCoreApplication.translate("main_menu_pg", u"   STREAM HUNTER", None))
+        self.ranker_btn.setText(QCoreApplication.translate("main_menu_pg", u"   RANKER", None))
         self.settings_btn.setText(QCoreApplication.translate("main_menu_pg", u"SETTINGS", None))
         self.version_lbl.setText("")
     # retranslateUi

@@ -12,6 +12,7 @@ import pages.instalocker.instalockerpageqwidget as instalocker_pg
 import pages.main_menu.mainmenupageqwidget as main_menu_pg
 import pages.no_valorant.novalorantpageqwidget as no_valorant_pg
 import pages.stream_hunter.streamhunterpageqwidget as stream_hunter_pg
+import pages.ranker.rankerpageqwidget as ranker_pg
 from client import CustomClient
 from settings import app_settings, user_settings
 from updatenotifierqdialog import UpdateNotifierQDialog
@@ -139,7 +140,7 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
         self.page_manager.add_page(main_menu_pg.MainMenuPageQWidget, 'main_menu_pg')
         self.page_manager.add_page(instalocker_pg.InstalockerPageQWidget, 'instalocker_pg')
         self.page_manager.add_page(stream_hunter_pg.StreamHunterPageQWidget, 'stream_hunter_pg')
-    
+        self.page_manager.add_page(ranker_pg.RankerPageQWidget, 'ranker_pg')
 
 def get_main_window() -> MainWindowQMainWindow | None:
     """Returns the MainWindowQMainWindow in the application (if any)"""
