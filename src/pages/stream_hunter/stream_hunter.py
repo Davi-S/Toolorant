@@ -70,13 +70,17 @@ class StreamHunter:
             logger.error(f'Match information could not be fetched due to error: {e}')
             return {}
 
+        # Check seen matches (cache)
         if match_info['MatchID'] in self._seen_matches:
             logger.warn('Repeated match ID')
             return self._seen_matches[match_info['MatchID']]
-        enemies = asyncio.run(self.get_enemies(match_info))
-
+        
         logger.info('Getting players streams')
-        return {
+        enemies = asyncio.run(self.get_enemies(match_info))
+        result = {
             (player.name, player.agent.name): asyncio.run(self.get_player_streams(player))
             for player in enemies
         }
+        # Save result on cache and return
+        self._seen_matches[match_info['MatchID']] = result
+        return result
