@@ -84,6 +84,7 @@ class Player:
             self.rank_rating = 0
 
     async def set_peak_rank(self):
+        """Peak rank counting all seasons"""
         try:
             data = await self.get_player_mmr()
             comp = data['QueueSkills']['competitive']['SeasonalInfoBySeasonID']
@@ -96,6 +97,7 @@ class Player:
             self.peak_rank = gr.Rank(0)
 
     async def set_win_rate(self):
+        """Win rate of current season"""
         try:
             data = await self.get_player_mmr()
             latest_season_id = await self._client.a_get_latest_season_id(self._session)
@@ -108,6 +110,7 @@ class Player:
             self.win_rate = 0
 
     async def set_kills_per_deaths(self):
+        """KD of last 20 matches"""
         comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
         kills, deaths = 0, 0
         for match in comp_updates:
@@ -118,6 +121,7 @@ class Player:
         self.kills_per_deaths = round(kills / deaths, 2) if deaths else kills
 
     async def set_head_shot(self):
+        """HS percent of last 20 matches"""
         comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
         total_shots, head_shots = 0, 0
         for match in comp_updates:
