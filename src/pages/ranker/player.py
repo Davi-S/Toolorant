@@ -1,33 +1,140 @@
-import dataclasses
+import aiohttp
 
 import game_resources as gr
+from client import CustomClient
 
-# puuid          Current Game Match
-# name           Current Game Match
-# agent          Current Game Match
-# current rank   Current Game Match
-# rank rating    Player MMR
-# peak rank      Player MMR
-# win rate (%)   Player MMR
-# KD (%)         Match Details
-# headshot (%)   Match Details
-# account level  Current Game Match
 
-@dataclasses.dataclass
 class Player:
-    puuid: str
-    full_name: str
-    name: str = dataclasses.field(init=False)
-    tag: str = dataclasses.field(init=False)
-    agent: gr.Agent
-    current_rank: str
-    rank_rating: str
-    peak_rank: str
-    win_rate: str
-    kills_per_deaths: str
-    head_shot: str
-    account_level: str
+    __slots__ = (
+        'puuid',
+        'full_name',        # Name Service
+        'name',             # Name Service
+        'tag',              # Name Service
+        'agent',            # Current Game Match
+        'current_rank',     # Player MMR
+        'rank_rating',      # Player MMR
+        'peak_rank',        # Player MMR
+        'win_rate',         # Player MMR
+        'kills_per_deaths', # Match Details
+        'head_shot',        # Match Details
+        'account_level',    # Current Game Match
+        '_player_mmr',
+    )
 
-    def __post_init__(self):
+    _client = None
+    _session = None
+
+    # Every player is on the same match, so one object is enough for all instances
+    _current_game_match = None
+
+    @classmethod
+    def init_cls(cls, client: CustomClient, session: aiohttp.ClientSession) -> None:
+        cls._client = client
+        cls._session = session
+        cls._current_game_match = cls._client.coregame_fetch_match()
+
+    def __init__(self, puuid: str) -> None:
+        self.puuid = puuid
+        self._player_mmr = None
+
+    async def get_player_mmr(self):
+        if not self._player_mmr:
+            data = await self._client.a_fetch_mmr(self._session, self.puuid)
+            self._player_mmr = data
+        return self._player_mmr
+
+    async def build(self):
+        for attr in self.__slots__:
+            if not attr.startswith('_'):
+                method = getattr(self, f'set_{attr}', None)
+                if method is not None:
+                    await method()
+
+    async def set_full_name(self):
+        self.full_name = await self._client.a_get_player_full_name(self._session, self.puuid)
+
+    async def set_name(self):
         self.name = self.full_name.split('#')[0]
+
+    async def set_tag(self):
         self.tag = self.full_name.split('#')[1]
+    # TODO replace "get" with "[]"
+    async def set_agent(self):
+        if player := next((player for player in self._current_game_match.get('Players', []) if player['Subject'] == self.puuid), None):
+            self.agent = gr.Agent(player.get('CharacterID', 0))
+        else:
+            self.agent = gr.Agent(0)
+
+    async def set_current_rank(self):
+        try:
+            data = await self.get_player_mmr()
+            latest_season_id = await self._client.a_get_latest_season_id(self._session)
+            latest_season_info = data.get('QueueSkills', {}).get('competitive', {}).get('SeasonalInfoBySeasonID', {}).get(latest_season_id, {})
+            self.current_rank = gr.Rank(latest_season_info.get('Rank', 0))
+        except (KeyError, TypeError):
+            self.current_rank = gr.Rank(0)
+        print()
+
+    async def set_rank_rating(self):
+        try:
+            data = await self.get_player_mmr()
+            latest_season_id = await self._client.a_get_latest_season_id(self._session)
+            last_season_comp = data.get('QueueSkills', {}).get('competitive', {}).get('SeasonalInfoBySeasonID', {}).get(latest_season_id, {})
+            self.rank_rating = last_season_comp.get('RankedRating', 0)
+        except (KeyError, TypeError):
+            self.rank_rating = 0
+
+    async def set_peak_rank(self):
+        try:
+            data = await self.get_player_mmr()
+            comp = data.get('QueueSkills', {}).get('competitive', {}).get('SeasonalInfoBySeasonID', {})
+            peak = max(
+                (season_info.get('Rank', 0) for season_info in comp.values()),
+                default=0
+            )
+            self.peak_rank = gr.Rank(peak)
+        except AttributeError:
+            self.peak_rank = gr.Rank(0)
+
+    async def set_win_rate(self):
+        try:
+            data = await self.get_player_mmr()
+            latest_season_id = await self._client.a_get_latest_season_id(self._session)
+            last_season_comp = data['QueueSkills']['competitive']['SeasonalInfoBySeasonID'][latest_season_id]
+            total_games = last_season_comp['NumberOfGames']
+            won_games = last_season_comp['NumberOfWins']
+            # Percent
+            self.win_rate = round(won_games / total_games * 100, 2) if total_games else 0
+        except (KeyError, TypeError):
+            self.win_rate = 0
+
+    async def set_kills_per_deaths(self):
+        comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
+        kills, deaths = 0, 0
+        for match in comp_updates:
+            match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
+            if player := next((player for player in match_detail.get('players', []) if player['subject'] == self.puuid), None):
+                kills += player['stats']['kills']
+                deaths += player['stats']['deaths']
+        self.kills_per_deaths = round(kills / deaths, 2) if deaths else kills
+
+    async def set_head_shot(self):
+        comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
+        total_shots, head_shots = 0, 0
+        for match in comp_updates:
+            match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
+            for game_round in match_detail.get('roundResults', []):
+                player_stats = next(
+                    (player['damage']
+                     for player in game_round['playerStats']
+                     if player['subject'] == self.puuid),
+                    []
+                )
+                for damage in player_stats:
+                    total_shots += damage['bodyshots'] + damage['legshots'] + damage['headshots']
+                    head_shots += damage['headshots']
+        self.head_shot = round(head_shots / total_shots * 100, 2) if total_shots else 0
+
+    async def set_account_level(self):
+        if player := next((player for player in self._current_game_match.get('Players', []) if player['Subject'] == self.puuid), None):
+            self.account_level = player['PlayerIdentity']['AccountLevel']
