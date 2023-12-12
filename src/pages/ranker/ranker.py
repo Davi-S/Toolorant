@@ -40,9 +40,6 @@ class Ranker:
 
         players_puuid = self.get_players_puuid(match_info)
         players = asyncio.run(self.get_players(players_puuid))
-
-        result = players  # TODO
-
         # Save the match result on the cache
-        self._seen_matches[match_info['MatchID']] = result
-        return result
+        self._seen_matches[match_info['MatchID']] = players
+        return players
