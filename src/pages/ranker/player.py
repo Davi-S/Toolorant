@@ -6,6 +6,7 @@ import valclient.exceptions
 
 
 class Player:
+    # TODO: add team information
     __slots__ = (
         'puuid',
         'full_name',        # Name Service

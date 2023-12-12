@@ -50,7 +50,7 @@
      <string>GET RANK</string>
     </property>
    </widget>
-   <widget class="QFrame" name="playersi_ranks_frm">
+   <widget class="QFrame" name="players_ranks_frm">
     <property name="geometry">
      <rect>
       <x>0</x>

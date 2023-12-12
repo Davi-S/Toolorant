@@ -37,18 +37,19 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         # Start the rank operation in a separate thread to not block the UI
         self.ranker_thread.start()
 
-    def update_ui_with_results(self, rank_result: dict):
+    def update_ui_with_results(self, rank_result: list[Player]):
         logger.info('Updating UI')
         self.ui.rank_btn.setText('GET RANK')
         # TODO:
         # Clean the layout from previous items
         # Add new items
         self.ui.rank_btn.setEnabled(True)
+        logger.info('UI updated')
 
 
 class RankerQThread(QtCore.QThread):
     # Using object type because dict does not work as intended. https://stackoverflow.com/a/43977161/14593213
-    rank_result = QtCore.Signal(object)
+    rank_result = QtCore.Signal(list)
 
     def __init__(self, ranker: Ranker):
         super().__init__()
