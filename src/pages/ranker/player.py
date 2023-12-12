@@ -2,6 +2,7 @@ import aiohttp
 
 import game_resources as gr
 from client import CustomClient
+import valclient.exceptions
 
 
 class Player:
@@ -114,10 +115,13 @@ class Player:
         comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
         kills, deaths = 0, 0
         for match in comp_updates:
-            match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
-            if player := next((player for player in match_detail['players'] if player['subject'] == self.puuid), None):
-                kills += player['stats']['kills']
-                deaths += player['stats']['deaths']
+            try:
+                match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
+                if player := next((player for player in match_detail['players'] if player['subject'] == self.puuid), None):
+                    kills += player['stats']['kills']
+                    deaths += player['stats']['deaths']
+            except (TypeError, valclient.exceptions.ResponseError):
+                continue
         self.kills_per_deaths = round(kills / deaths, 2) if deaths else kills
 
     async def set_head_shot(self):
@@ -125,17 +129,20 @@ class Player:
         comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
         total_shots, head_shots = 0, 0
         for match in comp_updates:
-            match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
-            for game_round in match_detail['roundResults']:
-                player_stats = next(
-                    (player['damage']
-                     for player in game_round['playerStats']
-                     if player['subject'] == self.puuid),
-                    []
-                )
-                for damage in player_stats:
-                    total_shots += damage['bodyshots'] + damage['legshots'] + damage['headshots']
-                    head_shots += damage['headshots']
+            try:
+                match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
+                for game_round in match_detail['roundResults']:
+                    player_stats = next(
+                        (player['damage']
+                        for player in game_round['playerStats']
+                        if player['subject'] == self.puuid),
+                        []
+                    )
+                    for damage in player_stats:
+                        total_shots += damage['bodyshots'] + damage['legshots'] + damage['headshots']
+                        head_shots += damage['headshots']
+            except (TypeError, valclient.exceptions.ResponseError):
+                continue
         self.head_shot = round(head_shots / total_shots * 100, 2) if total_shots else 0
 
     async def set_account_level(self):
