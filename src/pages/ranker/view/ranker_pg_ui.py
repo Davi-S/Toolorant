@@ -15,8 +15,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QSizePolicy,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QFrame, QSizePolicy, QWidget)
 
 from custom.primaryqpushbutton import PrimaryQPushButton
 from custom.topoptionqtoolbutton import TopOptionQToolButton
@@ -49,11 +48,6 @@ class Ui_ranker_pg(object):
         self.players_ranks_frm.setMaximumSize(QSize(958, 417))
         self.players_ranks_frm.setFrameShape(QFrame.StyledPanel)
         self.players_ranks_frm.setFrameShadow(QFrame.Raised)
-        self.player_streams_layout = QGridLayout(self.players_ranks_frm)
-        self.player_streams_layout.setObjectName(u"player_streams_layout")
-        self.player_streams_layout.setHorizontalSpacing(12)
-        self.player_streams_layout.setVerticalSpacing(0)
-        self.player_streams_layout.setContentsMargins(0, 0, 0, 0)
         self.menu_btn = TopOptionQToolButton(ranker_pg)
         self.menu_btn.setObjectName(u"menu_btn")
         self.menu_btn.setGeometry(QRect(57, 6, 53, 37))

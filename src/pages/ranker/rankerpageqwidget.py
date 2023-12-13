@@ -5,7 +5,9 @@ import PySide6.QtCore as QtCore
 import mainwindowqmainwindow
 import page_manager
 
+from .player import Player
 from .ranker import Ranker
+from .ranktableqtablewidget import RankTableQTableWidget
 from .view.ranker_pg_ui import Ui_ranker_pg
 
 logger = logging.getLogger(__name__)
@@ -40,9 +42,10 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
     def update_ui_with_results(self, rank_result: list[Player]):
         logger.info('Updating UI')
         self.ui.rank_btn.setText('GET RANK')
-        # TODO:
-        # Clean the layout from previous items
-        # Add new items
+        
+        RankTableQTableWidget(self.ui.players_ranks_frm)
+        # TODO: add data to table
+        
         self.ui.rank_btn.setEnabled(True)
         logger.info('UI updated')
 
