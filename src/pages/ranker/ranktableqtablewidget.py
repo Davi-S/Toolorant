@@ -7,9 +7,6 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        layout = QtWidgets.QVBoxLayout(self.parent())
-        layout.addWidget(self)
-        self.parent().setLayout(layout)
         self.setColumnCount(2)
         self.setHorizontalHeaderLabels(["Name", "Score"])
         self.populate_table()
