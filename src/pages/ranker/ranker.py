@@ -27,7 +27,7 @@ class Ranker:
             await asyncio.gather(*tasks)
         return players
 
-    def rank(self) -> dict[tuple[str, str], list[str]]:
+    def rank(self) -> list[Player]:
         try:
             match_info = self.client.coregame_fetch_match()
         except Exception as error:
