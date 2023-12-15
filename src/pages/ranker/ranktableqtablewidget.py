@@ -21,6 +21,9 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
     _char_size = 18
     # Fits 10 rows perfectly on the table. (Table Height - Header Height) / 10
     _row_height = 37  
+    
+    _blue_team_color = QtGui.QColor(102, 194, 169)
+    _red_team_color = QtGui.QColor(240, 92, 87)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setup_ui()
@@ -82,21 +85,20 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
         self.setRowCount(len(player_list))
         for row, player in enumerate(player_list):
             self.setRowHeight(row, self._row_height)
-            self.set_table_item(row, self.COLUMNS.index('Party'), player.party, background=QtGui.QColor(0, 0, 0, 0))
-            self.set_table_item(row, self.COLUMNS.index('Name'), player.full_name)
-            self.set_table_item(row, self.COLUMNS.index('Agent'), player.agent.name)
-            self.set_table_item(row, self.COLUMNS.index('Current Rank'), player.current_rank.name)
-            self.set_table_item(row, self.COLUMNS.index('Rank Rating'), player.rank_rating)
-            self.set_table_item(row, self.COLUMNS.index('Peak Rank'), player.peak_rank.name)
-            self.set_table_item(row, self.COLUMNS.index('Win Rate'), player.win_rate)
-            self.set_table_item(row, self.COLUMNS.index('KD'), player.kills_per_deaths)
-            self.set_table_item(row, self.COLUMNS.index('HS'), player.head_shot)
-            self.set_table_item(row, self.COLUMNS.index('Account Level'), player.account_level)
+            self.set_table_item(row, self.COLUMNS.index('Party'), player.party, background=QtGui.QColor(0, 0, 0, 0), font_size=9)
+            self.set_table_item(row, self.COLUMNS.index('Name'), player.full_name, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Agent'), player.agent.name, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Current Rank'), player.current_rank.name, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Rank Rating'), player.rank_rating, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Peak Rank'), player.peak_rank.name, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Win Rate'), player.win_rate, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('KD'), player.kills_per_deaths, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('HS'), player.head_shot, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Account Level'), player.account_level, foreground=player.team)
 
-    def set_table_item(self, row, column, value, alignment=None, background=None):
+    def set_table_item(self, row, column, value, background=None, foreground=None, font_size=None):
         item = QtWidgets.QTableWidgetItem(str(value))
-        if alignment is not None:
-            item.setTextAlignment(alignment)
+        # Background
         if background is None:
             # Alternate row colors
             if row % 2 == 0:
@@ -105,4 +107,13 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
                 item.setBackground(QtGui.QColor(255, 255, 255, 0))
         else:
             item.setBackground(background)
+        # Text color
+        if foreground is not None:
+            color = self._blue_team_color if foreground == 'Blue' else self._red_team_color
+            item.setForeground(color)
+        # Set font size
+        if font_size is not None:
+            font = item.font()
+            font.setPointSize(font_size)
+            item.setFont(font)
         self.setItem(row, column, item)

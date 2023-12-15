@@ -50,7 +50,7 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         logger.info('Updating UI')
         self.ui.rank_btn.setText('GET RANK')
         
-        # TODO
+        # TODO: order the player list
         self.ui.rank_table_tbl.populate_table(rank_result)
         
         self.ui.rank_btn.setEnabled(True)
