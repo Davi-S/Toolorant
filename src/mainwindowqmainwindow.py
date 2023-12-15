@@ -75,18 +75,21 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
         self.setStyleSheet(load_style_sheet(Path(__file__).resolve().parent / 'view/main.qss'))
         
     def check_updates(self) -> None:
-        response = requests.get("https://api.github.com/repos/Davi-S/Toolorant/releases/latest")
-        latest_version = response.json()["tag_name"]
-        latest_version = version.parse(latest_version)
+        try:
+            response = requests.get("https://api.github.com/repos/Davi-S/Toolorant/releases/latest")
+            latest_version = response.json()["tag_name"]
+            latest_version = version.parse(latest_version)
 
-        current_version = app_settings.version
-        current_version = version.parse(current_version)
-        
-        if latest_version > current_version:
-            dialog = UpdateNotifierQDialog(latest_version)
-            reply = dialog.exec_()
-            if reply == QtWidgets.QDialog.Accepted:
-                QtGui.QDesktopServices.openUrl(QtCore.QUrl('https://github.com/Davi-S/Toolorant/releases/latest'))
+            current_version = app_settings.version
+            current_version = version.parse(current_version)
+            
+            if latest_version > current_version:
+                dialog = UpdateNotifierQDialog(latest_version)
+                reply = dialog.exec_()
+                if reply == QtWidgets.QDialog.Accepted:
+                    QtGui.QDesktopServices.openUrl(QtCore.QUrl('https://github.com/Davi-S/Toolorant/releases/latest'))
+        except Exception as error:
+            logger.error(f'Error while trying to fetch latest version: {error}')
         
     def setup_dependencies(self) -> bool:
         """
