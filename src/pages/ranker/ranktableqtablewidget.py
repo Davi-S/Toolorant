@@ -40,7 +40,7 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
         # Hide stuff
         self.verticalHeader().setVisible(False)
         self.setFrameStyle(QtWidgets.QFrame.NoFrame)
-        # self.setShowGrid(False)
+        self.setShowGrid(False)
         
         # Set other attributes
         self.horizontalHeader().setMinimumSectionSize(self._char_size)
@@ -54,16 +54,15 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
                 self.horizontalHeader().setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
                 
         # Set columns fixed widths
-        # Using 0.8 multiplier because numbers are narrower than letters characters
-        self.setColumnWidth(self.COLUMNS.index('Party'),         0.8 * self._char_size * 1)   
-        self.setColumnWidth(self.COLUMNS.index('Agent'),         1.0 * self._char_size * 6) # Minimum size: 6
-        self.setColumnWidth(self.COLUMNS.index('Current Rank'),  1.0 * self._char_size * 7) # Minimum size: 7
-        self.setColumnWidth(self.COLUMNS.index('Peak Rank'),     1.0 * self._char_size * 7) # Minimum size: 7
-        self.setColumnWidth(self.COLUMNS.index('Rank Rating'),   0.8 * self._char_size * 5) # Minimum size: 2
-        self.setColumnWidth(self.COLUMNS.index('Win Rate'),      0.8 * self._char_size * 5) # Minimum size: 3   
-        self.setColumnWidth(self.COLUMNS.index('KD'),            0.8 * self._char_size * 5) # Minimum size: 2         
-        self.setColumnWidth(self.COLUMNS.index('HS'),            0.8 * self._char_size * 5) # Minimum size: 3         
-        self.setColumnWidth(self.COLUMNS.index('Account Level'), 0.8 * self._char_size * 5) # Minimum size: 3
+        self.setColumnWidth(self.COLUMNS.index('Party'),         self._char_size * 1)   
+        self.setColumnWidth(self.COLUMNS.index('Agent'),         self._char_size * 6)
+        self.setColumnWidth(self.COLUMNS.index('Current Rank'),  self._char_size * 7)
+        self.setColumnWidth(self.COLUMNS.index('Peak Rank'),     self._char_size * 7)
+        self.setColumnWidth(self.COLUMNS.index('Rank Rating'),   self._char_size * 3.5)
+        self.setColumnWidth(self.COLUMNS.index('Win Rate'),      self._char_size * 3.5)   
+        self.setColumnWidth(self.COLUMNS.index('KD'),            self._char_size * 3.5)         
+        self.setColumnWidth(self.COLUMNS.index('HS'),            self._char_size * 3.5)         
+        self.setColumnWidth(self.COLUMNS.index('Account Level'), self._char_size * 3.5)
 
         # Set alias names for specific headers
         alias_names = {
@@ -95,6 +94,7 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
 
     def set_table_item(self, row, column, value, alignment=None):
         item = QtWidgets.QTableWidgetItem(str(value))
+        self.setRowHeight(row, self._row_height)
         self.setItem(row, column, item)
         if alignment is not None:
             item.setTextAlignment(alignment)
