@@ -175,3 +175,11 @@ class CustomClient(valclient.Client):
             endpoint=f"/match-details/v1/matches/{match_id}",
             endpoint_type="pd",
         )
+
+    async def a_party_fetch_player(self, session: aiohttp.ClientSession, puuid: str):
+        puuid = self.__check_puuid(puuid)
+        return await self.a_fetch(
+            session=session,
+            endpoint=f"/parties/v1/players/{self.puuid}",
+            endpoint_type="glz",
+        )

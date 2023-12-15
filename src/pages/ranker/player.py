@@ -22,8 +22,8 @@ class Player:
         'kills_per_deaths', # Match Details
         'head_shot',        # Match Details
         'account_level',    # Current Game Match
-        'team',             # TODO
-        'party',            # TODO
+        'team',             # Current Game Match
+        'party',            # Party Player
         '_player_mmr',
     )
 
@@ -154,11 +154,11 @@ class Player:
         if player := next((player for player in self._current_game_match['Players'] if player['Subject'] == self.puuid), None):
             self.account_level = player['PlayerIdentity']['AccountLevel']
             
-    async def set_party(self):
-        # TODO
-        parties = [0, 1, 2, 3, 4]
-        self.party = random.choice(parties)
-        
     async def set_team(self):
-        # TODO
-        self.team = 'BLUE' if random.randint(0, 1) == 1 else 'RED'
+        player = next((player for player in self._current_game_match['Players'] if player['Subject'] == self.puuid), None)
+        self.team = player['TeamID']
+        
+        
+    async def set_party(self):
+        party = await self._client.a_party_fetch_player(self._session, self.puuid)
+        self.party = party['CurrentPartyID']
