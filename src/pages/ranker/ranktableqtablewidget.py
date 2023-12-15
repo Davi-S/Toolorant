@@ -3,7 +3,7 @@ import PySide6.QtGui as QtGui
 import PySide6.QtCore as QtCore
 from .player import Player
 
-
+# TODO: use enum for table headers
 class RankTableQTableWidget(QtWidgets.QTableWidget):
     COLUMNS = [
         'Party',
@@ -81,7 +81,8 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
     def populate_table(self, player_list: list[Player]):
         self.setRowCount(len(player_list))
         for row, player in enumerate(player_list):
-            self.set_table_item(row, self.COLUMNS.index('Party'), player.party)
+            self.setRowHeight(row, self._row_height)
+            self.set_table_item(row, self.COLUMNS.index('Party'), player.party, background=QtGui.QColor(0, 0, 0, 0))
             self.set_table_item(row, self.COLUMNS.index('Name'), player.full_name)
             self.set_table_item(row, self.COLUMNS.index('Agent'), player.agent.name)
             self.set_table_item(row, self.COLUMNS.index('Current Rank'), player.current_rank.name)
@@ -92,9 +93,16 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
             self.set_table_item(row, self.COLUMNS.index('HS'), player.head_shot)
             self.set_table_item(row, self.COLUMNS.index('Account Level'), player.account_level)
 
-    def set_table_item(self, row, column, value, alignment=None):
+    def set_table_item(self, row, column, value, alignment=None, background=None):
         item = QtWidgets.QTableWidgetItem(str(value))
-        self.setRowHeight(row, self._row_height)
-        self.setItem(row, column, item)
         if alignment is not None:
             item.setTextAlignment(alignment)
+        if background is None:
+            # Alternate row colors
+            if row % 2 == 0:
+                item.setBackground(QtGui.QColor(51, 61, 68))  
+            else:
+                item.setBackground(QtGui.QColor(255, 255, 255, 0))
+        else:
+            item.setBackground(background)
+        self.setItem(row, column, item)
