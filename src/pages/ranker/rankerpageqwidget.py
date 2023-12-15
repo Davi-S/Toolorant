@@ -32,6 +32,12 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
     def setup_ui(self):
         self.ui = Ui_ranker_pg()
         self.ui.setupUi(self)
+        # Setup table
+        table = RankTableQTableWidget(self.ui.players_ranks_frm)
+        layout = QtWidgets.QVBoxLayout(self.ui.players_ranks_frm)
+        layout.addWidget(table)
+        self.ui.players_ranks_frm.setLayout(layout)
+        self.ui.rank_table_tbl = table
 
     def rank_btn_clicked(self):
         logger.info('Rank button clicked')
@@ -44,13 +50,8 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         logger.info('Updating UI')
         self.ui.rank_btn.setText('GET RANK')
         
-        # Setup table
-        table = RankTableQTableWidget(self.ui.players_ranks_frm)
-        layout = QtWidgets.QVBoxLayout(self.ui.players_ranks_frm)
-        layout.addWidget(table)
-        self.ui.players_ranks_frm.setLayout(layout)
-        
-        # TODO: load rank_result data into the table
+        # TODO
+        self.ui.rank_table_tbl.populate_table(rank_result)
         
         self.ui.rank_btn.setEnabled(True)
         logger.info('UI updated')

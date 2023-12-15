@@ -125,3 +125,9 @@ QLineEdit#client_id_ledt,
 QLineEdit#client_secret_ledt {
     border: 2px solid white;
 }
+
+QHeaderView::section {
+    font: 9pt "Roboto";
+    background-color: transparent; 
+    color: rgba(255, 255, 255, 0.5);
+}

@@ -1,12 +1,14 @@
+import random
+
 import aiohttp
+import valclient.exceptions
 
 import game_resources as gr
 from client import CustomClient
-import valclient.exceptions
 
 
 class Player:
-    # TODO: add team information
+    # TODO: getter methods for attributes to get the formatted values
     __slots__ = (
         'puuid',
         'full_name',        # Name Service
@@ -20,6 +22,8 @@ class Player:
         'kills_per_deaths', # Match Details
         'head_shot',        # Match Details
         'account_level',    # Current Game Match
+        'team',             # TODO
+        'party',            # TODO
         '_player_mmr',
     )
 
@@ -107,7 +111,7 @@ class Player:
             total_games = last_season_comp['NumberOfGames']
             won_games = last_season_comp['NumberOfWins']
             # Percent
-            self.win_rate = round(won_games / total_games * 100, 2) if total_games else 0
+            self.win_rate = round(won_games / total_games * 100, 1) if total_games else 0
         except (KeyError, TypeError):
             self.win_rate = 0
 
@@ -144,8 +148,17 @@ class Player:
                         head_shots += damage['headshots']
             except (TypeError, valclient.exceptions.ResponseError):
                 continue
-        self.head_shot = round(head_shots / total_shots * 100, 2) if total_shots else 0
+        self.head_shot = round(head_shots / total_shots * 100, 1) if total_shots else 0
 
     async def set_account_level(self):
         if player := next((player for player in self._current_game_match['Players'] if player['Subject'] == self.puuid), None):
             self.account_level = player['PlayerIdentity']['AccountLevel']
+            
+    async def set_party(self):
+        # TODO
+        parties = [0, 1, 2, 3, 4]
+        self.party = random.choice(parties)
+        
+    async def set_team(self):
+        # TODO
+        self.team = 'BLUE' if random.randint(0, 1) == 1 else 'RED'
