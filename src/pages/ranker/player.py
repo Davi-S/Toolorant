@@ -24,6 +24,7 @@ class Player:
         'team',             # Current Game Match
         'party',            # Party Player
         '_player_mmr',
+        # TODO: Add kills_per_match attribute
     )
 
     _client = None
@@ -162,6 +163,7 @@ class Player:
         
         
     async def set_party(self):
+        # TODO: Fix this. This is not working as expected. The party ID is always the same for all players
         party = await self._client.a_party_fetch_player(self._session, self.puuid)
         self.party = party['CurrentPartyID']
     ######################################

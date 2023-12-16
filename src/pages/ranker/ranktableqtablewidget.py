@@ -6,14 +6,14 @@ from .player import Player
 # TODO: use enum for table headers
 class RankTableQTableWidget(QtWidgets.QTableWidget):
     COLUMNS = [
-        'Party',
+        # 'Party',  # Currently not working
         'Name',
         'Agent',
         'Current Rank',
         'Rank Rating',
         'Peak Rank',
         'Win Rate',
-        'KD',
+        'K/D',
         'HS',
         'Account Level',
     ]
@@ -53,17 +53,17 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
 
         # Set stretch factor for headers that should expand as needed
         for i, column in enumerate(self.COLUMNS):
-            if column not in ['Party', 'Agent', 'Current Rank', 'Peak Rank', 'Rank Rating', 'Win Rate', 'KD', 'HS', 'Account Level']:
+            if column not in ['Party', 'Agent', 'Current Rank', 'Peak Rank', 'Rank Rating', 'Win Rate', 'K/D', 'HS', 'Account Level']:
                 self.horizontalHeader().setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
                 
         # Set headers fixed widths
-        self.setColumnWidth(self.COLUMNS.index('Party'),         self._char_size * 1)   
+        # self.setColumnWidth(self.COLUMNS.index('Party'),         self._char_size * 1)   
         self.setColumnWidth(self.COLUMNS.index('Agent'),         self._char_size * 6)
         self.setColumnWidth(self.COLUMNS.index('Current Rank'),  self._char_size * 7)
         self.setColumnWidth(self.COLUMNS.index('Peak Rank'),     self._char_size * 7)
         self.setColumnWidth(self.COLUMNS.index('Rank Rating'),   self._char_size * 3.5)
         self.setColumnWidth(self.COLUMNS.index('Win Rate'),      self._char_size * 3.5)   
-        self.setColumnWidth(self.COLUMNS.index('KD'),            self._char_size * 3.5)         
+        self.setColumnWidth(self.COLUMNS.index('K/D'),            self._char_size * 3.5)         
         self.setColumnWidth(self.COLUMNS.index('HS'),            self._char_size * 3.5)         
         self.setColumnWidth(self.COLUMNS.index('Account Level'), self._char_size * 3.5)
 
@@ -71,7 +71,7 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
         alias_names = {
             'Name': '',
             'Agent': '',
-            'Party': '',
+            # 'Party': '',
             'Rank Rating': 'RR',
             'Win Rate': 'WR',
             'Account Level': 'LVL',
@@ -84,14 +84,14 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
         self.setRowCount(len(player_list))
         for row, player in enumerate(player_list):
             self.setRowHeight(row, self._row_height)
-            self.set_table_item(row, self.COLUMNS.index('Party'), player.party, background=QtGui.QColor(0, 0, 0, 0), font_size=9)
+            # self.set_table_item(row, self.COLUMNS.index('Party'), player.party, background=QtGui.QColor(0, 0, 0, 0), font_size=9)
             self.set_table_item(row, self.COLUMNS.index('Name'), player.full_name, foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('Agent'), player.agent.name.title(), foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('Current Rank'), player.current_rank.name.replace('_', ' ').title(), foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('Rank Rating'), player.rank_rating, foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('Peak Rank'), player.peak_rank.name.replace('_', ' ').title(), foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('Win Rate'), player.win_rate, foreground=player.team)
-            self.set_table_item(row, self.COLUMNS.index('KD'), player.kills_per_deaths, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('K/D'), player.kills_per_deaths, foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('HS'), player.head_shot, foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('Account Level'), player.account_level, foreground=player.team)
 
