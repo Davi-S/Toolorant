@@ -7,6 +7,7 @@ from client import CustomClient
 
 class Player:
     # TODO: getter methods for attributes to get the formatted values
+    # TODO: do not use __slots__
     __slots__ = (
         'puuid',
         'full_name',        # Name Service

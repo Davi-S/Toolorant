@@ -80,17 +80,16 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
             column_index = self.COLUMNS.index(name)
             self.setHorizontalHeaderItem(column_index, QtWidgets.QTableWidgetItem(alias))
 
-        
     def populate_table(self, player_list: list[Player]):
         self.setRowCount(len(player_list))
         for row, player in enumerate(player_list):
             self.setRowHeight(row, self._row_height)
             self.set_table_item(row, self.COLUMNS.index('Party'), player.party, background=QtGui.QColor(0, 0, 0, 0), font_size=9)
             self.set_table_item(row, self.COLUMNS.index('Name'), player.full_name, foreground=player.team)
-            self.set_table_item(row, self.COLUMNS.index('Agent'), player.agent.name, foreground=player.team)
-            self.set_table_item(row, self.COLUMNS.index('Current Rank'), player.current_rank.name, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Agent'), player.agent.name.title(), foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Current Rank'), player.current_rank.name.replace('_', ' ').title(), foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('Rank Rating'), player.rank_rating, foreground=player.team)
-            self.set_table_item(row, self.COLUMNS.index('Peak Rank'), player.peak_rank.name, foreground=player.team)
+            self.set_table_item(row, self.COLUMNS.index('Peak Rank'), player.peak_rank.name.replace('_', ' ').title(), foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('Win Rate'), player.win_rate, foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('KD'), player.kills_per_deaths, foreground=player.team)
             self.set_table_item(row, self.COLUMNS.index('HS'), player.head_shot, foreground=player.team)
