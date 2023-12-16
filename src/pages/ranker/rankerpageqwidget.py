@@ -62,14 +62,12 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         """Return a copy of the player list with the party ID replaced with symbols"""
         # Do not change the original object
         players = copy.deepcopy(_players)
-
         party_count = {}
         teams_char = {}
         # Count the occurrences of each party and initialize teams_char dictionary
         for player in players:
             party_count[player.party] = party_count.get(player.party, 0) + 1
             teams_char.setdefault(player.team, {})
-
         # Replace 'party' attribute with symbols
         for player in players:
             # Empty space for players alone in a party

@@ -51,12 +51,12 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
         self.setHorizontalHeaderLabels(self.COLUMNS)
         self.horizontalHeader().setDefaultAlignment(QtCore.Qt.AlignLeft)
 
-        # Set stretch factor for columns that should expand as needed
+        # Set stretch factor for headers that should expand as needed
         for i, column in enumerate(self.COLUMNS):
             if column not in ['Party', 'Agent', 'Current Rank', 'Peak Rank', 'Rank Rating', 'Win Rate', 'KD', 'HS', 'Account Level']:
                 self.horizontalHeader().setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
                 
-        # Set columns fixed widths
+        # Set headers fixed widths
         self.setColumnWidth(self.COLUMNS.index('Party'),         self._char_size * 1)   
         self.setColumnWidth(self.COLUMNS.index('Agent'),         self._char_size * 6)
         self.setColumnWidth(self.COLUMNS.index('Current Rank'),  self._char_size * 7)
@@ -76,8 +76,8 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
             'Win Rate': 'WR',
             'Account Level': 'LVL',
             }
-        for actual_name, alias in alias_names.items():
-            column_index = self.COLUMNS.index(actual_name)
+        for name, alias in alias_names.items():
+            column_index = self.COLUMNS.index(name)
             self.setHorizontalHeaderItem(column_index, QtWidgets.QTableWidgetItem(alias))
 
         
