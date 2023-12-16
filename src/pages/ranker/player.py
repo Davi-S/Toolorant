@@ -1,5 +1,3 @@
-import random
-
 import aiohttp
 import valclient.exceptions
 
@@ -55,7 +53,10 @@ class Player:
                 method = getattr(self, f'set_{attr}', None)
                 if method is not None:
                     await method()
-
+                    
+    ####################################
+    ########## SETTER METHODS ##########    
+    ####################################
     async def set_full_name(self):
         self.full_name = await self._client.a_get_player_full_name(self._session, self.puuid)
 
@@ -162,3 +163,6 @@ class Player:
     async def set_party(self):
         party = await self._client.a_party_fetch_player(self._session, self.puuid)
         self.party = party['CurrentPartyID']
+    ######################################
+    ######### END SETTER METHODS #########
+    ######################################
