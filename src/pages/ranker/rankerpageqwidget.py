@@ -1,3 +1,4 @@
+import copy
 import logging
 
 import PySide6.QtCore as QtCore
@@ -49,12 +50,39 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
     def update_ui_with_results(self, rank_result: list[Player]):
         logger.info('Updating UI')
         self.ui.rank_btn.setText('GET RANK')
-        
-        # TODO: order the player list
+
+        rank_result = sorted(rank_result, key=lambda x: x.team)
+        rank_result = self.replace_party_symbols(rank_result)
         self.ui.rank_table_tbl.populate_table(rank_result)
-        
+
         self.ui.rank_btn.setEnabled(True)
         logger.info('UI updated')
+
+    def replace_party_symbols(self, _players: list[Player], symbol_1: str = '>', symbol_2: str = '<'):
+        """Return a copy of the player list with the party ID replaced with symbols"""
+        # Do not change the original object
+        players = copy.deepcopy(_players)
+
+        party_count = {}
+        teams_char = {}
+        # Count the occurrences of each party and initialize teams_char dictionary
+        for player in players:
+            party_count[player.party] = party_count.get(player.party, 0) + 1
+            teams_char.setdefault(player.team, {})
+
+        # Replace 'party' attribute with symbols
+        for player in players:
+            # Empty space for players alone in a party
+            if party_count[player.party] == 1:
+                player.party = ' '
+            else:
+                char_dict = teams_char[player.team]
+                player.party = char_dict.setdefault(
+                    player.party, symbol_1
+                    if symbol_2 in char_dict.values()
+                    else symbol_2
+                )
+        return players
 
 
 class RankerQThread(QtCore.QThread):
