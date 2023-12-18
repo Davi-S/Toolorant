@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ranker_pg</class>
+ <widget class="QWidget" name="ranker_pg">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1080</width>
+    <height>610</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QFrame" name="main_frm">
+   <property name="geometry">
+    <rect>
+     <x>61</x>
+     <y>61</y>
+     <width>958</width>
+     <height>488</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="PrimaryQPushButton" name="rank_btn">
+    <property name="geometry">
+     <rect>
+      <x>319</x>
+      <y>0</y>
+      <width>320</width>
+      <height>45</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>45</height>
+     </size>
+    </property>
+    <property name="text">
+     <string>GET RANK</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="players_ranks_frm">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>71</y>
+      <width>958</width>
+      <height>417</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>958</width>
+      <height>417</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>958</width>
+      <height>417</height>
+     </size>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+  </widget>
+  <widget class="TopOptionQToolButton" name="menu_btn">
+   <property name="geometry">
+    <rect>
+     <x>57</x>
+     <y>6</y>
+     <width>53</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>MENU</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../../../resources/images.qrc">
+     <normaloff>:/icons/icons/losangle.png</normaloff>:/icons/icons/losangle.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>9</width>
+     <height>9</height>
+    </size>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <property name="autoRaise">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontal_line_top" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>12</y>
+     <width>1080</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="line" stdset="0">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QWidget" name="horizontal_line_bottom" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>595</y>
+     <width>1080</width>
+     <height>3</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="line" stdset="0">
+    <bool>true</bool>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TopOptionQToolButton</class>
+   <extends>QToolButton</extends>
+   <header>custom/topoptionqtoolbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>PrimaryQPushButton</class>
+   <extends>QPushButton</extends>
+   <header>custom/primaryqpushbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../resources/images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

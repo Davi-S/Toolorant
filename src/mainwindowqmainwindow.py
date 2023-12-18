@@ -12,6 +12,7 @@ import pages.instalocker.instalockerpageqwidget as instalocker_pg
 import pages.main_menu.mainmenupageqwidget as main_menu_pg
 import pages.no_valorant.novalorantpageqwidget as no_valorant_pg
 import pages.stream_hunter.streamhunterpageqwidget as stream_hunter_pg
+import pages.ranker.rankerpageqwidget as ranker_pg
 from client import CustomClient
 from settings import app_settings, user_settings
 from updatenotifierqdialog import UpdateNotifierQDialog
@@ -64,6 +65,9 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
         """Create ui and apply global stylesheets"""
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        # Move the window to previous position
+        if position := user_settings.window_position:
+            self.move(QtCore.QPoint(*position))
         self.setWindowFlags(
             self.windowFlags() |
             QtCore.Qt.FramelessWindowHint
@@ -71,18 +75,21 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
         self.setStyleSheet(load_style_sheet(Path(__file__).resolve().parent / 'view/main.qss'))
         
     def check_updates(self) -> None:
-        response = requests.get("https://api.github.com/repos/Davi-S/Toolorant/releases/latest")
-        latest_version = response.json()["tag_name"]
-        latest_version = version.parse(latest_version)
+        try:
+            response = requests.get("https://api.github.com/repos/Davi-S/Toolorant/releases/latest")
+            latest_version = response.json()["tag_name"]
+            latest_version = version.parse(latest_version)
 
-        current_version = app_settings.version
-        current_version = version.parse(current_version)
-        
-        if latest_version > current_version:
-            dialog = UpdateNotifierQDialog(latest_version)
-            reply = dialog.exec_()
-            if reply == QtWidgets.QDialog.Accepted:
-                QtGui.QDesktopServices.openUrl(QtCore.QUrl('https://github.com/Davi-S/Toolorant/releases/latest'))
+            current_version = app_settings.version
+            current_version = version.parse(current_version)
+            
+            if latest_version > current_version:
+                dialog = UpdateNotifierQDialog(latest_version)
+                reply = dialog.exec_()
+                if reply == QtWidgets.QDialog.Accepted:
+                    QtGui.QDesktopServices.openUrl(QtCore.QUrl('https://github.com/Davi-S/Toolorant/releases/latest'))
+        except Exception as error:
+            logger.error(f'Error while trying to fetch latest version: {error}')
         
     def setup_dependencies(self) -> bool:
         """
@@ -136,7 +143,7 @@ class MainWindowQMainWindow(QtWidgets.QMainWindow):
         self.page_manager.add_page(main_menu_pg.MainMenuPageQWidget, 'main_menu_pg')
         self.page_manager.add_page(instalocker_pg.InstalockerPageQWidget, 'instalocker_pg')
         self.page_manager.add_page(stream_hunter_pg.StreamHunterPageQWidget, 'stream_hunter_pg')
-    
+        self.page_manager.add_page(ranker_pg.RankerPageQWidget, 'ranker_pg')
 
 def get_main_window() -> MainWindowQMainWindow | None:
     """Returns the MainWindowQMainWindow in the application (if any)"""

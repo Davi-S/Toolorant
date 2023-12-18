@@ -1,7 +1,7 @@
-/* red: #FF4655 */
-/* red: rgb(255, 70, 85) */
-/* blue: #0F1B23 */
-/* blue: rgb(15, 27, 35) */
+/* red: #FF4655 rgb(255, 70, 85) */
+/* blue: #0F1B23 rgb(15, 27, 35) */
+/* green #66C2A9 rgb(102, 194, 169)*/
+/* left #F05C57 rgb(240, 92, 87)*/
 
 * {
     font: 12pt "Roboto";
@@ -68,7 +68,8 @@ QLabel#reload_lbl {
 } 
 
 QAbstractButton#start_stop_btn,
-QAbstractButton#hunt_btn {
+QAbstractButton#hunt_btn,
+QAbstractButton#rank_btn {
     font: 700 15pt "Roboto";
     letter-spacing: 1px;
     border: 2px solid #FF4655;
@@ -123,4 +124,10 @@ QLabel#player_agent_lbl {
 QLineEdit#client_id_ledt, 
 QLineEdit#client_secret_ledt {
     border: 2px solid white;
+}
+
+QHeaderView::section {
+    font: 9pt "Roboto";
+    background-color: transparent; 
+    color: rgba(255, 255, 255, 0.5);
 }

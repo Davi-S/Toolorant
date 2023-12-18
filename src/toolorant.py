@@ -1,6 +1,6 @@
 def main():
     print(f'===== Called "{__file__}" file =====')
-    print('===== Starting slash screen =====')
+    print('===== Starting splash screen =====')
     # SPLASH SCREEN
     import PySide6.QtWidgets as QtWidgets
     from splashscreenqsplashscreen import SplashScreenQSplashScreen
