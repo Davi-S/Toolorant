@@ -81,6 +81,10 @@ dict_config = {
         'websockets.client': {
             'handlers': [],
             'level': 'INFO'
+        },
+        'asyncio': {
+            'handlers': [],
+            'level': 'INFO'
         }
     }
 }
