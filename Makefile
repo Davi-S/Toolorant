@@ -17,7 +17,7 @@ exe: .venv/
 	$(ACTIVATE_VENV) nuitka --standalone --remove-output --disable-console \
 	--windows-icon-from-ico="src/resources/favicon.ico" \
 	--plugin-enable=pyside6 \
-	--include-module=websockets \
+	--include-package=websockets \
 	--include-data-files=src/view/*.qss=view/ \
 	--include-data-files=src/settings/*.toml=settings/ \
 	--include-data-files=src/settings/*.json=settings/ \
