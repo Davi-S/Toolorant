@@ -36,8 +36,8 @@ Toolorant is a collection of tools for Valorant designed to enhance your gamepla
 - **Stream Hunter**:
   Find the Twitch live stream of your opponents and get privileged information.
 
-- **Ranker** ([In development](#outro)):
-  See the rank, KD, and other information about everyone in the match
+- **Ranker**:
+  See the rank, KD, HS%, and other information about everyone in the match
 
 ## Features
 
