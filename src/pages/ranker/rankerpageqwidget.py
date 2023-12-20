@@ -62,7 +62,6 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         # As party is not currently working, this line is commented.
         # rank_result = self.replace_party_symbols(rank_result)
         self.ui.rank_table_tbl.populate_table(rank_result)
-
         logger.info('UI updated')
 
     def replace_party_symbols(self, _players: list[Player], symbol_1: str = '>', symbol_2: str = '<'):
@@ -91,7 +90,6 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
 
 
 class RankerQThread(QtCore.QThread):
-    # Using object type because dict does not work as intended. https://stackoverflow.com/a/43977161/14593213
     rank_result = QtCore.Signal(list)
 
     def __init__(self, ranker: Ranker):
@@ -99,6 +97,5 @@ class RankerQThread(QtCore.QThread):
         self.ranker = ranker
 
     def run(self):
-        logger.info('Ranker thread started')
         result = self.ranker.rank()
         self.rank_result.emit(result)
