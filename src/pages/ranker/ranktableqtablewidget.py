@@ -85,7 +85,8 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
             'Agent': '',
             # 'Party': '',
             'Rank Rating': 'RR',
-            'Win Rate': 'WR',
+            'Win Rate': 'WR (%)',
+            'HS': 'HS (%)',
             'Account Level': 'LVL',
             }
         for name, alias in alias_names.items():
