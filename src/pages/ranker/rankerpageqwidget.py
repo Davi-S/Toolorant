@@ -34,6 +34,7 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         self.ui = Ui_ranker_pg()
         self.ui.setupUi(self)
         # Setup table
+        logger.debug('Setting table')
         table = RankTableQTableWidget(self.ui.players_ranks_frm)
         layout = QtWidgets.QVBoxLayout(self.ui.players_ranks_frm)
         layout.addWidget(table)
@@ -93,5 +94,6 @@ class RankerQThread(QtCore.QThread):
         self.ranker = ranker
 
     def run(self):
+        logger.info('Ranker thread started')
         result = self.ranker.rank()
         self.rank_result.emit(result)

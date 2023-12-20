@@ -1,7 +1,12 @@
-import PySide6.QtWidgets as QtWidgets
-import PySide6.QtGui as QtGui
+import logging
+
 import PySide6.QtCore as QtCore
+import PySide6.QtGui as QtGui
+import PySide6.QtWidgets as QtWidgets
+
 from .player import Player
+
+logger = logging.getLogger(__name__)
 
 # TODO: use enum for table headers
 class RankTableQTableWidget(QtWidgets.QTableWidget):
@@ -24,11 +29,13 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
     
     _blue_team_color = QtGui.QColor(102, 194, 169)
     _red_team_color = QtGui.QColor(240, 92, 87)
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setup_ui()
 
     def setup_ui(self):
+        logger.debug('See only')
         # Make table "see only"
         self.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
         self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
@@ -40,22 +47,26 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
         self.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Fixed)
         self.verticalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Fixed)
         
+        logger.debug('Hide stuff')
         # Hide stuff
         self.verticalHeader().setVisible(False)
         self.setFrameStyle(QtWidgets.QFrame.NoFrame)
         self.setShowGrid(False)
         
+        logger.debug('Other attributes')
         # Set other attributes
         self.horizontalHeader().setMinimumSectionSize(self._char_size)
         self.setColumnCount(len(self.COLUMNS))
         self.setHorizontalHeaderLabels(self.COLUMNS)
         self.horizontalHeader().setDefaultAlignment(QtCore.Qt.AlignLeft)
 
+        logger.debug('Stretch headers')
         # Set stretch factor for headers that should expand as needed
         for i, column in enumerate(self.COLUMNS):
             if column not in ['Party', 'Agent', 'Current Rank', 'Peak Rank', 'Rank Rating', 'Win Rate', 'K/D', 'HS', 'Account Level']:
                 self.horizontalHeader().setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
                 
+        logger.debug('Fixed size headers')
         # Set headers fixed widths
         # self.setColumnWidth(self.COLUMNS.index('Party'),         self._char_size * 1)   
         self.setColumnWidth(self.COLUMNS.index('Agent'),         self._char_size * 6)
@@ -67,6 +78,7 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
         self.setColumnWidth(self.COLUMNS.index('HS'),            self._char_size * 3.5)         
         self.setColumnWidth(self.COLUMNS.index('Account Level'), self._char_size * 3.5)
 
+        logger.debug('Headers aliases')
         # Set alias names for specific headers
         alias_names = {
             'Name': '',
@@ -81,6 +93,7 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
             self.setHorizontalHeaderItem(column_index, QtWidgets.QTableWidgetItem(alias))
 
     def populate_table(self, player_list: list[Player]):
+        logger.debug('Populating table')
         self.setRowCount(len(player_list))
         for row, player in enumerate(player_list):
             self.setRowHeight(row, self._row_height)
@@ -96,6 +109,7 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
             self.set_table_item(row, self.COLUMNS.index('Account Level'), player.account_level, foreground=player.team)
 
     def set_table_item(self, row, column, value, background=None, foreground=None, font_size=None):
+        logger.debug(f'Setting item in {row=} {column=} with {value=}')
         item = QtWidgets.QTableWidgetItem(str(value))
         # Background
         if background is None:

@@ -23,11 +23,13 @@ class Ranker:
         return [player['Subject'] for player in match_info['Players']]
 
     async def get_players(self, puuids: list[str]) -> list[Player]:
+        logger.info('Getting players')
         players = [Player(puuid) for puuid in puuids]
         async with aiohttp.ClientSession() as session:
             Player.init_cls(self.client, session)
             tasks = [asyncio.create_task(player.build()) for player in players]
             await asyncio.gather(*tasks)
+        logger.info('Players built')
         return players
 
     def rank(self) -> list[Player]:
@@ -43,6 +45,7 @@ class Ranker:
 
         players_puuid = self.get_players_puuid(match_info)
         players = asyncio.run(self.get_players(players_puuid))
+        logger.info('Got players successfully')
         # Save the match result on the cache
         self._seen_matches[match_info['MatchID']] = players
         return players

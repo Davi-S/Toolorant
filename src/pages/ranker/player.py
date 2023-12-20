@@ -1,9 +1,12 @@
+import logging
+
 import aiohttp
 import valclient.exceptions
 
 import game_resources as gr
 from client import CustomClient
 
+logger = logging.getLogger(__name__)
 
 class Player:
     # TODO: getter methods for attributes to get the formatted values
@@ -35,6 +38,7 @@ class Player:
 
     @classmethod
     def init_cls(cls, client: CustomClient, session: aiohttp.ClientSession) -> None:
+        logger.debug('Initializing class')
         cls._client = client
         cls._session = session
         cls._current_game_match = cls._client.coregame_fetch_match()
@@ -50,6 +54,7 @@ class Player:
         return self._player_mmr
 
     async def build(self):
+        logger.debug(f'Building player {self.puuid=}')
         for attr in self.__slots__:
             if not attr.startswith('_'):
                 method = getattr(self, f'set_{attr}', None)
