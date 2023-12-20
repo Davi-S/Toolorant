@@ -43,21 +43,26 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
 
     def rank_btn_clicked(self):
         logger.info('Rank button clicked')
-        self.ui.rank_btn.setEnabled(False)
-        self.ui.rank_btn.setText('GETTING RANKS...')
-        # Start the rank operation in a separate thread to not block the UI
-        self.ranker_thread.start()
+        if not self.ranker_thread.isRunning():
+            logger.info('Thread is not running. Starting it')
+            self.ui.rank_btn.setText('GETTING RANKS...')
+            # Start the rank operation in a separate thread to not block the UI
+            self.ranker_thread.start()
+        else:
+            logger.info('Thread is running. Terminating it')
+            # Force cancel the thread and update the UI
+            self.ranker_thread.terminate()
+            self.ranker_thread.wait()
+            self.update_ui_with_results([])
 
     def update_ui_with_results(self, rank_result: list[Player]):
         logger.info('Updating UI')
         self.ui.rank_btn.setText('GET RANK')
-
         rank_result = sorted(rank_result, key=lambda x: x.team)
         # As party is not currently working, this line is commented.
         # rank_result = self.replace_party_symbols(rank_result)
         self.ui.rank_table_tbl.populate_table(rank_result)
 
-        self.ui.rank_btn.setEnabled(True)
         logger.info('UI updated')
 
     def replace_party_symbols(self, _players: list[Player], symbol_1: str = '>', symbol_2: str = '<'):
