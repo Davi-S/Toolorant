@@ -69,6 +69,8 @@ class PageManager:
             for page in self.pages:
                 if page[1] == _page:
                     idx = page[0]
+                    self.pages.remove(page)
+                    break
         else:
             idx = _page
         widget = self.stacked_widget.widget(idx)
@@ -83,6 +85,7 @@ class PageManager:
             self.stacked_widget.removeWidget(widget)
             widget.deleteLater()
             count += 1
+        self.pages.clear()
         if count > 0:
             logger.info(f'All pages deleted. Total of {count} pages')
         else:
