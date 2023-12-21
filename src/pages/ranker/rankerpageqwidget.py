@@ -42,12 +42,15 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         self.ui.rank_table_tbl = table
 
     def rank_btn_clicked(self):
-        logger.info('Rank button clicked')
+        logger.info('Rank button clicked') 
+        # To start the thread
         if not self.ranker_thread.isRunning():
             logger.info('Thread is not running. Starting it')
             self.ui.rank_btn.setText('GETTING RANKS...')
             # Start the rank operation in a separate thread to not block the UI
             self.ranker_thread.start()
+            
+        # To stop the thread if it already running
         else:
             logger.info('Thread is running. Terminating it')
             # Force cancel the thread and update the UI
@@ -70,7 +73,8 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         players = copy.deepcopy(_players)
         party_count = {}
         teams_char = {}
-        # Count the occurrences of each party and initialize teams_char dictionary
+        # Count the occurrences of each party and initialize teams_char dictionary.
+        # teams_char dictionary holds information about if a symbol has been used in a team
         for player in players:
             party_count[player.party] = party_count.get(player.party, 0) + 1
             teams_char.setdefault(player.team, {})
