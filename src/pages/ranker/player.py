@@ -21,13 +21,13 @@ class Player:
         'rank_rating',      # Player MMR
         'peak_rank',        # Player MMR
         'win_rate',         # Player MMR
-        'kills_per_deaths', # Match Details
+        'kills_per_death',  # Match Details
+        'kills_per_match',  # Match Details
         'head_shot',        # Match Details
         'account_level',    # Current Game Match
         'team',             # Current Game Match
         'party',            # Party Player
         '_player_mmr',
-        # TODO: Add kills_per_match attribute
     )
 
     _client = None
@@ -129,8 +129,8 @@ class Player:
         except (KeyError, TypeError):
             self.win_rate = 0
     
-    # TODO: set_kills_per_deaths and set_head_shot can use the same a_fetch_competitive_updates response and get all info in one single loop
-    async def set_kills_per_deaths(self):
+    # TODO: set_kills_per_death, set_kills_per_match, and set_head_shot can use the same a_fetch_competitive_updates response and get all info in one single loop
+    async def set_kills_per_death(self):
         """Set the player's kills per death (K/D). Based on a maximum of 20 last matches. Default's set to 0"""
         comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
         kills, deaths = 0, 0
@@ -142,7 +142,21 @@ class Player:
                     deaths += player['stats']['deaths']
             except (TypeError, valclient.exceptions.ResponseError):
                 continue
-        self.kills_per_deaths = round(kills / deaths, 2) if deaths else kills
+        self.kills_per_death = round(kills / deaths, 2) if deaths else kills
+        
+    async def set_kills_per_match(self):
+        """Set the player's kills per match (K/M). Based on a maximum of 20 last matches. Default's set to 0"""
+        comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
+        kills, matches = 0, 0
+        for match in comp_updates:
+            try:
+                match_detail = await self._client.a_fetch_match_details(self._session, match['MatchID'])
+                if player := next((player for player in match_detail['players'] if player['subject'] == self.puuid), None):
+                    kills += player['stats']['kills']
+                    matches += 1
+            except (TypeError, valclient.exceptions.ResponseError):
+                continue
+        self.kills_per_match = round(kills / matches, 2) if matches else 0
 
     async def set_head_shot(self):
         """Set the player's head shot percent of last 20 matches. Default's set to 0"""
@@ -174,7 +188,6 @@ class Player:
         """Set the player's team. "Blue" or "Red"."""
         player = next((player for player in self._current_game_match['Players'] if player['Subject'] == self.puuid), None)
         self.team = player['TeamID']
-        
         
     async def set_party(self):
         # TODO: Fix this. This is not working as expected. The party ID is always the same for all players

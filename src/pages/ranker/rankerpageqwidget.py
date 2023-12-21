@@ -62,11 +62,10 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
         logger.info('Updating UI')
         self.ui.rank_btn.setText('GET RANK')
         rank_result = sorted(rank_result, key=lambda x: x.team)
-        # As party is not currently working, this line is commented.
-        # rank_result = self.replace_party_symbols(rank_result)
         self.ui.rank_table_tbl.populate_table(rank_result)
         logger.info('UI updated')
 
+    # TODO: move this function to the player class
     def replace_party_symbols(self, _players: list[Player], symbol_1: str = '>', symbol_2: str = '<'):
         """Return a copy of the player list with the party ID replaced with symbols"""
         # Do not change the original object

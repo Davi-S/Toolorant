@@ -73,7 +73,8 @@ class Ranker:
         #     player.rank_rating = random.randint(0, 100)
         #     player.peak_rank = gr.Rank(random.randint(1, 10))
         #     player.win_rate = round(random.random() * 100, 1)
-        #     player.kills_per_deaths = random.randint(0, 5)
+        #     player.kills_per_death = random.randint(0, 5)
+        #     player.kills_per_match = random.randint(0, 20)
         #     player.head_shot = round(random.random() * 100, 1)
         #     player.account_level = random.randint(1, 100)
         #     player.party = parties[i]
