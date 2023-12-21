@@ -28,6 +28,7 @@ class Player:
         'team',             # Current Game Match
         'party',            # Party Player
         '_player_mmr',
+        '_player_competitive_update'
     )
 
     _client = None
@@ -46,14 +47,23 @@ class Player:
     def __init__(self, puuid: str) -> None:
         self.puuid = puuid
         self._player_mmr = None
+        self._player_competitive_update = None
 
     async def get_player_mmr(self):
         """Fetch the player mmr or get the one from the cache"""
         if not self._player_mmr:
-            # Save the mmr response on the cache
+            # Save the response on the cache
             data = await self._client.a_fetch_mmr(self._session, self.puuid)
             self._player_mmr = data
         return self._player_mmr
+
+    async def get_player_competitive_update(self):
+        """Fetch the player competitive updates (history) or get the one from the cache"""
+        if not self._player_competitive_update:
+            # Save the response on the cache
+            data = await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20)
+            self._player_competitive_update = data
+        return self._player_competitive_update
 
     async def build(self):
         """Call the set method for each attribute in the slots"""
@@ -132,7 +142,7 @@ class Player:
     # TODO: set_kills_per_death, set_kills_per_match, and set_head_shot can use the same a_fetch_competitive_updates response and get all info in one single loop
     async def set_kills_per_death(self):
         """Set the player's kills per death (K/D). Based on a maximum of 20 last matches. Default's set to 0"""
-        comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
+        comp_updates = (await self.get_player_competitive_update())['Matches']
         kills, deaths = 0, 0
         for match in comp_updates:
             try:
@@ -146,7 +156,7 @@ class Player:
         
     async def set_kills_per_match(self):
         """Set the player's kills per match (K/M). Based on a maximum of 20 last matches. Default's set to 0"""
-        comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
+        comp_updates = (await self.get_player_competitive_update())['Matches']
         kills, matches = 0, 0
         for match in comp_updates:
             try:
@@ -160,7 +170,7 @@ class Player:
 
     async def set_head_shot(self):
         """Set the player's head shot percent of last 20 matches. Default's set to 0"""
-        comp_updates = (await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20))['Matches']
+        comp_updates = (await self.get_player_competitive_update())['Matches']
         total_shots, head_shots = 0, 0
         for match in comp_updates:
             try:
