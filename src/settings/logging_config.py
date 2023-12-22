@@ -6,6 +6,8 @@ from pathlib import Path
 
 from color_logging import ColoramaFormatter
 
+# TODO: Rotating file handler
+
 # Constants for quick changes on the dict config
 STREAM_LOGGING_LEVEL: str | None = None
 ROOT_LOGGING_LEVEL: str | None = None
