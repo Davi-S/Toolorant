@@ -66,7 +66,8 @@ dict_config = {
             'class': 'logging.FileHandler',
             'filename': str(LOGS_FOLDER.joinpath("spam.log")),
             'mode': 'w',  # TODO: make this append mode on the release version
-            'formatter': 'file'
+            'formatter': 'file',
+            'encoding': 'utf-8'
         }
     },
     'root': {
