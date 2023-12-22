@@ -6,6 +6,8 @@ from pathlib import Path
 
 from color_logging import ColoramaFormatter
 
+# TODO: Rotating file handler
+
 # Constants for quick changes on the dict config
 STREAM_LOGGING_LEVEL: str | None = None
 ROOT_LOGGING_LEVEL: str | None = None
@@ -65,8 +67,9 @@ dict_config = {
         'spam': {
             'class': 'logging.FileHandler',
             'filename': str(LOGS_FOLDER.joinpath("spam.log")),
-            'mode': 'w',
-            'formatter': 'file'
+            'mode': 'w',  # TODO: make this append mode on the release version
+            'formatter': 'file',
+            'encoding': 'utf-8'
         }
     },
     'root': {
