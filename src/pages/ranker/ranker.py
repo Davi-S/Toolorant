@@ -38,9 +38,10 @@ class Ranker:
             logger.error(f'Match information could not be fetched due to error: {error}')
             return {}
 
-        if match_info['MatchID'] in self._seen_matches:
-            logger.warn('Repeated match ID')
-            return self._seen_matches[match_info['MatchID']]
+        # Removing the cache check temporarily
+        # if match_info['MatchID'] in self._seen_matches:
+        #     logger.warn('Repeated match ID')
+        #     return self._seen_matches[match_info['MatchID']]
 
         players_puuid = self.get_players_puuid(match_info)
         logger.info('Getting players')
@@ -60,7 +61,6 @@ class Ranker:
         #     prefix = random.choice(prefixes)
         #     suffix = random.choice(suffixes)
         #     names.append(prefix + name + suffix)
-        # agents = ["ASTRA", "BREACH", "BRIMSTONE", "CHAMBER", "CYPHER", "DEADLOCK", "FADE", "GEKKO", "HARBOR", "ISO", "JETT", "KAYO", "KILLJOY", "NEON", "OMEN", "PHOENIX", "RAZE", "REYNA", "SAGE", "SKYE", "SOVA", "VIPER", "YORU"]
         # teams = ['Blue', 'Blue', 'Blue', 'Blue', 'Blue', 'Red', 'Red', 'Red', 'Red', 'Red']
         # parties = ['0', '1', '1', '2', '3', '4', '4', '7', '6', '5']
         # for i in range(10):
@@ -69,16 +69,16 @@ class Ranker:
         #     player.name = player.full_name.split('#')[0]
         #     player.tag = player.full_name.split('#')[1]
         #     player.agent = gr.Agent[agents[i]]
-        #     player.current_rank = gr.Rank(random.randint(0, 27))
-        #     player.rank_rating = random.randint(0, 100)
-        #     player.peak_rank = gr.Rank(random.randint(1, 10))
+        #     player.current_rank = gr.Rank(random.randint(10, 15))
+        #     player.rank_rating = random.randint(30, 80)
+        #     player.peak_rank = gr.Rank(random.randint(10, 25))
         #     player.win_rate = round(random.random() * 100, 1)
-        #     player.kills_per_death = random.randint(0, 5)
-        #     player.kills_per_match = random.randint(0, 20)
+        #     player.kills_per_death = random.randint(1, 5)
+        #     player.kills_per_match = random.randint(15, 20)
         #     player.head_shot = round(random.random() * 100, 1)
-        #     player.account_level = random.randint(1, 100)
+        #     player.account_level = random.randint(100, 300)
         #     player.party = parties[i]
         #     player.team = teams[i]
         #     players.append(player)
-        # time.sleep(5)
+        # # time.sleep(5)
         # return players
