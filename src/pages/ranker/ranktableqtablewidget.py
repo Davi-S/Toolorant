@@ -105,7 +105,6 @@ class RankTableQTableWidget(QtWidgets.QTableWidget):
             self.set_table_item(row, self.COLUMNS.index('Account Level'), player.account_level, foreground=player.team)
 
     def set_table_item(self, row, column, value, foreground=None):
-        logger.debug(f'Setting item in {row=} {column=} with {value=}')
         item = QtWidgets.QTableWidgetItem(str(value))
         # Alternate row colors
         if row % 2 == 0:
