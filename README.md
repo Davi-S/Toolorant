@@ -24,6 +24,7 @@ Toolorant is a collection of tools for Valorant designed to enhance your gamepla
 ![Main menu](src/resources/screenshots/main_menu.png)
 ![Instalocker](src/resources/screenshots/instalocker.png)
 ![Stream Hunter](src/resources/screenshots/stream_hunter.png)
+![Ranker](src/resources/screenshots/ranker.png)
 
 ## Tools
 
