@@ -49,23 +49,25 @@ class Player:
         self._player_mmr = None
         self._player_competitive_update = None
 
-    async def get_player_mmr(self):
+    async def get_player_mmr(self) -> dict:
         """Fetch the player mmr or get the one from the cache"""
         if not self._player_mmr:
-            # Save the response on the cache
             data = await self._client.a_fetch_mmr(self._session, self.puuid)
             self._player_mmr = data
         return self._player_mmr
 
-    async def get_player_competitive_update(self):
+    async def get_player_competitive_update(self) -> dict:
         """Fetch the player competitive updates (history) or get the one from the cache"""
         if not self._player_competitive_update:
-            # Save the response on the cache
-            data = await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20)
+            try:
+                data = await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20)
+            except valclient.exceptions.ResponseError:
+                logger.error('valclient.exceptions.ResponseError while getting player competitive history')
+                data = {}
             self._player_competitive_update = data
         return self._player_competitive_update
 
-    async def build(self):
+    async def build(self) -> None:
         """Call the set method for each attribute in the slots"""
         logger.debug(f'Building player {self.puuid=}')
         for attr in self.__slots__:
@@ -142,7 +144,7 @@ class Player:
     # TODO: set_kills_per_death, set_kills_per_match, and set_head_shot can use the same a_fetch_competitive_updates response and get all info in one single loop
     async def set_kills_per_death(self):
         """Set the player's kills per death (K/D). Based on a maximum of 20 last matches. Default's set to 0"""
-        comp_updates = (await self.get_player_competitive_update())['Matches']
+        comp_updates = (await self.get_player_competitive_update()).get('Matches', [])
         kills, deaths = 0, 0
         for match in comp_updates:
             try:
@@ -152,11 +154,11 @@ class Player:
                     deaths += player['stats']['deaths']
             except (TypeError, valclient.exceptions.ResponseError):
                 continue
-        self.kills_per_death = round(kills / deaths, 2) if deaths else kills
+        self.kills_per_death = round(kills / deaths, 1) if deaths else kills
         
     async def set_kills_per_match(self):
         """Set the player's kills per match (K/M). Based on a maximum of 20 last matches. Default's set to 0"""
-        comp_updates = (await self.get_player_competitive_update())['Matches']
+        comp_updates = (await self.get_player_competitive_update()).get('Matches', [])
         kills, matches = 0, 0
         for match in comp_updates:
             try:
@@ -166,11 +168,11 @@ class Player:
                     matches += 1
             except (TypeError, valclient.exceptions.ResponseError):
                 continue
-        self.kills_per_match = round(kills / matches, 2) if matches else 0
+        self.kills_per_match = round(kills / matches, 1) if matches else 0
 
     async def set_head_shot(self):
         """Set the player's head shot percent of last 20 matches. Default's set to 0"""
-        comp_updates = (await self.get_player_competitive_update())['Matches']
+        comp_updates = (await self.get_player_competitive_update()).get('Matches', [])
         total_shots, head_shots = 0, 0
         for match in comp_updates:
             try:
