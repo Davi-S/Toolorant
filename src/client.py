@@ -104,9 +104,9 @@ class CustomClient(valclient.Client):
             with contextlib.suppress(Exception):
                 data = json.loads(await response.text())
 
+        # TODO: remove this error raising from here
         if data is None:
-            raise valclient.exceptions.ResponseError(
-                "Request returned NoneType")
+            raise valclient.exceptions.ResponseError("Request returned NoneType")
 
         if "httpStatus" not in data:
             return data
