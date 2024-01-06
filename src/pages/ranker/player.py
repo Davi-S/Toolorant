@@ -60,7 +60,7 @@ class Player:
         """Fetch the player competitive updates (history) or get the one from the cache"""
         if not self._player_competitive_update:
             try:
-                data = await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 20)
+                data = await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 5)
             except valclient.exceptions.ResponseError:
                 logger.error('valclient.exceptions.ResponseError while getting player competitive history')
                 data = {}
