@@ -1,7 +1,6 @@
 import logging
 
 import aiohttp
-import valclient.exceptions
 import game_resources as gr
 from client import CustomClient
 
