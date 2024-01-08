@@ -12,8 +12,10 @@ def main():
     # SETUP LOGGING
     import logging
     import logging.config
-    from settings.logging_config import dict_config
+    from settings.logging_config import dict_config, rollover_all_rotating_handlers
     logging.config.dictConfig(dict_config)
+    # Create new log file every time the app runs
+    rollover_all_rotating_handlers()
     print('===== Finished logging configuration =====')
 
     print('===== Starting imports =====')
