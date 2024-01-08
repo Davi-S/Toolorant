@@ -78,7 +78,6 @@ class CustomClient(valclient.Client):
         if exceptions is None:
             exceptions = {}
 
-        data = None
         base_url = (
             self.base_url_glz
             if endpoint_type == "glz"
@@ -98,18 +97,13 @@ class CustomClient(valclient.Client):
                 port=self.lockfile["port"], endpoint=endpoint
             )
             headers = self.local_headers
-
+            
+        data = {}
         async with session.get(url, headers=headers) as response:
             # as no data is set, an exception will be raised later in the method
             with contextlib.suppress(Exception):
                 data = json.loads(await response.text())
-
-        # TODO: remove this error raising from here
-        if data is None:
-            raise valclient.exceptions.ResponseError("Request returned NoneType")
-
-        if "httpStatus" not in data:
-            return data
+        return data
 
     async def __a_coregame_check_match_id(self, session: aiohttp.ClientSession, match_id) -> str:
         player = await self.a_coregame_fetch_player(session=session)
@@ -161,7 +155,7 @@ class CustomClient(valclient.Client):
             endpoint_type="shared"
         )
 
-    async def a_fetch_competitive_updates(self, session: aiohttp.ClientSession, puuid: str = None, start_index: int = 0, end_index: int = 15, queue_id: str = "competitive") -> dict:
+    async def a_fetch_competitive_updates(self, session: aiohttp.ClientSession, puuid: str = None, start_index: int = 0, end_index: int = 10, queue_id: str = "competitive") -> dict:
         puuid = self.__check_puuid(puuid)
         return await self.a_fetch(
             session=session,
