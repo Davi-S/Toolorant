@@ -93,14 +93,11 @@ class CustomClient(valclient.Client):
         headers = self.headers
 
         if endpoint_type == "local":
-            url = "https://127.0.0.1:{port}{endpoint}".format(
-                port=self.lockfile["port"], endpoint=endpoint
-            )
+            url = "https://127.0.0.1:{port}{endpoint}".format(port=self.lockfile["port"], endpoint=endpoint)
             headers = self.local_headers
             
         data = {}
         async with session.get(url, headers=headers) as response:
-            # as no data is set, an exception will be raised later in the method
             with contextlib.suppress(Exception):
                 data = json.loads(await response.text())
         return data
