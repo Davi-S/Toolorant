@@ -82,8 +82,6 @@ dict_config = {
         'spam': {
             'class': f'{__name__}.CustomRotatingFileHandler',  # Defined in the same file
             'filename': str(LOGS_FOLDER.joinpath("spam.log")),
-            'mode': 'a',
-            'formatter': 'file',
             'encoding': 'utf-8',
             'delay': True,
         }
