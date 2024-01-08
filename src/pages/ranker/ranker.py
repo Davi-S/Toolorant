@@ -38,15 +38,19 @@ class Ranker:
             logger.error(f'Match information could not be fetched due to error: {error}')
             return {}
 
-        # Removing the cache check temporarily
+        # TODO: uncomment the cache check
         # if match_info['MatchID'] in self._seen_matches:
         #     logger.warn('Repeated match ID')
         #     return self._seen_matches[match_info['MatchID']]
 
         players_puuid = self.get_players_puuid(match_info)
         logger.info('Getting players')
-        players = asyncio.run(self.get_players(players_puuid))
-        logger.info('Got players')
+        try:
+            players = asyncio.run(self.get_players(players_puuid))
+            logger.info('Got players')
+        except Exception as error:
+            players = {}
+            logger.error(f'Error getting players: {error}')
         # Save the match result on the cache
         self._seen_matches[match_info['MatchID']] = players
         return players

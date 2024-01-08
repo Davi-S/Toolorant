@@ -58,11 +58,9 @@ class Player:
     async def get_player_competitive_update(self) -> dict:
         """Fetch the player competitive updates (history) or get the one from the cache"""
         if not self._player_competitive_update:
-            try:
-                data = await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 5)
-            except valclient.exceptions.ResponseError:
-                logger.error('valclient.exceptions.ResponseError while getting player competitive history')
-                data = {}
+            data = await self._client.a_fetch_competitive_updates(self._session, self.puuid, 0, 5)
+            if not data:
+                logger.warning(f'No data retrieved for player {self.puuid}')
             self._player_competitive_update = data
         return self._player_competitive_update
 

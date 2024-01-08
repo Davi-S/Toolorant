@@ -74,10 +74,7 @@ class CustomClient(valclient.Client):
             data = await response.text()
             return json.loads(data)[0]
 
-    async def a_fetch(self, session: aiohttp.ClientSession, endpoint="/", endpoint_type="pd", exceptions=None):
-        if exceptions is None:
-            exceptions = {}
-
+    async def a_fetch(self, session: aiohttp.ClientSession, endpoint="/", endpoint_type="pd"):
         base_url = (
             self.base_url_glz
             if endpoint_type == "glz"
