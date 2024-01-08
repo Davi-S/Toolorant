@@ -24,6 +24,7 @@ class StreamHunterPageQWidget(page_manager.BasePageQWidget):
         )
         self.ui.menu_btn.clicked.connect(lambda: self.page_manager.switch_to_page('main_menu_pg'))
         self.ui.hunt_btn.clicked.connect(self.hunt_btn_clicked)
+        # TODO: Let user know if the imputed client keys are valid. Maybe change color?
         self.ui.client_id_ledt.editingFinished.connect(self.client_id_ledt_editing_finished)
         self.ui.client_secret_ledt.editingFinished.connect(self.client_secret_ledt_editing_finished)
 
