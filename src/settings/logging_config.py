@@ -6,13 +6,6 @@ from pathlib import Path
 
 from color_logging import ColoramaFormatter
 
-# TODO: Rotating file handler
-
-# Constants for quick changes on the dict config
-STREAM_LOGGING_LEVEL: str | None = None
-ROOT_LOGGING_LEVEL: str | None = None
-LOGGERS_LOGGING_LEVEL: str | None = None
-
 # Set and create the logs folder
 LOGS_FOLDER = Path(__file__).resolve().parent.parent / '.logs/'
 if not LOGS_FOLDER.exists():
@@ -61,19 +54,19 @@ dict_config = {
     'handlers': {
         'stream': {
             'class': 'logging.StreamHandler',
-            'level': STREAM_LOGGING_LEVEL or 'INFO',
+            'level': 'INFO',
             'formatter': 'colorama',
         },
         'spam': {
             'class': 'logging.FileHandler',
             'filename': str(LOGS_FOLDER.joinpath("spam.log")),
-            'mode': 'w',  # TODO: make this append mode on the release version
+            'mode': 'a',
             'formatter': 'file',
             'encoding': 'utf-8'
         }
     },
     'root': {
-        'level': ROOT_LOGGING_LEVEL or 'DEBUG',
+        'level': 'DEBUG',
         'handlers': ['spam', 'stream']
     },
     'loggers': {
@@ -91,8 +84,3 @@ dict_config = {
         }
     }
 }
-
-# Dynamically set loggers level
-if LOGGERS_LOGGING_LEVEL:
-    for logger in dict_config['loggers']:
-        dict_config['loggers'][logger]['level'] = LOGGERS_LOGGING_LEVEL
