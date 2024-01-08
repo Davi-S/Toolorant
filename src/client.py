@@ -149,7 +149,7 @@ class CustomClient(valclient.Client):
             endpoint_type="shared"
         )
 
-    async def a_fetch_competitive_updates(self, session: aiohttp.ClientSession, puuid: str = None, start_index: int = 0, end_index: int = 10, queue_id: str = "competitive") -> dict:
+    async def a_fetch_competitive_updates(self, session: aiohttp.ClientSession, puuid: str = None, start_index: int = 0, end_index: int = 1, queue_id: str = "competitive") -> dict:
         puuid = self.__check_puuid(puuid)
         return await self.a_fetch(
             session=session,
