@@ -23,10 +23,10 @@ def rollover_all_rotating_handlers():
 
 class CustomRotatingFileHandler(logging.handlers.RotatingFileHandler):
     def __init__(self, filename: str, mode: str = "a", maxBytes: int = 0, backupCount: int = 0, encoding: str | None = None, delay: bool = False, errors: str | None = None) -> None:
-        filename = self.get_new_filename(Path(filename))
-        super().__init__(filename, mode, maxBytes, backupCount, encoding, delay, errors)
+        super().__init__(self.get_new_filename(Path(filename)), mode, maxBytes, backupCount, encoding, delay, errors)
 
-    def get_new_filename(self, filename: Path):
+    @staticmethod
+    def get_new_filename(filename: Path):
         now = datetime.datetime.now()
         dt_string = now.strftime("%d-%m-%Y %H-%M-%S")      
         new_full_path = filename.with_name(f'{dt_string} {filename.name}')
