@@ -61,8 +61,12 @@ class RankerPageQWidget(page_manager.BasePageQWidget):
     def update_ui_with_results(self, rank_result: list[Player]):
         logger.info('Updating UI')
         self.ui.rank_btn.setText('GET RANK')
-        rank_result = sorted(rank_result, key=lambda x: x.team)
-        self.ui.rank_table_tbl.populate_table(rank_result)
+        # Update table
+        if not rank_result:
+            self.ui.rank_table_tbl.clear()
+        else:
+            rank_result = sorted(rank_result, key=lambda x: x.team)
+            self.ui.rank_table_tbl.populate_table(rank_result)
         logger.info('UI updated')
 
     # TODO: move this function to the player class
