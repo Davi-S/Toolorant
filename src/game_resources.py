@@ -22,6 +22,7 @@ class Map(enum.Enum):
     SPLIT = "Bonsai"
     SUNSET = "Juliett"
     DISTRICT = "HURM_Alley"
+    DRIFT = "HURM_Helix"
     KASBAH = "HURM_Bowl"
     PIAZZA = "HURM_Yard"
 
