@@ -9,7 +9,7 @@ dynaconf==3.2.4
 frozenlist==1.4.0
 idna==3.6
 multidict==6.0.4
-Nuitka==1.9.1
+Nuitka==2.1.4
 ordered-set==4.1.0
 packaging==23.2
 pyclean==2.7.6
@@ -17,6 +17,7 @@ PySide6==6.6.0
 PySide6-Addons==6.6.0
 PySide6-Essentials==6.6.0
 requests==2.31.0
+setuptools==69.0.2
 shiboken6==6.6.0
 urllib3==2.1.0
 valclient==2.28
