@@ -31,6 +31,7 @@ class Agent(enum.Enum):
     BREACH = "5f8d3a7f-467b-97f3-062c-13acf203c006"
     BRIMSTONE = "9f0d8ba9-4140-b941-57d3-a7ad57c6b417"
     CHAMBER = "22697a3d-45bf-8dd7-4fec-84a9e28c69d7"
+    CLOVE = "1dbf2edd-4729-0984-3115-daa5eed44993"
     CYPHER = "117ed9e3-49f3-6512-3ccf-0cada7e3823b"
     DEADLOCK = "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235"
     FADE = "dade69b4-4f5a-8528-247b-219e5a1facd6"
