@@ -1,4 +1,4 @@
 # "check_dependencies" is used to ignore the dependencies on the application
 # Useful when testing the UI
 check_dependencies = true
-version = "2.5.0"
+version = "2.5.1"
