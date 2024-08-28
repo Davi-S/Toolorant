@@ -51,6 +51,7 @@ class Agent(enum.Enum):
     SKYE = "6f2a04ca-43e0-be17-7f36-b3908627744d"
     SOVA = "320b2a48-4d9b-a075-30f1-1f93a9b638fa"
     VIPER = "707eab51-4836-f488-046a-cda6bf494859"
+    VYSE = "efba5359-4016-a1e5-7626-b1ae76895940"
     YORU = "7f94d92c-4234-0a36-9646-3a87eb8b5c89"
 
 
