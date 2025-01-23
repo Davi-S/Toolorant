@@ -27,6 +27,7 @@ class Map(enum.Enum):
     KASBAH = "HURM_Bowl"
     PIAZZA = "HURM_Yard"
 
+# https://valorant-api.com/v1/agents
 class Agent(enum.Enum):
     ASTRA = "41fb69c1-4189-7b37-f117-bcaf1e96f1bf"
     BREACH = "5f8d3a7f-467b-97f3-062c-13acf203c006"
@@ -50,6 +51,7 @@ class Agent(enum.Enum):
     SAGE = "569fdd95-4d10-43ab-ca70-79becc718b46"
     SKYE = "6f2a04ca-43e0-be17-7f36-b3908627744d"
     SOVA = "320b2a48-4d9b-a075-30f1-1f93a9b638fa"
+    TEJO = "b444168c-4e35-8076-db47-ef9bf368f384"
     VIPER = "707eab51-4836-f488-046a-cda6bf494859"
     VYSE = "efba5359-4016-a1e5-7626-b1ae76895940"
     YORU = "7f94d92c-4234-0a36-9646-3a87eb8b5c89"
