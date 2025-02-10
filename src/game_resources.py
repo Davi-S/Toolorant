@@ -42,7 +42,7 @@ def process_agents(agents_data: List[Dict]) -> List[Tuple[str, str]]:
         for a in sorted_agents
     ]
 
-def process_maps(maps_data: List[Dict]) -> List[Tuple[str, str]]:
+def process_maps(maps_data: List[Dict]) :
     logger.info("Processing maps data")
     map_items = []
     for m in maps_data:
