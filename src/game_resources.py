@@ -1,5 +1,91 @@
 import enum
+import requests
+import logging
 
+logger = logging.getLogger(__name__)
+
+def fetch_dynamic_enum(enum_name, url, process_items):
+    """Fetch data from API and create an Enum dynamically with deduplication"""
+    try:
+        logger.info(f"Fetching {enum_name} data from {url}")
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        items = process_items(data['data'])
+        
+        # Deduplicate items by name
+        unique_items = {}
+        for name, value in items:
+            if name not in unique_items:
+                unique_items[name] = value
+            else:
+                print(f"Warning: Duplicate map name detected and skipped - {name}")
+        
+        logger.info("Processed %s items: %s", enum_name, ', '.join(f"{k}: {v}" for k, v in unique_items.items()))
+        
+        return enum.Enum(enum_name, unique_items.items())
+    except requests.exceptions.RequestException as e:
+        logger.error(f"Failed to fetch {enum_name}: {e}")
+        raise RuntimeError(f"Failed to fetch {enum_name}: {e}")
+
+def process_agents(agents_data):
+    logger.info("Processing agents data")
+    agents = [
+        a for a in agents_data 
+        if a.get('isPlayableCharacter', False)
+    ]
+    sorted_agents = sorted(agents, key=lambda x: x['displayName'])
+    logger.info(f"Found {len(sorted_agents)} playable agents")
+    return [
+        (a['displayName'].upper().replace(' ', '_'), a['uuid']) 
+        for a in sorted_agents
+    ]
+
+def process_maps(maps_data):
+    logger.info("Processing maps data")
+    map_items = []
+    for m in maps_data:
+        # Skip The Range map
+        if m['displayName'] in ['The Range', 'Basic Training']:
+            logger.info(f"Skipping map: {m['displayName']}")
+            continue
+            
+        parts = m['mapUrl'].split('/')
+
+        # Find the index of "Maps" in the URL path
+        try:
+            maps_index = parts.index("Maps")
+        except ValueError:
+            logger.warning(f"Invalid map URL format: {m['mapUrl']}")
+            continue
+
+        # Extract the map ID based on the "Maps" segment
+        if maps_index + 1 < len(parts):
+            # Handle special case for HURM maps
+            if parts[maps_index + 1] == "HURM":
+                # For URLs like /Game/Maps/HURM/HURM_Alley/HURM_Alley
+                map_id = parts[maps_index + 2]  # Get "HURM_Alley"
+            else:
+                map_id = parts[maps_index + 1]  # Normal case (e.g., Ascent -> Ascen
+        else:
+            logger.warning(f"Invalid map URL format: {m['mapUrl']}")
+            continue
+
+        map_name = m['displayName'].upper().replace(' ', '_')
+        map_items.append((map_name, map_id))
+        logger.info(f"Added map: {map_name} -> {map_id}")
+
+    logger.info(f"Found {len(map_items)} playable maps")
+    return sorted(map_items, key=lambda x: x[0])
+
+# Dynamically create enums
+logger.info("Creating Agent enum")
+Agent = fetch_dynamic_enum('Agent', 'https://valorant-api.com/v1/agents', process_agents)
+
+logger.info("Creating Map enum")
+Map = fetch_dynamic_enum('Map', 'https://valorant-api.com/v1/maps', process_maps)
+
+logger.info("Finished creating enums")
 
 class GameMode(enum.Enum):
     # check for "QueueID" on the match info to find if the "Bomb" game mode is competitive or unrated
@@ -8,54 +94,6 @@ class GameMode(enum.Enum):
     SPIKE_RUSH = "QuickBomb"
     SWIFTPLAY = "Swiftplay_EndOfRoundCredits"
     UNRATED = "Bomb"
-
-
-class Map(enum.Enum):
-    ABYSS = "Infinity"
-    ASCENT = "Ascent"
-    BIND = "Duality"
-    BREEZE = "Foxtrot"
-    FRACTURE = "Canyon"
-    HAVEN = "Triad"
-    ICEBOX = "Port"
-    LOTUS = "Jam"
-    PEARL = "Pitt"
-    SPLIT = "Bonsai"
-    SUNSET = "Juliett"
-    DISTRICT = "HURM_Alley"
-    DRIFT = "HURM_Helix"
-    KASBAH = "HURM_Bowl"
-    PIAZZA = "HURM_Yard"
-
-# https://valorant-api.com/v1/agents
-class Agent(enum.Enum):
-    ASTRA = "41fb69c1-4189-7b37-f117-bcaf1e96f1bf"
-    BREACH = "5f8d3a7f-467b-97f3-062c-13acf203c006"
-    BRIMSTONE = "9f0d8ba9-4140-b941-57d3-a7ad57c6b417"
-    CHAMBER = "22697a3d-45bf-8dd7-4fec-84a9e28c69d7"
-    CLOVE = "1dbf2edd-4729-0984-3115-daa5eed44993"
-    CYPHER = "117ed9e3-49f3-6512-3ccf-0cada7e3823b"
-    DEADLOCK = "cc8b64c8-4b25-4ff9-6e7f-37b4da43d235"
-    FADE = "dade69b4-4f5a-8528-247b-219e5a1facd6"
-    GEKKO = "e370fa57-4757-3604-3648-499e1f642d3f"
-    HARBOR = "95b78ed7-4637-86d9-7e41-71ba8c293152"
-    ISO = "0e38b510-41a8-5780-5e8f-568b2a4f2d6c"
-    JETT = "add6443a-41bd-e414-f6ad-e58d267f4e95"
-    KAYO = "601dbbe7-43ce-be57-2a40-4abd24953621"
-    KILLJOY = "1e58de9c-4950-5125-93e9-a0aee9f98746"
-    NEON = "bb2a4828-46eb-8cd1-e765-15848195d751"
-    OMEN = "8e253930-4c05-31dd-1b6c-968525494517"
-    PHOENIX = "eb93336a-449b-9c1b-0a54-a891f7921d69"
-    RAZE = "f94c3b30-42be-e959-889c-5aa313dba261"
-    REYNA = "a3bfb853-43b2-7238-a4f1-ad90e9e46bcc"
-    SAGE = "569fdd95-4d10-43ab-ca70-79becc718b46"
-    SKYE = "6f2a04ca-43e0-be17-7f36-b3908627744d"
-    SOVA = "320b2a48-4d9b-a075-30f1-1f93a9b638fa"
-    TEJO = "b444168c-4e35-8076-db47-ef9bf368f384"
-    VIPER = "707eab51-4836-f488-046a-cda6bf494859"
-    VYSE = "efba5359-4016-a1e5-7626-b1ae76895940"
-    YORU = "7f94d92c-4234-0a36-9646-3a87eb8b5c89"
-
 
 class Rank(enum.Enum):
     UNRANKED_1 = 0
