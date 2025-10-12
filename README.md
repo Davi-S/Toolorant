@@ -3,7 +3,6 @@
 > This project is currently in a **semi-unmaintainable** state.  
 > There are **no active updates or new features** planned at the moment.  
 > However, **small hotfixes and patches** are still being made by contributors **when possible**.  
-> **Hotfix releases and executable builds are _not_ distributed here on GitHub** — they are only available on the Discord server.  
 > For more information, updates, and access to those builds, please check out the [**Joining the community**](#support-and-community) section below.  
 
 # Toolorant
