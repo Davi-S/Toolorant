@@ -34,6 +34,23 @@ def process_agents(agents_data):
         a for a in agents_data 
         if a.get('isPlayableCharacter', False)
     ]
+
+    HARDCODED_AGENT_NAME = "Veto"
+    HARDCODED_AGENT_UUID = "92eeef5d-43b5-1d4a-8d03-b3927a09034b"
+    
+    # Check if the hardcoded agent is missing and manually inject it
+    is_veto_present = any(a.get('displayName') == HARDCODED_AGENT_NAME for a in agents)
+    
+    if not is_veto_present:
+        logger.warning(f"Agent {HARDCODED_AGENT_NAME} not found in API. Manually adding.")
+        # Create a mock agent dictionary that contains the essential keys for processing
+        veto_entry = {
+            'displayName': HARDCODED_AGENT_NAME,
+            'uuid': HARDCODED_AGENT_UUID,
+            'isPlayableCharacter': True
+        }
+        agents.append(veto_entry)
+
     sorted_agents = sorted(agents, key=lambda x: x['displayName'])
     logger.info(f"Found {len(sorted_agents)} playable agents")
     return [
