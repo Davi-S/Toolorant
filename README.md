@@ -109,3 +109,5 @@ If you know how to code, you can [submit a pull request](https://github.com/Davi
 ## Outro
 
 Please note that the project is currently under active development, and many features are in the beta phase and/or yet to be implemented.
+
+**Consider giving this project a :star:! Your support helps us keep improving the project and delivering new updates!**
