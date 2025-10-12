@@ -1,3 +1,10 @@
+> ⚠️ **Project Status: Semi-Unmaintainable** ⚠️
+>
+> This project is currently in a **semi-unmaintainable** state.  
+> There are **no active updates or new features** planned at the moment.  
+> However, **small hotfixes and patches** are still being made by contributors **when possible**.
+> **Hotfix releases and executable builds are _not_ distributed here on GitHub** — they are only available on the Discord server. For more information, updates, and access to those builds, please check out the [**Joining the community**](#support-and-community) section below.
+
 # Toolorant
 
 ![Logo](src/resources/images/logo.png)
@@ -53,10 +60,10 @@ Toolorant is a collection of tools for Valorant designed to enhance your gamepla
 
 2. Download the executable version from the assets section.
    - If you encounter a false positive virus warning, you can safely proceed.
-  If you don't trust the exe file, you can download the source code, (read it to confirm that there is no virus) and compile it yourself or run with the python interpreter. If you need help on this process, ask for it on our [Discord Community](#support-and-community)
+  If you don't trust the exe file, you can download the source code (read it to confirm that there is no virus) and compile it yourself or run it with the Python interpreter. If you need help with this process, ask for it on our [Discord Community](#support-and-community)
 
 3. Save it on your computer and run the `Toolorant.exe` file
-   - If you get an error message or if it just doesn't open it's probably because Toolorant is missing "controlled folder access" permission on Windows Defender. Follow [this tutorial](https://support.microsoft.com/en-us/windows/allow-an-app-to-access-controlled-folders-b5b6627a-b008-2ca2-7931-7e51e912b034) to learn how to add this permission to an app, or ask for support on our [Discord Community](#support-and-community)
+   - If you get an error message or if it just doesn't open, it's probably because Toolorant is missing "controlled folder access" permission on Windows Defender. Follow [this tutorial](https://support.microsoft.com/en-us/windows/allow-an-app-to-access-controlled-folders-b5b6627a-b008-2ca2-7931-7e51e912b034) to learn how to add this permission to an app, or ask for support on our [Discord Community](#support-and-community)
 
 If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-desktop-shortcut-windows-10#:~:text=Create%20Desktop%20Shortcut%20in%20Windows%2010.%201%5D%20The,shortcut%20has%20been%20created%20on%20your%20Windows%20desktop.) for it on your desktop
 
@@ -64,18 +71,18 @@ If you want, you can [create a shortcut](https://www.thewindowsclub.com/create-d
 
 ## Is This "bannable"?
 
-**USE AT YOUR OWN RISK.**
+**USE AT YOUR OWN RISK**
 
 No **bans** have been reported so far from using this program.
 Some players reported receiving a two-week competitive **suspension** for using the Instalocker tool excessively with zero delay. (This can be avoided by using 3+ seconds of delay)
 
-This program does not use an auto-clicker, or read the game's memory; therefore, the anti-cheat should not be triggered.
+This program does not use an auto-clicker or read the game's memory; therefore, the anti-cheat should not be triggered.
 
 However, using the VALORANT API in this manner is against Riot's Terms of Service, since you are getting an advantage over other players. So there is always a risk.
 
 ## [Support and community](https://discord.gg/gbaGu3ermT)
 
-Be welcome to the [Toolorant community](https://discord.gg/gbaGu3ermT)! We believe that collaboration and interaction are essential for the growth of any project and community. Whether you're a developer or a user, you're invited to join our [Discord server](https://discord.gg/gbaGu3ermT) to:
+Be welcome to the [Toolorant community on Discord](https://discord.gg/gbaGu3ermT)! We believe that collaboration and interaction are essential for the growth of any project and community. Whether you're a developer or a user, you're invited to join our Discord server to:
 
 - Get Help
 - Request Features
@@ -83,17 +90,17 @@ Be welcome to the [Toolorant community](https://discord.gg/gbaGu3ermT)! We belie
 - Report Bugs
 - Access more Valorant content
 
-**JOIN LINK**: <https://discord.gg/gbaGu3ermT>
+**DISCORD SERVER JOIN LINK**: <https://discord.gg/gbaGu3ermT>
 
 ## Contributing
 
-By contributing, you can help improve the project and make it better for everyone. Please read this guide to understand how you can contribute to the project.
+By contributing, you can help improve the project and make it better for everyone. I'd like you to please read this guide to understand how you can contribute to the project.
 
-### [Joining the community](#support-and-community)
+### Joining the community
 
 You can request new features, report bugs you encounter, and help other members of the community.
 
-See the [Support and Community](#support-and-community) topic for more details.
+Refer to the [Support and Community](#support-and-community) section for more information.
 
 ### Improving the code
 
