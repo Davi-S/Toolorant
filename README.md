@@ -80,9 +80,9 @@ This program does not use an auto-clicker or read the game's memory; therefore, 
 
 However, using the VALORANT API in this manner is against Riot's Terms of Service, since you are getting an advantage over other players. So there is always a risk.
 
-## [Support and community](https://discord.gg/gbaGu3ermT)
+## Support and community
 
-Be welcome to the [Toolorant community on Discord](https://discord.gg/gbaGu3ermT)! We believe that collaboration and interaction are essential for the growth of any project and community. Whether you're a developer or a user, you're invited to join our Discord server to:
+Be welcome to the Toolorant community on Discord! We believe that collaboration and interaction are essential for the growth of any project and community. Whether you're a developer or a user, you're invited to join our Discord server to:
 
 - Get Help
 - Request Features
