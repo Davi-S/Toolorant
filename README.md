@@ -1,6 +1,6 @@
-> ⚠️ **Project Status: Semi-Unmaintainable** ⚠️
+> ⚠️ **Project Status: Unmaintained** ⚠️
 >
-> This project is currently in a **semi-unmaintainable** state.  
+> This project is currently in an **unmaintained** state.  
 > There are **no active updates or new features** planned at the moment.  
 > However, **small hotfixes and patches** are still being made by contributors **when possible**.  
 > For more information, updates, and access to those builds, please check out the [**Joining the community**](#support-and-community) section below.  
