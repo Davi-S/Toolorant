@@ -1,10 +1,11 @@
 import enum
 import requests
 import logging
+from typing import Callable, Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
 
-def fetch_dynamic_enum(enum_name, url, process_items):
+def fetch_dynamic_enum(enum_name: str, url: str, process_items: Callable[[List[Dict]], List[Tuple[str, str]]]) -> enum.Enum:
     """Fetch data from API and create an Enum dynamically with deduplication"""
     try:
         logger.info(f"Fetching {enum_name} data from {url}")
@@ -19,7 +20,7 @@ def fetch_dynamic_enum(enum_name, url, process_items):
             if name not in unique_items:
                 unique_items[name] = value
             else:
-                print(f"Warning: Duplicate map name detected and skipped - {name}")
+                logger.warning(f"Duplicate map name detected and skipped: {name}")
         
         logger.info("Processed %s items: %s", enum_name, ', '.join(f"{k}: {v}" for k, v in unique_items.items()))
         
@@ -28,7 +29,7 @@ def fetch_dynamic_enum(enum_name, url, process_items):
         logger.error(f"Failed to fetch {enum_name}: {e}")
         raise RuntimeError(f"Failed to fetch {enum_name}: {e}")
 
-def process_agents(agents_data):
+def process_agents(agents_data: List[Dict]) -> List[Tuple[str, str]]:
     logger.info("Processing agents data")
     agents = [
         a for a in agents_data 
@@ -41,7 +42,7 @@ def process_agents(agents_data):
         for a in sorted_agents
     ]
 
-def process_maps(maps_data):
+def process_maps(maps_data: List[Dict]) :
     logger.info("Processing maps data")
     map_items = []
     for m in maps_data:
